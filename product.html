@@ -206,7 +206,6 @@ document.getElementById("productDesc").innerHTML =
 product.desc;
 
 
-
 /* SIZE SELECT */
 
 let selectedSize = "";
@@ -226,7 +225,6 @@ function selectSize(element){
 }
 
 
-
 /* ADD TO CART */
 
 function addToCart(){
@@ -236,6 +234,7 @@ function addToCart(){
         alert("Please select size");
 
         return;
+
     }
 
     let cart = JSON.parse(
@@ -252,12 +251,7 @@ function addToCart(){
     JSON.stringify(cart)
     );
 
-    alert(
-    product.name +
-    " Size " +
-    selectedSize +
-    " Added to Cart"
-    );
+    alert("Added to Cart");
 
 }
 
