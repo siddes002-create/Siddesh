@@ -55,36 +55,37 @@ color:#ff4d6d;
 
 /* HERO */
 
-.hero{
-    height:100vh;
-    background:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+<head>
+
+<style>
+
+/* OLD CSS */
+
+
+/* SLIDER CSS */
+
+.slider{
+    position:relative;
+    max-width:100%;
+    height:90vh;
+    overflow:hidden;
 }
 
-.hero-content h1{
-    color:white;
-    font-size:70px;
+.slides{
+    display:none;
 }
 
-.hero-content p{
-    color:white;
-    font-size:30px;
+.slides img{
+    width:100%;
+    height:90vh;
+    object-fit:cover;
 }
 
-.hero-content button{
-    background:#ff4d6d;
-    color:white;
-    border:none;
-    padding:15px 35px;
-    font-size:20px;
-    border-radius:10px;
-    cursor:pointer;
-}
+/* MORE CSS */
+
+</style>
+
+</head>
 
 /* CATEGORY */
 
@@ -202,20 +203,31 @@ Retail Nanban
 
 <!-- HERO -->
 
-<section class="hero">
+<div class="slider">
 
-    <div class="hero-content">
-
-        <h1>Fashion That Speaks</h1>
-
-        <p>Mens • Women • Kids Collection</p>
-
-        <a href="#shop">
-            <button>Shop Now</button>
-        </a>
-
+    <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b">
     </div>
 
+    <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8">
+    </div>
+
+    <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d">
+    </div>
+
+    <!-- Buttons -->
+
+    <a class="prev" onclick="plusSlides(-1)">
+        ❮
+    </a>
+
+    <a class="next" onclick="plusSlides(1)">
+        ❯
+    </a>
+
+</div>
 </section>
 
 <!-- CATEGORY -->
@@ -259,7 +271,7 @@ Retail Nanban
 <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1000">
 
 <h3>Kids Collection</h3>
-
+m
 </div>
 
 </a>
@@ -283,7 +295,43 @@ Retail Nanban
 <p>Contact : +91 9876543210</p>
 
 </footer>
+<script>
 
+let slideIndex = 1;
+
+showSlides(slideIndex);
+
+function plusSlides(n){
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n){
+
+    let slides =
+    document.getElementsByClassName("slides");
+
+    if(n > slides.length){
+        slideIndex = 1;
+    }
+
+    if(n < 1){
+        slideIndex = slides.length;
+    }
+
+    for(let i = 0; i < slides.length; i++){
+        slides[i].style.display = "none";
+    }
+
+    slides[slideIndex-1].style.display = "block";
+}
+
+/* AUTO SLIDE */
+
+setInterval(() => {
+    plusSlides(1);
+}, 3000);
+
+</script>
 </body>
 
 </html>
