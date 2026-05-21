@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Product Details</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:0;
+    padding:30px;
+    background:#f5f5f5;
+}
+
+.product-box{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    display:flex;
+    gap:40px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.product-box img{
+    width:400px;
+    border-radius:10px;
+}
+
+.details{
+    flex:1;
+}
+
+h1{
+    margin-top:0;
+}
+
+.price{
+    font-size:35px;
+    font-weight:bold;
+    color:#222;
+}
+
+.size-box{
+    display:flex;
+    gap:10px;
+    margin:20px 0;
+}
+
+.size{
+    border:1px solid #ccc;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.size:hover{
+    background:#2874f0;
+    color:white;
+}
+
+.btns{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+}
+
+.cart-btn{
+    background:#ff9f00;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    font-size:18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.buy-btn{
+    background:#fb641b;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    font-size:18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="product-box">
+
+    <img id="productImage">
+
+    <div class="details">
+
+        <h1 id="productName"></h1>
+
+        <p class="price" id="productPrice"></p>
+
+        <p id="productDesc"></p>
+
+        <h3>Select Size</h3>
+
+        <div class="size-box">
+            <div class="size">S</div>
+            <div class="size">M</div>
+            <div class="size">L</div>
+            <div class="size">XL</div>
+        </div>
+
+        <div class="btns">
+
+            <button class="cart-btn"
+            onclick="addToCart()">
+                Add to Cart
+            </button>
+
+            <button class="buy-btn">
+                Buy Now
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let product = JSON.parse(
+localStorage.getItem("selectedProduct")
+);
+
+document.getElementById("productName")
+.innerHTML = product.name;
+
+document.getElementById("productPrice")
+.innerHTML = "₹" + product.price;
+
+document.getElementById("productImage")
+.src = product.image;
+
+document.getElementById("productDesc")
+.innerHTML = product.desc;
+
+function addToCart(){
+
+    let cart = JSON.parse(
+    localStorage.getItem("cart")
+    ) || [];
+
+    cart.push(product);
+
+    localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+    );
+
+    alert("Added to Cart");
+
+}
+
+</script>
+
+</body>
+</html>
