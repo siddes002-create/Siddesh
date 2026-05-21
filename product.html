@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Product Details</title>
 
@@ -27,6 +30,8 @@ body{
 
 .product-box img{
     width:400px;
+    height:450px;
+    object-fit:cover;
     border-radius:10px;
 }
 
@@ -36,12 +41,18 @@ body{
 
 h1{
     margin-top:0;
+    font-size:42px;
 }
 
 .price{
     font-size:35px;
     font-weight:bold;
     color:#222;
+}
+
+#productDesc{
+    font-size:18px;
+    color:#555;
 }
 
 .size-box{
@@ -55,11 +66,18 @@ h1{
     padding:10px 18px;
     border-radius:8px;
     cursor:pointer;
+    transition:0.3s;
 }
 
 .size:hover{
     background:#2874f0;
     color:white;
+}
+
+.size.active{
+    background:#2874f0;
+    color:white;
+    border-color:#2874f0;
 }
 
 .btns{
@@ -87,11 +105,12 @@ h1{
     border-radius:8px;
     cursor:pointer;
 }
-.size.active{
-    background:#2874f0;
-    color:white;
-    border-color:#2874f0;
+
+.cart-btn:hover,
+.buy-btn:hover{
+    opacity:0.9;
 }
+
 </style>
 
 </head>
@@ -100,7 +119,12 @@ h1{
 
 <div class="product-box">
 
+    <!-- Product Image -->
+
     <img id="productImage">
+
+
+    <!-- Product Details -->
 
     <div class="details">
 
@@ -110,27 +134,37 @@ h1{
 
         <p id="productDesc"></p>
 
+
+        <!-- Size -->
+
         <h3>Select Size</h3>
 
-       <div class="size-box">
+        <div class="size-box">
 
-    <div class="size" onclick="selectSize(this)">
-        S
-    </div>
+            <div class="size"
+            onclick="selectSize(this)">
+                S
+            </div>
 
-    <div class="size" onclick="selectSize(this)">
-        M
-    </div>
+            <div class="size"
+            onclick="selectSize(this)">
+                M
+            </div>
 
-    <div class="size" onclick="selectSize(this)">
-        L
-    </div>
+            <div class="size"
+            onclick="selectSize(this)">
+                L
+            </div>
 
-    <div class="size" onclick="selectSize(this)">
-        XL
-    </div>
+            <div class="size"
+            onclick="selectSize(this)">
+                XL
+            </div>
 
-</div>
+        </div>
+
+
+        <!-- Buttons -->
 
         <div class="btns">
 
@@ -149,48 +183,18 @@ h1{
 
 </div>
 
+
+
 <script>
+
+/* GET PRODUCT */
 
 let product = JSON.parse(
 localStorage.getItem("selectedProduct")
 );
 
-document.getElementById("productName")
-.innerHTML = product.name;
-
-document.getElementById("productPrice")
-.innerHTML = "₹" + product.price;
-
-document.getElementById("productImage")
-.src = product.image;
-
-document.getElementById("productDesc")
-.innerHTML = product.desc;
-
-function addToCart(){
-
-    let cart = JSON.parse(
-    localStorage.getItem("cart")
-    ) || [];
-
-    cart.push(product);
-
-    localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-    );
-
-    alert("Added to Cart");
-
-}
-
-<script>
-
-let product = JSON.parse(
-localStorage.getItem("selectedProduct")
-);
-
-document.getElementById("productName").innerHTML = product.name;
+document.getElementById("productName").innerHTML =
+product.name;
 
 document.getElementById("productPrice").innerHTML =
 "₹" + product.price;
@@ -228,11 +232,12 @@ function selectSize(element){
 function addToCart(){
 
     if(selectedSize == ""){
+
         alert("Please select size");
+
         return;
-        
     }
-</script>
+
     let cart = JSON.parse(
     localStorage.getItem("cart")
     ) || [];
@@ -247,10 +252,16 @@ function addToCart(){
     JSON.stringify(cart)
     );
 
-    alert("Added to Cart");
+    alert(
+    product.name +
+    " Size " +
+    selectedSize +
+    " Added to Cart"
+    );
 
 }
 
 </script>
+
 </body>
 </html>
