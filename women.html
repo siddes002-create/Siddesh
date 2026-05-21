@@ -1,156 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Women Collection</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
 body{
-background:#f5f5f5;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f5f5;
 }
 
-header{
-background:white;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+/* Navbar */
+
+.navbar{
+    background:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 .logo{
-font-size:28px;
-font-weight:bold;
-color:#ff4d6d;
+    font-size:32px;
+    font-weight:bold;
+    color:#ff4d6d;
 }
 
-nav a{
-text-decoration:none;
-margin:0 15px;
-color:#333;
-font-weight:bold;
+.nav-links a{
+    text-decoration:none;
+    margin-left:20px;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
 }
+
+/* Banner */
 
 .banner{
-height:300px;
-background:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200') center/cover;
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-font-size:50px;
-font-weight:bold;
+    position:relative;
 }
+
+.banner img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.banner h1{
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    font-size:60px;
+}
+
+/* Products */
 
 .products{
-padding:50px;
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:20px;
+    flex-wrap:wrap;
+    padding:40px;
 }
 
-.card{
-background:white;
-width:300px;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-text-align:center;
+.product-card{
+    width:280px;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    padding-bottom:20px;
 }
 
-.card img{
-width:100%;
-height:350px;
-object-fit:cover;
+.product-card:hover{
+    transform:translateY(-5px);
 }
 
-.card h2{
-padding:15px;
+.product-card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
 }
 
-.card p{
-font-size:20px;
-padding-bottom:15px;
+.product-card h3{
+    margin:15px 0 10px;
+    font-size:28px;
 }
 
-.card button{
-margin-bottom:20px;
-padding:10px 20px;
-border:none;
-background:#ff4d6d;
-color:white;
-border-radius:5px;
-cursor:pointer;
+.product-card p{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.product-card button{
+    background:#ff4d6d;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header>
+<!-- Navbar -->
 
-<div class="logo">Retail Nanban</div>
+<div class="navbar">
 
-<nav>
-<a href="index.html">Home</a>
-<a href="mens.html">Mens</a>
-<a href="women.html">Women</a>
-<a href="kids.html">Kids</a>
-</nav>
+    <div class="logo">Zudora</div>
 
-</header>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="mens.html">Mens</a>
+        <a href="kids.html">Kids</a>
+    </div>
+
+</div>
+
+
+<!-- Banner -->
 
 <div class="banner">
-Women Collection
-</div>
 
-<section class="products">
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b">
 
-<div class="card">
-<div class="product-card"
-onclick="openProduct(
-'Women Dress',
-1299,
-'image1.jpg',
-'Beautiful women fashion dress'
-)">
-
-    <img src="image1.jpg">
-
-    <h3>Women Dress</h3>
-
-    <p>₹1299</p>
+    <h1>Women Collection</h1>
 
 </div>
 
+
+
+<!-- Products -->
+
+<div class="products">
+
+
+    <!-- Product 1 -->
+
+    <div class="product-card"
+    onclick="openProduct(
+    'Women Dress',
+    1299,
+    'https://images.unsplash.com/photo-1496747611176-843222e1e57c',
+    'Beautiful women dress collection'
+    )">
+
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c">
+
+        <h3>Women Dress</h3>
+
+        <p>₹1299</p>
+
+        <button>Buy Now</button>
+
+    </div>
+
+
+
+    <!-- Product 2 -->
+
+    <div class="product-card"
+    onclick="openProduct(
+    'Stylish Top',
+    899,
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b',
+    'Stylish top for women'
+    )">
+
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b">
+
+        <h3>Stylish Top</h3>
+
+        <p>₹899</p>
+
+        <button>Buy Now</button>
+
+    </div>
+
+
+
+    <!-- Product 3 -->
+
+    <div class="product-card"
+    onclick="openProduct(
+    'Fashion Wear',
+    1499,
+    'https://images.unsplash.com/photo-1529139574466-a303027c1d8b',
+    'Premium fashion wear for women'
+    )">
+
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b">
+
+        <h3>Fashion Wear</h3>
+
+        <p>₹1499</p>
+
+        <button>Buy Now</button>
+
+    </div>
+
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1000">
-<h2>Stylish Top</h2>
-<p>₹899</p>
-<button>Buy Now</button>
-</div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000">
-<h2>Fashion Wear</h2>
-<p>₹1499</p>
-<button>Buy Now</button>
-</div>
 
-</section>
 <script>
 
 function openProduct(name, price, image, desc){
@@ -168,8 +238,10 @@ function openProduct(name, price, image, desc){
     );
 
     window.location.href = "product.html";
+
 }
 
 </script>
+
 </body>
 </html>
