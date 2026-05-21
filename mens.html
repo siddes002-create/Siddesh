@@ -153,7 +153,6 @@ onclick="openProduct(
 
 <div class="products">
 
-    <!-- Product 1 -->
     <div class="product-card"
     onclick="openProduct(
     'Casual Shirt',
@@ -173,7 +172,6 @@ onclick="openProduct(
     </div>
 
 
-    <!-- Product 2 -->
     <div class="product-card"
     onclick="openProduct(
     'T-Shirt',
@@ -193,7 +191,6 @@ onclick="openProduct(
     </div>
 
 
-    <!-- Product 3 -->
     <div class="product-card"
     onclick="openProduct(
     'Hoodie',
@@ -212,9 +209,26 @@ onclick="openProduct(
 
     </div>
 
-</div>
+<script>
 
-</div>
+function openProduct(name, price, image, desc){
+
+    let product = {
+        name:name,
+        price:price,
+        image:image,
+        desc:desc
+    };
+
+    localStorage.setItem(
+        "selectedProduct",
+        JSON.stringify(product)
+    );
+
+    window.location.href = "product.html";
+}
+
+</script>
 
 </section>
 
