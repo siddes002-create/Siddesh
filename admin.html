@@ -65,7 +65,15 @@ button:hover{
 <div class="login-box">
 
     <h1>Admin Login</h1>
+<h2>Update Stock</h2>
 
+<input type="number"
+id="shirtStock"
+placeholder="Casual Shirt Stock">
+
+<button onclick="saveStock()">
+    Save Stock
+</button>
     <input type="text"
     id="username"
     placeholder="Enter Username">
@@ -106,7 +114,19 @@ function login(){
     }
 
 }
+function saveStock(){
 
+    let stock =
+    document.getElementById("shirtStock").value;
+
+    localStorage.setItem(
+        "shirtStock",
+        stock
+    );
+
+    alert("Stock Updated");
+
+}
 </script>
 
 </body>
