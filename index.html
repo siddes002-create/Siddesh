@@ -11,62 +11,59 @@
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
 body{
-background:#f5f5f5;
+    background:#f5f5f5;
 }
 
 /* HEADER */
 
 header{
-background:white;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-position:sticky;
-top:0;
-z-index:1000;
+    width:100%;
+    background:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 .logo{
-font-size:40px;
-font-weight:bold;
-color:#ff4d6d;
+    font-size:48px;
+    font-weight:bold;
+    color:#ff4d6d;
+}
+
+nav{
+    display:flex;
+    gap:30px;
 }
 
 nav a{
-text-decoration:none;
-margin:0 15px;
-color:#333;
-font-weight:bold;
-font-size:18px;
+    text-decoration:none;
+    color:#222;
+    font-size:22px;
+    font-weight:bold;
+    transition:0.3s;
 }
 
 nav a:hover{
-color:#ff4d6d;
+    color:#ff4d6d;
 }
 
-/* HERO */
-
-<head>
-
-<style>
-
-/* OLD CSS */
-
-
-/* SLIDER CSS */
+/* SLIDER */
 
 .slider{
     position:relative;
-    max-width:100%;
+    width:100%;
     height:90vh;
     overflow:hidden;
 }
@@ -81,93 +78,156 @@ color:#ff4d6d;
     object-fit:cover;
 }
 
-/* MORE CSS */
+.prev,
+.next{
+    cursor:pointer;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    padding:18px;
+    color:white;
+    font-size:35px;
+    font-weight:bold;
+    background:rgba(0,0,0,0.5);
+    border-radius:50%;
+    user-select:none;
+}
 
-</style>
+.prev{
+    left:20px;
+}
 
-</head>
+.next{
+    right:20px;
+}
+
+/* HERO TEXT */
+
+.hero-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
+}
+
+.hero-text h1{
+    font-size:90px;
+    margin-bottom:20px;
+}
+
+.scroll-text{
+    font-size:36px;
+    font-weight:bold;
+    white-space:nowrap;
+    overflow:hidden;
+    animation:scrollText 8s linear infinite;
+}
+
+@keyframes scrollText{
+
+    0%{
+        transform:translateX(100%);
+    }
+
+    100%{
+        transform:translateX(-100%);
+    }
+
+}
+
+.hero-text button{
+    margin-top:25px;
+    padding:16px 40px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    font-size:22px;
+    border-radius:10px;
+    cursor:pointer;
+}
 
 /* CATEGORY */
 
 .categories{
-padding:70px 40px;
+    padding:70px 40px;
 }
 
 .categories h2{
-text-align:center;
-font-size:50px;
-margin-bottom:40px;
+    text-align:center;
+    font-size:50px;
+    margin-bottom:40px;
 }
 
 .category-container{
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
 }
 
 .category-card{
-background:white;
-width:350px;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 2px 15px rgba(0,0,0,0.1);
-transition:0.3s;
-text-align:center;
+    background:white;
+    width:350px;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 2px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+    text-align:center;
 }
 
 .category-card:hover{
-transform:translateY(-10px);
+    transform:translateY(-10px);
 }
 
 .category-card img{
-width:100%;
-height:400px;
-object-fit:cover;
+    width:100%;
+    height:400px;
+    object-fit:cover;
 }
 
 .category-card h3{
-padding:20px;
-font-size:28px;
-color:#333;
+    padding:20px;
+    font-size:32px;
 }
 
-/* FOOTER */
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:30px;
-margin-top:50px;
+.category-card a{
+    display:inline-block;
+    margin-bottom:25px;
+    text-decoration:none;
+    background:#ff4d6d;
+    color:white;
+    padding:12px 30px;
+    border-radius:10px;
+    font-size:18px;
 }
 
 /* MOBILE */
 
 @media(max-width:768px){
 
-.hero-content h1{
-font-size:45px;
-}
+    .hero-text h1{
+        font-size:45px;
+    }
 
-.hero-content p{
-font-size:20px;
-}
+    .scroll-text{
+        font-size:20px;
+    }
 
-header{
-flex-direction:column;
-gap:15px;
-}
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
 
-nav{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-}
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
 
-.category-card{
-width:100%;
-}
+    .category-card{
+        width:100%;
+    }
 
 }
 
@@ -181,120 +241,157 @@ width:100%;
 
 <header>
 
-<div class="logo">
-Retail Nanban
-</div>
+    <div class="logo">
+        Retail Nanban
+    </div>
 
-<nav>
+    <nav>
 
-<a href="index.html">Home</a>
+        <a href="#">Home</a>
 
-<a href="mens.html">Mens</a>
+        <a href="mens.html">
+            Mens
+        </a>
 
-<a href="women.html">Women</a>
+        <a href="women.html">
+            Women
+        </a>
 
-<a href="kids.html">Kids</a>
+        <a href="kids.html">
+            Kids
+        </a>
 
-<a href="cart.html">🛒 Cart</a>
+        <a href="cart.html">
+            🛒 Cart
+        </a>
 
-</nav>
+    </nav>
 
 </header>
 
-<!-- HERO -->
+
+
+<!-- SLIDER -->
 
 <div class="slider">
 
     <div class="slides fade">
+
         <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b">
+
     </div>
 
     <div class="slides fade">
+
         <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8">
+
     </div>
 
     <div class="slides fade">
+
         <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d">
+
     </div>
 
-    <!-- Buttons -->
 
-    <a class="prev" onclick="plusSlides(-1)">
+    <!-- TEXT -->
+
+    <div class="hero-text">
+
+        <h1>
+            Fashion That Speaks
+        </h1>
+
+        <p class="scroll-text">
+            Mens • Women • Kids Collection
+        </p>
+
+        <button>
+            Shop Now
+        </button>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <a class="prev"
+    onclick="plusSlides(-1)">
         ❮
     </a>
 
-    <a class="next" onclick="plusSlides(1)">
+    <a class="next"
+    onclick="plusSlides(1)">
         ❯
     </a>
 
 </div>
-</section>
+
+
 
 <!-- CATEGORY -->
 
-<section class="categories" id="shop">
+<section class="categories">
 
-<h2>Shop By Category</h2>
+    <h2>
+        Shop By Category
+    </h2>
 
-<div class="category-container">
-
-<a href="women.html" style="text-decoration:none;">
-
-<div class="category-card">
-
-<img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000">
-
-<h3>Women Collection</h3>
-
-</div>
-
-</a>
+    <div class="category-container">
 
 
-<a href="mens.html" style="text-decoration:none;">
+        <!-- Mens -->
 
-<div class="category-card">
+        <div class="category-card">
 
-<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f">
 
-<h3>Mens Collection</h3>
+            <h3>Mens Collection</h3>
 
-</div>
+            <a href="mens.html">
+                Explore
+            </a>
 
-</a>
+        </div>
 
 
-<a href="kids.html" style="text-decoration:none;">
 
-<div class="category-card">
+        <!-- Women -->
 
-<img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1000">
+        <div class="category-card">
 
-<h3>Kids Collection</h3>
-m
-</div>
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c">
 
-</a>
+            <h3>Women Collection</h3>
 
-</div>
+            <a href="women.html">
+                Explore
+            </a>
+
+        </div>
+
+
+
+        <!-- Kids -->
+
+        <div class="category-card">
+
+            <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea">
+
+            <h3>Kids Collection</h3>
+
+            <a href="kids.html">
+                Explore
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- FOOTER -->
 
-<footer>
 
-<h2>Retail Nanban</h2>
-
-<br>
-
-<p>Fashion Store For Mens, Womens & Kids</p>
-
-<br>
-
-<p>Contact : +91 9876543210</p>
-
-</footer>
 <script>
 
 let slideIndex = 1;
@@ -302,7 +399,9 @@ let slideIndex = 1;
 showSlides(slideIndex);
 
 function plusSlides(n){
+
     showSlides(slideIndex += n);
+
 }
 
 function showSlides(n){
@@ -311,27 +410,37 @@ function showSlides(n){
     document.getElementsByClassName("slides");
 
     if(n > slides.length){
+
         slideIndex = 1;
+
     }
 
     if(n < 1){
+
         slideIndex = slides.length;
+
     }
 
     for(let i = 0; i < slides.length; i++){
+
         slides[i].style.display = "none";
+
     }
 
     slides[slideIndex-1].style.display = "block";
+
 }
+
 
 /* AUTO SLIDE */
 
 setInterval(() => {
+
     plusSlides(1);
+
 }, 3000);
 
 </script>
-</body>
 
+</body>
 </html>
