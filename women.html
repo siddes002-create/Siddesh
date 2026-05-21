@@ -151,6 +151,25 @@ onclick="openProduct(
 </div>
 
 </section>
+<script>
 
+function openProduct(name, price, image, desc){
+
+    let product = {
+        name:name,
+        price:price,
+        image:image,
+        desc:desc
+    };
+
+    localStorage.setItem(
+        "selectedProduct",
+        JSON.stringify(product)
+    );
+
+    window.location.href = "product.html";
+}
+
+</script>
 </body>
 </html>
