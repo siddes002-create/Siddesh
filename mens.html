@@ -150,7 +150,7 @@ body{
         <h3>Casual Shirt</h3>
 
         <p>₹799</p>
-
+<p id="stockText"></p>
         <button>Buy Now</button>
 
     </div>
@@ -219,6 +219,30 @@ function openProduct(name, price, image, desc){
 }
 
 </script>
+<script>
 
+let stock =
+localStorage.getItem("shirtStock");
+
+let stockText =
+document.getElementById("stockText");
+
+if(stock > 0){
+
+    stockText.innerHTML =
+    "In Stock : " + stock;
+
+    stockText.style.color = "green";
+
+}else{
+
+    stockText.innerHTML =
+    "Out Of Stock";
+
+    stockText.style.color = "red";
+
+}
+
+</script>
 </body>
 </html>
