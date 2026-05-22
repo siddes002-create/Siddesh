@@ -104,7 +104,36 @@ body{
 }
 
 </style>
+#products{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  padding:40px;
+}
 
+.product-card{
+  width:250px;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+.product-card img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+}
+
+.product-card button{
+  background:black;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  cursor:pointer;
+}
 </head>
 
 <body>
@@ -243,6 +272,41 @@ if(stock > 0){
 
 }
 
+<script>
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+let productContainer =
+document.getElementById("products");
+
+let output = "";
+
+products.forEach((p)=>{
+
+  output += `
+
+  <div class="product-card">
+
+    <img src="${p.image}">
+
+    <h3>${p.name}</h3>
+
+    <p>₹${p.price}</p>
+
+    <p>Stock : ${p.stock}</p>
+
+    <button>Add to Cart</button>
+
+  </div>
+
+  `;
+
+});
+
+productContainer.innerHTML = output;
+
 </script>
+    
 </body>
 </html>
