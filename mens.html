@@ -163,7 +163,9 @@ products.forEach((p)=>{
 
     <p>Stock : ${p.stock}</p>
 
-    <button>Add to Cart</button>
+    <button onclick='selectSize(${JSON.stringify(p)})'>
+Add to Cart
+</button>
 
   </div>
 
@@ -172,7 +174,35 @@ products.forEach((p)=>{
 });
 
 document.getElementById("products").innerHTML = output;
+function selectSize(product){
 
+  let size = prompt(
+    "Choose Size : S / M / L / XL"
+  );
+
+  if(size){
+
+    product.size = size;
+
+    let orders =
+    JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders.push(product);
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify(orders)
+    );
+
+    alert(
+      product.name +
+      " Size " + size +
+      " Added To Cart"
+    );
+
+  }
+
+}
 </script>
 
 </body>
