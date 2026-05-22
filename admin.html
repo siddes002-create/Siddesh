@@ -2,131 +2,235 @@
 <html>
 
 <head>
+  <title>Admin Login</title>
 
-<title>Admin Login</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#f5f5f5;
+    }
 
-<style>
+    .login-box{
+      width:300px;
+      margin:100px auto;
+      background:white;
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      text-align:center;
+    }
 
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f5f5f5;
-    font-family:Arial;
-}
+    input{
+      width:90%;
+      padding:10px;
+      margin:10px 0;
+    }
 
-.login-box{
-    background:white;
-    padding:40px;
-    width:350px;
-    border-radius:15px;
-    box-shadow:0 2px 15px rgba(0,0,0,0.2);
-    text-align:center;
-}
+    button{
+      padding:10px 20px;
+      background:black;
+      color:white;
+      border:none;
+      cursor:pointer;
+    }
 
-h1{
-    margin-bottom:30px;
-    color:#ff4d6d;
-}
+    .product-box{
+      border:1px solid #ccc;
+      padding:20px;
+      margin:20px;
+      width:250px;
+      background:white;
+      border-radius:10px;
+    }
 
-input{
-    width:100%;
-    padding:14px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:16px;
-}
+    .product-box img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+    }
 
-button{
-    width:100%;
-    padding:14px;
-    border:none;
-    background:#ff4d6d;
-    color:white;
-    font-size:18px;
-    border-radius:8px;
-    cursor:pointer;
-    margin-top:15px;
-}
-
-button:hover{
-    background:#e63956;
-}
-
-</style>
+    #products{
+      display:flex;
+      flex-wrap:wrap;
+    }
+  </style>
 
 </head>
 
 <body>
 
-<div class="login-box">
+  <div class="login-box">
 
-    <h1>Admin Login</h1>
-<h2>Update Stock</h2>
+    <h2>Admin Login</h2>
 
-<input type="number"
-id="shirtStock"
-placeholder="Casual Shirt Stock">
-
-<button onclick="saveStock()">
-    Save Stock
-</button>
     <input type="text"
-    id="username"
-    placeholder="Enter Username">
+    id="email"
+    placeholder="Username">
 
     <input type="password"
     id="password"
-    placeholder="Enter Password">
+    placeholder="Password">
 
     <button onclick="login()">
-        Login
+      Login
     </button>
 
-</div>
-
+  </div>
 
 <script>
 
-function login(){
+function login() {
 
-    let username =
-    document.getElementById("username").value;
+  let email =
+  document.getElementById("email").value;
 
-    let password =
-    document.getElementById("password").value;
+  let password =
+  document.getElementById("password").value;
 
-    if(username == "admin" &&
-       password == "1234"){
+  if(email === "admin" && password === "1234") {
 
-        alert("Login Success");
+    document.body.innerHTML = `
 
-        window.location.href =
-        "index.html";
+    <div style="padding:30px">
 
-    }else{
+      <h1>Admin Panel</h1>
 
-        alert("Wrong Username or Password");
+      <input type="text"
+      id="name"
+      placeholder="Product Name">
 
-    }
+      <br>
+
+      <input type="number"
+      id="price"
+      placeholder="Price">
+
+      <br>
+
+      <input type="number"
+      id="stock"
+      placeholder="Stock">
+
+      <br>
+
+      <input type="text"
+      id="image"
+      placeholder="Image URL">
+
+      <br><br>
+
+      <button onclick="addProduct()">
+        Add Product
+      </button>
+
+      <hr>
+
+      <div id="products"></div>
+
+    </div>
+
+    `;
+
+    loadProducts();
+
+  }
+
+  else{
+    alert("Wrong Login");
+  }
 
 }
-function saveStock(){
 
-    let stock =
-    document.getElementById("shirtStock").value;
+function addProduct(){
 
-    localStorage.setItem(
-        "shirtStock",
-        stock
-    );
+  let name =
+  document.getElementById("name").value;
 
-    alert("Stock Updated");
+  let price =
+  document.getElementById("price").value;
+
+  let stock =
+  document.getElementById("stock").value;
+
+  let image =
+  document.getElementById("image").value;
+
+  let product = {
+    name:name,
+    price:price,
+    stock:stock,
+    image:image
+  };
+
+  let products =
+  JSON.parse(localStorage.getItem("products")) || [];
+
+  products.push(product);
+
+  localStorage.setItem(
+    "products",
+    JSON.stringify(products)
+  );
+
+  loadProducts();
+
+  alert("Product Added");
 
 }
+
+function loadProducts(){
+
+  let products =
+  JSON.parse(localStorage.getItem("products")) || [];
+
+  let output = "";
+
+  products.forEach((p,index)=>{
+
+    output += `
+
+    <div class="product-box">
+
+      <img src="${p.image}">
+
+      <h3>${p.name}</h3>
+
+      <p>₹${p.price}</p>
+
+      <p>Stock : ${p.stock}</p>
+
+      <button onclick="deleteProduct(${index})"
+      style="background:red">
+        Delete
+      </button>
+
+    </div>
+
+    `;
+
+  });
+
+  document.getElementById("products").innerHTML = output;
+
+}
+
+function deleteProduct(index){
+
+  let products =
+  JSON.parse(localStorage.getItem("products")) || [];
+
+  products.splice(index,1);
+
+  localStorage.setItem(
+    "products",
+    JSON.stringify(products)
+  );
+
+  loadProducts();
+
+}
+
 </script>
 
 </body>
