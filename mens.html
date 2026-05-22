@@ -45,7 +45,17 @@
       height:350px;
       object-fit:cover;
     }
+<div class="categories">
 
+  <a href="casualshirts.html">Casual Shirts</a>
+
+  <a href="tshirts.html">T-Shirts</a>
+
+  <a href="pants.html">Pants</a>
+
+  <a href="hoodies.html">Hoodies</a>
+
+</div>
    #products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -115,7 +125,27 @@
 }
 
   </style>
+.categories{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  padding:25px;
+  background:white;
+}
 
+.categories a{
+  text-decoration:none;
+  background:black;
+  color:white;
+  padding:12px 25px;
+  border-radius:30px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.categories a:hover{
+  background:#2874f0;
+}
 </head>
 
 <body>
