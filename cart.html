@@ -179,41 +179,38 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 let cartItems = document.getElementById("cart-items");
 
-let total = 0;
+let totalPrice = 0;
 
-function displayCart(){
+if(cart.length === 0){
 
-    cartItems.innerHTML = "";
+    cartItems.innerHTML = `
+        <p style="text-align:center; padding:20px; font-size:20px;">
+            Your Cart Is Empty
+        </p>
+    `;
 
-    total = 0;
+    document.querySelector(".checkout-btn").style.display = "none";
 
-    cart.forEach((item,index)=>{
+    document.getElementById("total").style.display = "none";
 
-        total += item.price;
+}
+else{
+
+    cart.forEach((item)=>{
+
+        totalPrice += item.price;
 
         cartItems.innerHTML += `
 
         <div class="cart-item">
 
             <div>
-
                 <h3>${item.name}</h3>
-
                 <p>Fashion Collection</p>
-
             </div>
 
-            <div class="price">
-                ₹${item.price}
-            </div>
+            <h3>₹${item.price}</h3>
 
-            <button class="remove-btn"
-            onclick="removeItem(${index})">
-            Remove
-            </button>
-<p id="empty-cart" style="text-align:center; font-size:20px; padding:20px;">
-    Your Cart is Empty
-</p>
         </div>
 
         `;
@@ -221,37 +218,10 @@ function displayCart(){
     });
 
     document.getElementById("total").innerHTML =
-    "Total : ₹" + total;
+    "Total : ₹" + totalPrice;
 
 }
 
-function removeItem(index){
-
-    cart.splice(index,1);
-
-    localStorage.setItem("cart",JSON.stringify(cart));
-
-    displayCart();
-
-}
-
-displayCart();
-let cartItems = document.getElementById("cart-items");
-let total = document.getElementById("total");
-let checkoutBtn = document.querySelector(".checkout-btn");
-
-if(cartItems.innerHTML.trim() === ""){
-
-    total.style.display = "none";
-
-    checkoutBtn.style.display = "none";
-
-}
-else{
-
-    document.getElementById("empty-cart").style.display = "none";
-
-}
 </script>
 </body>
 </html>
