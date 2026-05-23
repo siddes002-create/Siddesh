@@ -1,235 +1,289 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Retail Nanban</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body{
-      margin:0;
-      font-family:Arial;
-      background:#f5f5f5;
+<title>Admin Panel - Retail Nanban</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+    font-size:40px;
+    font-weight:bold;
+    color:#ff4f6d;
+}
+
+/* ADMIN */
+
+.admin-container{
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.admin-container h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.input-box{
+    margin-bottom:20px;
+}
+
+.input-box label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.add-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#ff4f6d;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* PRODUCT LIST */
+
+.product-list{
+    margin-top:40px;
+}
+
+.product-item{
+    background:#fafafa;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.product-item img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.product-details{
+    flex:1;
+    margin-left:15px;
+}
+
+.delete-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .admin-container{
+        margin:20px;
+        padding:20px;
     }
 
-    .login-box{
-      width:300px;
-      margin:100px auto;
-      background:white;
-      padding:30px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
-      text-align:center;
+    .product-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
     }
 
-    input{
-      width:90%;
-      padding:10px;
-      margin:10px 0;
+    .product-details{
+        margin-left:0;
     }
+}
 
-    button{
-      padding:10px 20px;
-      background:black;
-      color:white;
-      border:none;
-      cursor:pointer;
-    }
-
-    .product-box{
-      border:1px solid #ccc;
-      padding:20px;
-      margin:20px;
-      width:250px;
-      background:white;
-      border-radius:10px;
-    }
-
-    .product-box img{
-      width:100%;
-      height:250px;
-      object-fit:cover;
-    }
-
-    #products{
-      display:flex;
-      flex-wrap:wrap;
-    }
-  </style>
+</style>
 
 </head>
 
 <body>
 
-  <div class="login-box">
+<header>
 
-    <h2>Admin Login</h2>
+<div class="logo">
+Retail Nanban Admin
+</div>
 
-    <input type="text"
-    id="email"
-    placeholder="Username">
+</header>
 
-    <input type="password"
-    id="password"
-    placeholder="Password">
 
-    <button onclick="login()">
-      Login
-    </button>
+<div class="admin-container">
 
-  </div>
+<h1>Add Product</h1>
+
+<div class="input-box">
+<label>Product Name</label>
+<input type="text" id="productName">
+</div>
+
+<div class="input-box">
+<label>Price</label>
+<input type="number" id="productPrice">
+</div>
+
+<div class="input-box">
+<label>Image URL</label>
+<input type="text" id="productImage">
+</div>
+
+<button class="add-btn"
+onclick="addProduct()">
+Add Product
+</button>
+
+
+<div class="product-list"
+id="productList">
+
+</div>
+
+</div>
+
 
 <script>
 
-function login() {
-
-  let email =
-  document.getElementById("email").value;
-
-  let password =
-  document.getElementById("password").value;
-
-  if(email === "admin" && password === "1234") {
-
-    document.body.innerHTML = `
-
-    <div style="padding:30px">
-
-      <h1>Admin Panel</h1>
-
-      <input type="text"
-      id="name"
-      placeholder="Product Name">
-
-      <br>
-
-      <input type="number"
-      id="price"
-      placeholder="Price">
-
-      <br>
-
-      <input type="number"
-      id="stock"
-      placeholder="Stock">
-
-      <br>
-
-      <input type="text"
-      id="image"
-      placeholder="Image URL">
-
-      <br><br>
-
-      <button onclick="addProduct()">
-        Add Product
-      </button>
-
-      <hr>
-
-      <div id="products"></div>
-
-    </div>
-
-    `;
-
-    loadProducts();
-
-  }
-
-  else{
-    alert("Wrong Login");
-  }
-
-}
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
 
 function addProduct(){
 
-  let name =
-  document.getElementById("name").value;
+    let name =
+    document.getElementById("productName").value;
 
-  let price =
-  document.getElementById("price").value;
+    let price =
+    document.getElementById("productPrice").value;
 
-  let stock =
-  document.getElementById("stock").value;
+    let image =
+    document.getElementById("productImage").value;
 
-  let image =
-  document.getElementById("image").value;
+    if(name=="" || price=="" || image==""){
 
-  let product = {
-    name:name,
-    price:price,
-    stock:stock,
-    image:image
-  };
+        alert("Fill all details");
 
-  let products =
-  JSON.parse(localStorage.getItem("products")) || [];
+        return;
 
-  products.push(product);
+    }
 
-  localStorage.setItem(
-    "products",
-    JSON.stringify(products)
-  );
+    let product = {
 
-  loadProducts();
+        name:name,
+        price:price,
+        image:image
 
-  alert("Product Added");
+    };
+
+    products.push(product);
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+    displayProducts();
+
+    document.getElementById("productName").value="";
+    document.getElementById("productPrice").value="";
+    document.getElementById("productImage").value="";
 
 }
 
-function loadProducts(){
+function displayProducts(){
 
-  let products =
-  JSON.parse(localStorage.getItem("products")) || [];
+    let productList =
+    document.getElementById("productList");
 
-  let output = "";
+    productList.innerHTML = "";
 
-  products.forEach((p,index)=>{
+    products.forEach((product,index)=>{
 
-    output += `
+        productList.innerHTML += `
 
-    <div class="product-box">
+        <div class="product-item">
 
-      <img src="${p.image}">
+            <img src="${product.image}">
 
-      <h3>${p.name}</h3>
+            <div class="product-details">
 
-      <p>₹${p.price}</p>
+                <h3>${product.name}</h3>
 
-      <p>Stock : ${p.stock}</p>
+                <p>₹${product.price}</p>
 
-      <button onclick="deleteProduct(${index})"
-      style="background:red">
-        Delete
-      </button>
+            </div>
 
-    </div>
+            <button class="delete-btn"
+            onclick="deleteProduct(${index})">
+            Delete
+            </button>
 
-    `;
+        </div>
 
-  });
+        `;
 
-  document.getElementById("products").innerHTML = output;
+    });
 
 }
 
 function deleteProduct(index){
 
-  let products =
-  JSON.parse(localStorage.getItem("products")) || [];
+    products.splice(index,1);
 
-  products.splice(index,1);
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
 
-  localStorage.setItem(
-    "products",
-    JSON.stringify(products)
-  );
-
-  loadProducts();
+    displayProducts();
 
 }
+
+displayProducts();
 
 </script>
 
