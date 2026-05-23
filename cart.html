@@ -211,7 +211,9 @@ function displayCart(){
             onclick="removeItem(${index})">
             Remove
             </button>
-
+<p id="empty-cart" style="text-align:center; font-size:20px; padding:20px;">
+    Your Cart is Empty
+</p>
         </div>
 
         `;
@@ -234,7 +236,22 @@ function removeItem(index){
 }
 
 displayCart();
+let cartItems = document.getElementById("cart-items");
+let total = document.getElementById("total");
+let checkoutBtn = document.querySelector(".checkout-btn");
 
+if(cartItems.innerHTML.trim() === ""){
+
+    total.style.display = "none";
+
+    checkoutBtn.style.display = "none";
+
+}
+else{
+
+    document.getElementById("empty-cart").style.display = "none";
+
+}
 </script>
 </body>
 </html>
