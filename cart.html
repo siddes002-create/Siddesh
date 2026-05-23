@@ -162,7 +162,15 @@ Retail Nanban
 <div class="cart-container">
 
 <h1>🛒 Your Cart</h1>
+<div id="cart-items"></div>
 
+<div class="total" id="total">
+Total : ₹0
+</div>
+
+<button class="checkout-btn">
+Proceed To Checkout
+</button>
 
 <div class="cart-item">
 
@@ -209,6 +217,68 @@ Proceed To Checkout
 </button>
 
 </div>
+<script>
 
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let cartItems = document.getElementById("cart-items");
+
+let total = 0;
+
+function displayCart(){
+
+    cartItems.innerHTML = "";
+
+    total = 0;
+
+    cart.forEach((item,index)=>{
+
+        total += item.price;
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+            <div>
+
+                <h3>${item.name}</h3>
+
+                <p>Fashion Collection</p>
+
+            </div>
+
+            <div class="price">
+                ₹${item.price}
+            </div>
+
+            <button class="remove-btn"
+            onclick="removeItem(${index})">
+            Remove
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("total").innerHTML =
+    "Total : ₹" + total;
+
+}
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    localStorage.setItem("cart",JSON.stringify(cart));
+
+    displayCart();
+
+}
+
+displayCart();
+
+</script>
 </body>
 </html>
