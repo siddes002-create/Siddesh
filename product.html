@@ -178,127 +178,7 @@ Retail Nanban
 
 <h1>Trending Collections</h1>
 
-<div class="product-grid">
-
-
-<!-- PRODUCT 1 -->
-
-<div class="product-card">
-
-<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop">
-
-<div class="product-info">
-
-<h3>Casual T-Shirt</h3>
-
-<div class="price">₹799</div>
-
-<select class="size-select">
-<option>Select Size</option>
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-</select>
-
-<button class="cart-btn"
-onclick="addToCart('Casual T-Shirt',799)">
-Add To Cart
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCT 2 -->
-
-<div class="product-card">
-
-<img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1200&auto=format&fit=crop">
-
-<div class="product-info">
-
-<h3>Women Dress</h3>
-
-<div class="price">₹1499</div>
-
-<select class="size-select">
-<option>Select Size</option>
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-</select>
-
-<button class="cart-btn"
-onclick="addToCart('Women Dress',1499)">
-Add To Cart
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCT 3 -->
-
-<div class="product-card">
-
-<img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1200&auto=format&fit=crop">
-
-<div class="product-info">
-
-<h3>Kids Fashion</h3>
-
-<div class="price">₹999</div>
-
-<select class="size-select">
-<option>Select Size</option>
-<option>2Y</option>
-<option>4Y</option>
-<option>6Y</option>
-<option>8Y</option>
-</select>
-
-<button class="cart-btn"
-onclick="addToCart('Kids Fashion',999)">
-Add To Cart
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCT 4 -->
-
-<div class="product-card">
-
-<img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop">
-
-<div class="product-info">
-
-<h3>Formal Shirt</h3>
-
-<div class="price">₹1299</div>
-
-<select class="size-select">
-<option>Select Size</option>
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-</select>
-
-<button class="cart-btn"
-onclick="addToCart('Formal Shirt',1299)">
-Add To Cart
-</button>
-
-</div>
-
-</div>
+<div class="product-grid" id="productGrid">
 
 </div>
 
@@ -307,24 +187,108 @@ Add To Cart
 
 <script>
 
-function addToCart(name, price){
+let defaultProducts = [
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+{
+    name:"Casual T-Shirt",
+    price:799,
+    image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop"
+},
 
-    let product = {
+{
+    name:"Women Dress",
+    price:1499,
+    image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+    name:"Kids Fashion",
+    price:999,
+    image:"https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1200&auto=format&fit=crop"
+}
+
+];
+
+let adminProducts =
+JSON.parse(localStorage.getItem("products")) || [];
+
+let allProducts =
+[...defaultProducts,...adminProducts];
+
+let productGrid =
+document.getElementById("productGrid");
+
+function displayProducts(){
+
+    productGrid.innerHTML = "";
+
+    allProducts.forEach((product)=>{
+
+        productGrid.innerHTML += `
+
+        <div class="product-card">
+
+            <img src="${product.image}">
+
+            <div class="product-info">
+
+                <h3>${product.name}</h3>
+
+                <div class="price">
+                ₹${product.price}
+                </div>
+
+                <select class="size-select">
+
+                    <option>Select Size</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+
+                </select>
+
+                <button class="cart-btn"
+                onclick="addToCart(
+                '${product.name}',
+                ${product.price}
+                )">
+
+                Add To Cart
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+function addToCart(name,price){
+
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({
         name:name,
         price:price
-    };
+    });
 
-    cart.push(product);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
 
     alert(name + " added to cart 🛒");
 
 }
 
-</script>
+displayProducts();
 
+</script>
 </body>
 </html>
