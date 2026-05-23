@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Retail Nanban</title>
 
 <style>
@@ -18,7 +16,6 @@
 
 body{
     background:#f5f5f5;
-    overflow-x:hidden;
 }
 
 /* HEADER */
@@ -36,7 +33,7 @@ header{
 }
 
 .logo{
-    font-size:42px;
+    font-size:28px;
     font-weight:bold;
     color:#ff4f6d;
 }
@@ -53,19 +50,26 @@ nav a{
     font-weight:bold;
 }
 
+nav a:hover{
+    color:#ff4f6d;
+}
+
 /* HERO */
 
 .hero{
     position:relative;
     width:100%;
-    height:550px;
+    height:450px;
+
     background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop');
-background-size:cover;
-background-position:center;
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
-
-.hero img{
-
 
 .overlay{
     position:absolute;
@@ -73,32 +77,28 @@ background-position:center;
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.35);
+    background:rgba(0,0,0,0.4);
 }
 
 .hero-content{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+    position:relative;
+    z-index:2;
     text-align:center;
     color:white;
-    width:100%;
-    z-index:2;
 }
 
 .hero-content h1{
-    font-size:75px;
-    margin-bottom:20px;
+    font-size:65px;
+    margin-bottom:15px;
 }
 
 .hero-content p{
-    font-size:30px;
-    margin-bottom:25px;
+    font-size:28px;
+    margin-bottom:20px;
 }
 
 .hero-content button{
-    padding:14px 30px;
+    padding:14px 35px;
     border:none;
     border-radius:8px;
     background:#ff4f6d;
@@ -108,51 +108,71 @@ background-position:center;
     cursor:pointer;
 }
 
-/* CATEGORY */
-
-.categories{
-    padding:60px 20px;
+.hero-content button:hover{
+    background:#ff2f55;
 }
 
-.categories h2{
+/* CATEGORY */
+
+.category-section{
+    padding:60px 40px;
+}
+
+.category-title{
     text-align:center;
     font-size:50px;
     margin-bottom:40px;
 }
 
-.category-container{
+.categories{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:25px;
 }
 
 .category-card{
-    background:white;
-    border-radius:12px;
+    position:relative;
     overflow:hidden;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
-    text-align:center;
+    border-radius:15px;
+    cursor:pointer;
 }
 
 .category-card img{
     width:100%;
-    height:350px;
+    height:400px;
     object-fit:cover;
+    transition:0.4s;
 }
 
-.category-card h3{
-    margin:20px 0;
-    font-size:28px;
+.category-card:hover img{
+    transform:scale(1.08);
 }
 
-.category-card a{
-    display:inline-block;
-    margin-bottom:20px;
-    text-decoration:none;
-    background:#ff4f6d;
+.category-name{
+    position:absolute;
+    bottom:20px;
+    left:20px;
     color:white;
-    padding:10px 20px;
-    border-radius:6px;
+    font-size:35px;
+    font-weight:bold;
+    z-index:2;
+}
+
+.card-overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.3);
+}
+
+/* FOOTER */
+
+footer{
+    background:black;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
 }
 
 /* MOBILE */
@@ -161,145 +181,142 @@ background-position:center;
 
     header{
         flex-direction:column;
-        padding:15px;
-    }
-
-    .logo{
-        font-size:30px;
-        margin-bottom:10px;
-    }
-
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
         gap:15px;
     }
 
-    nav a{
-        font-size:16px;
+    nav{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
     }
 
     .hero{
-        height:320px;
-    }
-
-    .hero img{
-        height:320px;
+        height:350px;
     }
 
     .hero-content h1{
-        font-size:38px;
+        font-size:40px;
     }
 
     .hero-content p{
-        font-size:18px;
+        font-size:20px;
     }
 
-    .hero-content button{
-        padding:10px 20px;
-        font-size:15px;
+    .category-title{
+        font-size:35px;
     }
 
-    .categories h2{
-        font-size:34px;
-    }
-
-    .category-container{
-        grid-template-columns:1fr;
-    }
-
-    .category-card img{
-        height:250px;
-    }
 }
 
 </style>
 
 </head>
-
 <body>
+
+<!-- HEADER -->
 
 <header>
 
-<div class="logo">
-Retail Nanban
-</div>
+    <div class="logo">
+        Retail Nanban
+    </div>
 
-<nav>
-<a href="#">Home</a>
-<a href="mens.html">Mens</a>
-<a href="women.html">Women</a>
-<a href="kids.html">Kids</a>
-<a href="cart.html">🛒 Cart</a>
-</nav>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="mens.html">Mens</a>
+        <a href="women.html">Women</a>
+        <a href="kids.html">Kids</a>
+        <a href="cart.html">🛒 Cart</a>
+    </nav>
 
 </header>
-
 
 <!-- HERO -->
 
 <section class="hero">
 
+    <div class="overlay"></div>
 
+    <div class="hero-content">
 
-<div class="overlay"></div>
+        <h1>Fashion That Speaks</h1>
 
-<div class="hero-content">
+        <p>Mens • Women • Kids Collection</p>
 
-<h1>Fashion That Speaks</h1>
+        <button onclick="window.location.href='mens.html'">
+            Shop Now
+        </button>
 
-<p>Mens • Women • Kids Collection</p>
-
-<button>Shop Now</button>
-
-</div>
+    </div>
 
 </section>
-
 
 <!-- CATEGORY -->
 
-<section class="categories">
+<section class="category-section">
 
-<h2>Shop By Category</h2>
+    <h1 class="category-title">
+        Shop By Category
+    </h1>
 
-<div class="category-container">
+    <div class="categories">
 
-<div class="category-card">
+        <!-- MEN -->
 
-<img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f">
+        <div class="category-card"
+        onclick="window.location.href='mens.html'">
 
-<h3>Mens Collection</h3>
+            <div class="card-overlay"></div>
 
-<a href="mens.html">Explore</a>
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop">
 
-</div>
+            <div class="category-name">
+                Mens
+            </div>
 
+        </div>
 
-<div class="category-card">
+        <!-- WOMEN -->
 
-<img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c">
+        <div class="category-card"
+        onclick="window.location.href='women.html'">
 
-<h3>Women Collection</h3>
+            <div class="card-overlay"></div>
 
-<a href="women.html">Explore</a>
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1200&auto=format&fit=crop">
 
-</div>
+            <div class="category-name">
+                Women
+            </div>
 
+        </div>
 
-<div class="category-card">
+        <!-- KIDS -->
 
-<img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea">
+        <div class="category-card"
+        onclick="window.location.href='kids.html'">
 
-<h3>Kids Collection</h3>
+            <div class="card-overlay"></div>
 
-<a href="kids.html">Explore</a>
+            <img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?q=80&w=1200&auto=format&fit=crop">
 
-</div>
+            <div class="category-name">
+                Kids
+            </div>
 
-</div>
+        </div>
+
+    </div>
 
 </section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 Retail Nanban | All Rights Reserved
+
+</footer>
 
 </body>
 </html>
