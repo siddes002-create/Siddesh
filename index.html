@@ -230,7 +230,55 @@ nav a:hover{
     }
 
 }
+@media screen and (max-width: 768px) {
 
+  nav {
+    padding: 10px 15px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  nav ul {
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .hero {
+    height: 300px;
+  }
+
+  .hero-content h1 {
+    font-size: 38px;
+    text-align: center;
+  }
+
+  .hero-content p {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .hero-content button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .product-card img {
+    height: 220px;
+    object-fit: cover;
+  }
+}
 </style>
 
 </head>
