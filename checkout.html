@@ -166,15 +166,49 @@ function placeOrder(){
 
     }
 
-    alert("Order Placed Successfully 🎉");
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+    let orderText =
+    "🛍️ *New Order - Retail Nanban* %0A%0A";
+
+    orderText +=
+    "👤 Name: " + name + "%0A";
+
+    orderText +=
+    "📞 Mobile: " + mobile + "%0A";
+
+    orderText +=
+    "📍 Address: " + address + "%0A%0A";
+
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+
+        orderText +=
+        "🛒 " + item.name +
+        " - ₹" + item.price + "%0A";
+
+        total += item.price;
+
+    });
+
+    orderText +=
+    "%0A💰 Total: ₹" + total;
+
+    let phone =
+    "91YOURNUMBER";
+
+    let whatsappURL =
+    "https://wa.me/" + phone +
+    "?text=" + orderText;
+
+    window.open(whatsappURL,"_blank");
 
     localStorage.removeItem("cart");
-
-    window.location.href="index.html";
 
 }
 
 </script>
-
 </body>
 </html>
