@@ -103,7 +103,11 @@ body{
   line-height: 1.7;
   color: #444;
 }
-
+.active-size{
+background:blue;
+color:white;
+border-color:blue;
+}
 </style>
 
 </head>
@@ -130,11 +134,24 @@ body{
     </div>
 
     <div class="sizes">
-      <button class="size-btn">S</button>
-      <button class="size-btn">M</button>
-      <button class="size-btn">L</button>
-      <button class="size-btn">XL</button>
-    </div>
+
+<button class="size-btn" onclick="selectSize(this)">
+S
+</button>
+
+<button class="size-btn" onclick="selectSize(this)">
+M
+</button>
+
+<button class="size-btn" onclick="selectSize(this)">
+L
+</button>
+
+<button class="size-btn" onclick="selectSize(this)">
+XL
+</button>
+
+</div>
 
     <div class="buttons">
 
@@ -186,6 +203,16 @@ JSON.stringify(cart)
 );
 
 alert("Added To Cart 🛒");
+
+function selectSize(button){
+
+document
+.querySelectorAll(".size-btn")
+.forEach((btn)=>{
+btn.classList.remove("active-size");
+});
+
+button.classList.add("active-size");
 
 }
 </script>
