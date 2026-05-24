@@ -112,17 +112,17 @@ body{
 <div class="product-container">
 
   <div class="left">
-    <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop">
+   <img id="productImage">
   </div>
 
   <div class="right">
 
     <div class="product-title">
-      Premium Stylish Shirt
+      <div id="productName"></div>
     </div>
 
     <div class="price">
-      ₹799
+      <div id="productPrice"></div>
     </div>
 
     <div class="size-title">
@@ -160,6 +160,20 @@ body{
   </div>
 
 </div>
+<script>
 
+const params = new URLSearchParams(window.location.search);
+
+const image = params.get("image");
+const name = params.get("name");
+const price = params.get("price");
+
+document.getElementById("productImage").src = image;
+
+document.getElementById("productName").innerText = name;
+
+document.getElementById("productPrice").innerText = "₹" + price;
+
+</script>
 </body>
 </html>
