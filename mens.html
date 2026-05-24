@@ -126,7 +126,19 @@ nav ul li a{
 .product-card button:hover{
   background:#0b5ed7;
 }
+.product-name{
+  text-decoration: none;
+  color: black;
+}
 
+.product-card img{
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product-card img:hover{
+  transform: scale(1.03);
+}
 </style>
 
 </head>
@@ -182,22 +194,25 @@ output += `
 
 <div class="product-card">
 
-<img src="${p.image}">
+<a href="product.html">
 
-<h3>${p.name}</h3>
+  <img src="${p.image}">
+
+</a>
+
+<a href="product.html" class="product-name">
+
+  <h3>${p.name}</h3>
+
+</a>
 
 <div class="price">
 ₹${p.price}
 </div>
 
-
 <div class="stock">
 Only ${p.stock} left
 </div>
-
-<button onclick='selectSize(${JSON.stringify(p)})'>
-Add to Cart
-</button>
 
 </div>
 
