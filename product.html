@@ -162,17 +162,17 @@ body{
 </div>
 <script>
 
-const params = new URLSearchParams(window.location.search);
+const product =
+JSON.parse(localStorage.getItem("selectedProduct"));
 
-const image = params.get("image");
-const name = params.get("name");
-const price = params.get("price");
+document.getElementById("productImage").src =
+product.image;
 
-document.getElementById("productImage").src = image;
+document.getElementById("productName").innerText =
+product.name;
 
-document.getElementById("productName").innerText = name;
-
-document.getElementById("productPrice").innerText = "₹" + price;
+document.getElementById("productPrice").innerText =
+"₹" + product.price;
 
 </script>
 </body>
