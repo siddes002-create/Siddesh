@@ -194,14 +194,13 @@ output += `
 
 <div class="product-card">
 
-<a href="product.html?image=${p.image}&name=${p.name}&price=${p.price}">
+<a href="#" onclick='openProduct(${JSON.stringify(p)})'>
 
   <img src="${p.image}">
 
 </a>
 
-<a href="product.html?image=${p.image}&name=${p.name}&price=${p.price}" class="product-name">
-
+<a href="#" onclick='openProduct(${JSON.stringify(p)})' class="product-name">
   <h3>${p.name}</h3>
 
 </a>
@@ -248,8 +247,16 @@ product.name +
 " Added To Cart"
 );
 
-}
 
+
+function openProduct(product){
+
+  localStorage.setItem(
+    "selectedProduct",
+    JSON.stringify(product)
+  );
+
+  window.location.href = "product.html";
 }
 
 </script>
