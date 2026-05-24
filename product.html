@@ -1,294 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Products - Retail Nanban</title>
+<title>Product Details</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
 body{
-    background:#f5f5f5;
+  font-family: Arial;
+  margin: 0;
+  padding: 30px;
+  background: #f1f3f6;
 }
 
-/* HEADER */
-
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.product-container{
+  display: flex;
+  gap: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
 }
 
-.logo{
-    font-size:38px;
-    font-weight:bold;
-    color:#ff4f6d;
+.left{
+  width: 40%;
 }
 
-nav{
-    display:flex;
-    gap:25px;
+.left img{
+  width: 100%;
+  border-radius: 10px;
 }
 
-nav a{
-    text-decoration:none;
-    color:black;
-    font-weight:bold;
+.right{
+  width: 60%;
 }
 
-/* PRODUCTS */
-
-.products{
-    padding:40px 20px;
-}
-
-.products h1{
-    text-align:center;
-    margin-bottom:40px;
-    font-size:50px;
-}
-
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
-}
-
-.product-card{
-    background:white;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
-    transition:0.3s;
-}
-
-.product-card:hover{
-    transform:translateY(-5px);
-}
-
-.product-card img{
-    width:100%;
-    height:320px;
-    object-fit:cover;
-}
-
-.product-info{
-    padding:20px;
-}
-
-.product-info h3{
-    margin-bottom:10px;
+.product-title{
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .price{
-    color:#ff4f6d;
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:15px;
+  font-size: 30px;
+  color: green;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.size-select{
-    width:100%;
-    padding:10px;
-    margin-bottom:15px;
-    border:1px solid #ddd;
-    border-radius:6px;
+.size-title{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.sizes{
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.size-btn{
+  padding: 10px 18px;
+  border: 2px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.size-btn:hover{
+  border-color: blue;
+  color: blue;
+}
+
+.buttons{
+  display: flex;
+  gap: 20px;
 }
 
 .cart-btn{
-    width:100%;
-    padding:12px;
-    border:none;
-    background:#ff4f6d;
-    color:white;
-    font-size:16px;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
+  background: orange;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-/* MOBILE */
+.buy-btn{
+  background: #fb641b;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-@media(max-width:768px){
-
-    header{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .logo{
-        font-size:30px;
-    }
-
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-
-    .products h1{
-        font-size:34px;
-    }
-
-    .product-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:15px;
-    }
-
-    .product-card img{
-        height:220px;
-    }
+.desc{
+  margin-top: 30px;
+  line-height: 1.7;
+  color: #444;
 }
 
 </style>
 
 </head>
-
 <body>
 
-<header>
+<div class="product-container">
 
-<div class="logo">
-Retail Nanban
+  <div class="left">
+    <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop">
+  </div>
+
+  <div class="right">
+
+    <div class="product-title">
+      Premium Stylish Shirt
+    </div>
+
+    <div class="price">
+      ₹799
+    </div>
+
+    <div class="size-title">
+      Select Size
+    </div>
+
+    <div class="sizes">
+      <button class="size-btn">S</button>
+      <button class="size-btn">M</button>
+      <button class="size-btn">L</button>
+      <button class="size-btn">XL</button>
+    </div>
+
+    <div class="buttons">
+
+      <button class="cart-btn">
+        Add to Cart
+      </button>
+
+      <button class="buy-btn">
+        Buy Now
+      </button>
+
+    </div>
+
+    <div class="desc">
+
+      Premium quality cotton shirt.  
+      Comfortable for daily wear.  
+      Stylish modern fit design.  
+      Best for casual and party wear.
+
+    </div>
+
+  </div>
+
 </div>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="#">Mens</a>
-<a href="#">Women</a>
-<a href="#">Kids</a>
-<a href="cart.html">🛒 Cart</a>
-</nav>
-
-</header>
-
-
-<section class="products">
-
-<h1>Trending Collections</h1>
-
-<div class="product-grid" id="productGrid">
-
-</div>
-
-</section>
-
-
-<script>
-
-let defaultProducts = [
-
-{
-    name:"Casual T-Shirt",
-    price:799,
-    image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-    name:"Women Dress",
-    price:1499,
-    image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-    name:"Kids Fashion",
-    price:999,
-    image:"https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1200&auto=format&fit=crop"
-}
-
-];
-
-let adminProducts =
-JSON.parse(localStorage.getItem("products")) || [];
-
-let allProducts =
-[...defaultProducts,...adminProducts];
-
-let productGrid =
-document.getElementById("productGrid");
-
-function displayProducts(){
-
-    productGrid.innerHTML = "";
-
-    allProducts.forEach((product)=>{
-
-        productGrid.innerHTML += `
-
-        <div class="product-card">
-
-            <img src="${product.image}">
-
-            <div class="product-info">
-
-                <h3>${product.name}</h3>
-
-                <div class="price">
-                ₹${product.price}
-                </div>
-
-                <select class="size-select">
-
-                    <option>Select Size</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-
-                </select>
-
-                <button class="cart-btn"
-                onclick="addToCart(
-                '${product.name}',
-                ${product.price}
-                )">
-
-                Add To Cart
-
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-function addToCart(name,price){
-
-    let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.push({
-        name:name,
-        price:price
-    });
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    alert(name + " added to cart 🛒");
-
-}
-
-displayProducts();
-
-</script>
 </body>
 </html>
