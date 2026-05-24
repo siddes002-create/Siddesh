@@ -1,140 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cart - Retail Nanban</title>
+<title>Cart</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
 body{
-    background:#f5f5f5;
-}
-
-/* HEADER */
-
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-.logo{
-    font-size:38px;
-    font-weight:bold;
-    color:#ff4f6d;
-}
-
-nav{
-    display:flex;
-    gap:25px;
-}
-
-nav a{
-    text-decoration:none;
-    color:black;
-    font-weight:bold;
-}
-
-/* CART */
-
-.cart-container{
-    max-width:1000px;
-    margin:40px auto;
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-
-.cart-container h1{
-    margin-bottom:30px;
-    text-align:center;
+font-family:Arial;
+padding:20px;
+background:#f1f3f6;
 }
 
 .cart-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 0;
-    border-bottom:1px solid #ddd;
+display:flex;
+gap:20px;
+background:white;
+padding:15px;
+margin-bottom:20px;
+border-radius:10px;
+align-items:center;
 }
 
-.cart-item h3{
-    margin-bottom:5px;
+.cart-item img{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:10px;
 }
 
 .price{
-    color:#ff4f6d;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.remove-btn{
-    background:red;
-    color:white;
-    border:none;
-    padding:8px 15px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.total{
-    text-align:right;
-    margin-top:30px;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.checkout-btn{
-    display:block;
-    width:100%;
-    margin-top:25px;
-    padding:15px;
-    background:#ff4f6d;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    header{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-
-    .cart-item{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
-
-    .total{
-        text-align:center;
-    }
+font-size:22px;
+font-weight:bold;
+color:green;
+margin-top:10px;
 }
 
 </style>
@@ -143,85 +41,45 @@ nav a{
 
 <body>
 
-<header>
+<h1>Your Cart 🛒</h1>
 
-<div class="logo">
-Retail Nanban
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="#">Mens</a>
-<a href="#">Women</a>
-</nav>
-
-</header>
-
-
-<div class="cart-container">
-    
-<h1>🛒 Your Cart</h1>
-<div id="cart-items"></div>
-
-<div class="total" id="total">
-    Total : ₹0
-</div>
-
-<button class="checkout-btn" onclick="window.location.href='checkout.html'">
-    Proceed To Checkout
-</button>
-
+<div id="cartItems"></div>
 
 <script>
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cart =
+JSON.parse(localStorage.getItem("cart")) || [];
 
-let cartItems = document.getElementById("cart-items");
+let output = "";
 
-let totalPrice = 0;
+cart.forEach((item)=>{
 
-if(cart.length === 0){
+output += `
 
-    cartItems.innerHTML = `
-        <p style="text-align:center; padding:20px; font-size:20px;">
-            Your Cart Is Empty
-        </p>
-    `;
+<div class="cart-item">
 
-    document.querySelector(".checkout-btn").style.display = "none";
+<img src="${item.image}">
 
-    document.getElementById("total").style.display = "none";
+<div>
 
-}
-else{
+<h2>${item.name}</h2>
 
-    cart.forEach((item)=>{
+<div class="price">
+₹${item.price}
+</div>
 
-        totalPrice += item.price;
+</div>
 
-        cartItems.innerHTML += `
+</div>
 
-        <div class="cart-item">
+`;
 
-            <div>
-                <h3>${item.name}</h3>
-                <p>Fashion Collection</p>
-            </div>
+});
 
-            <h3>₹${item.price}</h3>
-
-        </div>
-
-        `;
-
-    });
-
-    document.getElementById("total").innerHTML =
-    "Total : ₹" + totalPrice;
-
-}
+document.getElementById("cartItems").innerHTML =
+output;
 
 </script>
+
 </body>
 </html>
