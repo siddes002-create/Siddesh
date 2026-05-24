@@ -129,23 +129,15 @@ border-color:blue;
       Select Size
     </div>
 
-    <div class="sizes">
+  <div class="sizes">
 
-<button class="size-btn" onclick="selectSize(this)">
-S
-</button>
+<button class="size-btn" onclick="selectSize(this)">S</button>
 
-<button class="size-btn" onclick="selectSize(this)">
-M
-</button>
+<button class="size-btn" onclick="selectSize(this)">M</button>
 
-<button class="size-btn" onclick="selectSize(this)">
-L
-</button>
+<button class="size-btn" onclick="selectSize(this)">L</button>
 
-<button class="size-btn" onclick="selectSize(this)">
-XL
-</button>
+<button class="size-btn" onclick="selectSize(this)">XL</button>
 
 </div>
 
@@ -186,6 +178,18 @@ product.name;
 
 document.getElementById("productPrice").innerText =
 "₹" + product.price;
+
+function selectSize(button){
+
+document
+.querySelectorAll(".size-btn")
+.forEach((btn)=>{
+btn.classList.remove("active-size");
+});
+
+button.classList.add("active-size");
+
+}
 
 </script>
 </body>
