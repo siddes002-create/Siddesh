@@ -186,31 +186,7 @@ product.name;
 
 document.getElementById("productPrice").innerText =
 "₹" + product.price;
-function addToCart(){
 
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
-
-cart.push(product);
-
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
-);
-
-alert("Added To Cart 🛒");
-
-function selectSize(button){
-
-document
-.querySelectorAll(".size-btn")
-.forEach((btn)=>{
-btn.classList.remove("active-size");
-});
-
-button.classList.add("active-size");
-
-}
 </script>
 </body>
 </html>
