@@ -124,15 +124,11 @@ message +=
 const whatsappNumber =
 "919025360877";
 
-window.open(
-`https://wa.me/${whatsappNumber}?text=${message}`,
-"_blank"
-);
+alert("Order Placed Successfully");
+
 localStorage.removeItem("cart");
 
 window.location.href = "success.html";
-}
-
 </script>
 
 </body>
