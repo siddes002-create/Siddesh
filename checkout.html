@@ -80,7 +80,36 @@ Place Order
 <script>
 
 function placeOrder(){
+const name =
+document.getElementById("name").value;
 
+const phone =
+document.getElementById("phone").value;
+
+const address =
+document.getElementById("address").value;
+
+const cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let newOrder = {
+
+customer:name,
+phone:phone,
+address:address,
+items:cart
+
+};
+
+orders.push(newOrder);
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
 alert("Order Placed Successfully");
 
 localStorage.removeItem("cart");
