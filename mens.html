@@ -90,7 +90,14 @@ body{
   cursor:pointer;
   transition:0.3s;
 }
-
+#searchInput{
+width:300px;
+padding:12px;
+margin:20px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
 .product-card img:hover{
   transform:scale(1.03);
 }
@@ -150,7 +157,12 @@ body{
 
 </head>
 <body>
-
+<input
+type="text"
+id="searchInput"
+placeholder="Search Product..."
+onkeyup="searchProducts()"
+>
 <div class="navbar">
 
   <div class="logo">
@@ -287,7 +299,31 @@ JSON.stringify(product)
 window.location.href = "product.html";
 
 }
+function searchProducts(){
 
+const input =
+document.getElementById("searchInput")
+.value
+.toLowerCase();
+
+const products =
+document.querySelectorAll(".product-card");
+
+products.forEach(product=>{
+
+const name =
+product.innerText.toLowerCase();
+
+if(name.includes(input)){
+product.style.display = "block";
+}
+else{
+product.style.display = "none";
+}
+
+});
+
+}
 </script>
 
 </body>
