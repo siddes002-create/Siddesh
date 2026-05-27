@@ -95,7 +95,15 @@ JSON.parse(localStorage.getItem("cart")) || [];
 
 let message =
 "🛒 NEW ORDER %0A%0A";
+function placeOrder(){
 
+alert("Order Placed Successfully");
+
+localStorage.removeItem("cart");
+
+window.location.href = "success.html";
+
+}
 cart.forEach(item=>{
 
 
