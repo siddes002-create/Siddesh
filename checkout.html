@@ -81,22 +81,6 @@ Place Order
 
 function placeOrder(){
 
-const name =
-document.getElementById("name").value;
-
-const phone =
-document.getElementById("phone").value;
-
-const address =
-document.getElementById("address").value;
-
-const cart =
-JSON.parse(localStorage.getItem("cart")) || [];
-
-let message =
-"🛒 NEW ORDER %0A%0A";
-function placeOrder(){
-
 alert("Order Placed Successfully");
 
 localStorage.removeItem("cart");
@@ -104,14 +88,7 @@ localStorage.removeItem("cart");
 window.location.href = "success.html";
 
 }
-cart.forEach(item=>{
 
-
-alert("Order Placed Successfully");
-
-localStorage.removeItem("cart");
-
-window.location.href = "success.html";
 </script>
 
 </body>
