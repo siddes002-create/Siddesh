@@ -118,7 +118,24 @@ header{
     border-radius:6px;
     cursor:pointer;
 }
+.order-box{
+background:#fafafa;
+padding:20px;
+border-radius:10px;
+margin-top:20px;
+border:1px solid #ddd;
+}
 
+.order-box h3{
+margin-bottom:10px;
+}
+
+.order-item{
+margin-top:10px;
+padding:10px;
+background:white;
+border-radius:8px;
+}
 /* MOBILE */
 
 @media(max-width:768px){
@@ -179,9 +196,12 @@ Add Product
 </button>
 
 
-<div class="product-list"
-id="productList">
+<div class="product-list"id="productList">
+<h1 style="margin-top:40px;">
+Customer Orders
+</h1>
 
+<div id="orderList"></div>
 </div>
 
 </div>
@@ -284,7 +304,61 @@ function deleteProduct(index){
 }
 
 displayProducts();
+function displayOrders(){
 
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let orderList =
+document.getElementById("orderList");
+
+orderList.innerHTML = "";
+
+orders.forEach(order=>{
+
+let itemsHTML = "";
+
+order.items.forEach(item=>{
+
+itemsHTML += `
+
+<div class="order-item">
+
+<p><b>${item.name}</b></p>
+
+<p>₹${item.price}</p>
+
+<p>Qty : ${item.qty || 1}</p>
+
+<p>Size : ${item.size}</p>
+
+</div>
+
+`;
+
+});
+
+orderList.innerHTML += `
+
+<div class="order-box">
+
+<h3>${order.customer}</h3>
+
+<p>${order.phone}</p>
+
+<p>${order.address}</p>
+
+${itemsHTML}
+
+</div>
+
+`;
+
+});
+
+}
+
+displayOrders();
 </script>
 
 </body>
