@@ -161,7 +161,20 @@ border-radius:8px;
 </head>
 
 <body>
+<div id="loginPage">
 
+<h1>Admin Login</h1>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Enter Password">
+
+<button onclick="checkLogin()">
+Login
+</button>
+
+</div>
 <header>
 
 <div class="logo">
@@ -171,7 +184,9 @@ Retail Nanban Admin
 </header>
 
 
-<div class="admin-container">
+<div class="admin-container"
+id="adminPanel"
+style="display:none;">
 
 <h1>Add Product</h1>
 
@@ -208,7 +223,27 @@ Customer Orders
 
 
 <script>
+function checkLogin(){
 
+const password =
+document.getElementById("adminPassword").value;
+
+if(password == "1234"){
+
+document.getElementById("loginPage")
+.style.display = "none";
+
+document.getElementById("adminPanel")
+.style.display = "block";
+
+}
+else{
+
+alert("Wrong Password");
+
+}
+
+}
 let products =
 JSON.parse(localStorage.getItem("products")) || [];
 
@@ -359,6 +394,7 @@ ${itemsHTML}
 }
 
 displayOrders();
+    
 </script>
 
 </body>
