@@ -72,7 +72,7 @@ placeholder="Delivery Address">
 </textarea>
 
 <button onclick="placeOrder()">
-Place Order on WhatsApp
+Place Order
 </button>
 
 </div>
@@ -98,31 +98,6 @@ let message =
 
 cart.forEach(item=>{
 
-message +=
-`Product: ${item.name}%0A`;
-
-message +=
-`Size: ${item.size}%0A`;
-
-message +=
-`Qty: ${item.qty || 1}%0A`;
-
-message +=
-`Price: ₹${item.price}%0A%0A`;
-
-});
-
-message +=
-`Customer: ${name}%0A`;
-
-message +=
-`Phone: ${phone}%0A`;
-
-message +=
-`Address: ${address}`;
-
-const whatsappNumber =
-"919025360877";
 
 alert("Order Placed Successfully");
 
