@@ -170,6 +170,8 @@ border-color:blue;
 const product =
 JSON.parse(localStorage.getItem("selectedProduct"));
 
+if(product){
+
 document.getElementById("productImage").src =
 product.image;
 
@@ -179,40 +181,45 @@ product.name;
 document.getElementById("productPrice").innerText =
 "₹" + product.price;
 
-function selectSize(button){
-function addToCart() {
-
-  const selectedSize =
-    document.querySelector(".active-size")?.innerText;
-
-  if (!selectedSize) {
-    alert("Please select size");
-    return;
-  }
-
-  const cartItem = {
-    image: product.image,
-    name: product.name,
-    price: product.price,
-    size: selectedSize
-  };
-
-  let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
-
-  cart.push(cartItem);
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  alert("Added to Cart");
 }
+
+function selectSize(button){
+
 document
 .querySelectorAll(".size-btn")
-.forEach((btn)=>{
+.forEach(btn=>{
 btn.classList.remove("active-size");
 });
 
 button.classList.add("active-size");
+
+}
+
+function addToCart(){
+
+const selectedSize =
+document.querySelector(".active-size");
+
+if(!selectedSize){
+alert("Select Size");
+return;
+}
+
+const cartItem = {
+image: product.image,
+name: product.name,
+price: product.price,
+size: selectedSize.innerText
+};
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push(cartItem);
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+alert("Added To Cart");
 
 }
 
