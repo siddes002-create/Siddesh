@@ -230,14 +230,20 @@ const productsData = [
 
 {
 name:"Check Shirt",
-price:"₹899",
+price:899,
 image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
 },
 
 {
 name:"Smart Shirt",
-price:"₹799",
+price:799,
 image:"https://images.unsplash.com/photo-1483985988355-763728e1935b"
+},
+
+{
+name:"Casual Shirt",
+price:999,
+image:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
 }
 
 ];
@@ -250,11 +256,14 @@ output += `
 
 <div class="product-card">
 
-<img src="${product.image}">
+<img
+src="${product.image}"
+onclick='openProduct(${JSON.stringify(product)})'
+>
 
 <h3>${product.name}</h3>
 
-<p>${product.price}</p>
+<p>₹${product.price}</p>
 
 <button onclick="addWishlist(this)">
 ❤️
@@ -268,6 +277,17 @@ output += `
 
 document.getElementById("products").innerHTML =
 output;
+
+function openProduct(product){
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(product)
+);
+
+window.location.href = "product.html";
+
+}
 
 function addWishlist(button){
 
@@ -283,6 +303,38 @@ else{
 button.innerText = "❤️";
 
 }
+
+}
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+}
+
+function searchProducts(){
+
+const input =
+document.getElementById("searchInput")
+.value
+.toLowerCase();
+
+const products =
+document.querySelectorAll(".product-card");
+
+products.forEach(product=>{
+
+const name =
+product.innerText.toLowerCase();
+
+if(name.includes(input)){
+product.style.display = "block";
+}
+else{
+product.style.display = "none";
+}
+
+});
 
 }
 
