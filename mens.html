@@ -18,7 +18,9 @@
 body{
   background:#f1f3f6;
 }
-
+<button onclick="toggleDarkMode()" id="darkBtn">
+🌙 Dark Mode
+</button>
 .navbar{
   display:flex;
   justify-content:space-between;
@@ -26,7 +28,25 @@ body{
   padding:20px;
   background:white;
 }
+#darkBtn{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:black;
+color:white;
+cursor:pointer;
+margin:20px;
+}
 
+.dark-mode{
+background:#111;
+color:white;
+}
+
+.dark-mode .product-card{
+background:#222;
+color:white;
+}
 .logo{
   font-size:28px;
   font-weight:bold;
@@ -195,7 +215,15 @@ onkeyup="searchProducts()"
 </div>
 
 <div class="products" id="products"></div>
+<script>
 
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+}
+
+</script>
 <script>
 
 const products = [
