@@ -58,7 +58,7 @@ let total = 0;
 
 cart.forEach((item,index)=>{
 
-total += item.price;
+total += item.price * (item.qty || 1);
 
 output += `
 
@@ -69,7 +69,19 @@ output += `
 <div>
 
 <h2>${item.name}</h2>
+<div class="qty-box">
 
+<button onclick="changeQty(${index}, -1)">
+-
+</button>
+
+<span>${item.qty || 1}</span>
+
+<button onclick="changeQty(${index}, 1)">
++
+</button>
+
+</div>
 <div class="price">
 ₹${item.price}
 </div>
@@ -79,7 +91,26 @@ output += `
 <button onclick="removeItem(${index})">
 Remove
 </button>
+function changeQty(index, change){
 
+if(!cart[index].qty){
+cart[index].qty = 1;
+}
+
+cart[index].qty += change;
+
+if(cart[index].qty < 1){
+cart[index].qty = 1;
+}
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+location.reload();
+
+}
 </div>
 
 </div>
