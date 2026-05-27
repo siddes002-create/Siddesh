@@ -128,7 +128,9 @@ window.open(
 `https://wa.me/${whatsappNumber}?text=${message}`,
 "_blank"
 );
+localStorage.removeItem("cart");
 
+window.location.href = "success.html";
 }
 
 </script>
