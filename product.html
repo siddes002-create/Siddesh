@@ -143,8 +143,8 @@ border-color:blue;
 
     <div class="buttons">
 
-      <button class="cart-btn" onclick="addToCart()">
-Add to Cart
+      <button onclick="addToCart()" class="cart-btn">
+  Add to Cart
 </button>
 
       <button class="buy-btn">
@@ -180,7 +180,32 @@ document.getElementById("productPrice").innerText =
 "₹" + product.price;
 
 function selectSize(button){
+function addToCart() {
 
+  const selectedSize =
+    document.querySelector(".active-size")?.innerText;
+
+  if (!selectedSize) {
+    alert("Please select size");
+    return;
+  }
+
+  const cartItem = {
+    image: product.image,
+    name: product.name,
+    price: product.price,
+    size: selectedSize
+  };
+
+  let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+  cart.push(cartItem);
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert("Added to Cart");
+}
 document
 .querySelectorAll(".size-btn")
 .forEach((btn)=>{
