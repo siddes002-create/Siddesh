@@ -194,7 +194,9 @@ flex:1;
 </head>
 
 <body>
-    <div class="admin-layout">
+   <div class="admin-layout"
+style="display:none;"
+id="adminLayout">
 
 <div class="sidebar">
 
@@ -292,7 +294,9 @@ document.getElementById("loginPage")
 
 document.getElementById("adminPanel")
 .style.display = "block";
-
+    
+document.getElementById("adminLayout")
+.style.display = "flex";
 }
 else{
 
