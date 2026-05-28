@@ -195,7 +195,6 @@ flex:1;
 
 <body>
    <div class="admin-layout"
-style="display:none;"
 id="adminLayout">
 
 <div class="sidebar">
@@ -213,8 +212,8 @@ Customer Orders
 </div>
 
 <div class="main-content">
-<div id="loginPage">
-
+<div id="loginPage"
+style="padding:40px;">
 <h1>Admin Login</h1>
 
 <input
@@ -294,9 +293,7 @@ document.getElementById("loginPage")
 
 document.getElementById("adminPanel")
 .style.display = "block";
-    
-document.getElementById("adminLayout")
-.style.display = "flex";
+
 }
 else{
 
