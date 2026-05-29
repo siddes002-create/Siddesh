@@ -413,15 +413,12 @@ let orderList =
 document.getElementById("orderList");
 
 orderList.innerHTML = "";
-
+console.log(orders);
 orders.forEach(order=>{
-    if(!order.items){
-return;
-}
 
 let itemsHTML = "";
 
-order.items.forEach(item=>{
+(order.items || []).forEach(item=>{
 
 itemsHTML += `
 
