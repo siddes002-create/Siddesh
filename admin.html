@@ -422,6 +422,14 @@ JSON.parse(localStorage.getItem("orders")) || [];
 let orderList =
 document.getElementById("orderList");
 orderList.innerHTML = `
+orderList.innerHTML = `
+<div id="orderStats"
+style="
+display:flex;
+gap:10px;
+margin-bottom:15px;">
+</div>
+`;
 let totalOrders = orders.length;
 
 let delivered =
@@ -490,8 +498,6 @@ itemsHTML += `
 `;
 
 });
-
-orderList.innerHTML += `
 
 <div class="order-box">
 
