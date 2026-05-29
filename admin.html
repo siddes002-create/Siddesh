@@ -274,7 +274,17 @@ style="display:none;">
 <h1 style="margin-top:40px;">
 Customer Orders
 </h1>
-
+<input
+type="text"
+id="searchOrder"
+placeholder="Search Name or Phone"
+onkeyup="displayOrders()"
+style="
+width:100%;
+padding:10px;
+margin:15px 0;
+border:1px solid #ddd;
+border-radius:8px;">
 <div id="orderList"></div>
 
 </div>
@@ -411,10 +421,51 @@ JSON.parse(localStorage.getItem("orders")) || [];
 
 let orderList =
 document.getElementById("orderList");
+orderList.innerHTML = `
+let totalOrders = orders.length;
 
-orderList.innerHTML = "";
+let delivered =
+orders.filter(o =>
+o.status === "Delivered"
+).length;
+
+let pending =
+totalOrders - delivered;
+
+document.getElementById("orderStats").innerHTML = `
+<div style="
+background:#fff;
+padding:10px 15px;
+border-radius:8px;">
+<b>Total:</b> ${totalOrders}
+</div>
+
+<div style="
+background:#fff3cd;
+padding:10px 15px;
+border-radius:8px;">
+<b>Pending:</b> ${pending}
+</div>
+
+<div style="
+background:#d4edda;
+padding:10px 15px;
+border-radius:8px;">
+<b>Delivered:</b> ${delivered}
+</div>
+`;
 console.log(orders);
 orders.forEach((order,index)=>{
+if(
+search &&
+!(order.customer || "")
+.toLowerCase()
+.includes(search.toLowerCase()) &&
+!(order.phone || "")
+.includes(search)
+){
+return;
+}    
 if(!order.customer){
 return;
 }
@@ -497,7 +548,9 @@ function toggleStatus(index){
 
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
-
+let search =
+(document.getElementById("searchOrder")?.value || "")
+.toLowerCase();
 if(orders[index].status === "Delivered"){
 
 orders[index].status = "Pending";
