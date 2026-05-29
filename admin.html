@@ -458,8 +458,15 @@ ${itemsHTML}
 
 }
 
-displayOrders();
- function showSection(sectionId){
+    displayOrders();
+
+document.getElementById("productsSection")
+.style.display = "block";
+
+document.getElementById("ordersSection")
+.style.display = "none";
+
+function showSection(sectionId){
 
 document.getElementById("productsSection")
 .style.display = "none";
@@ -470,7 +477,8 @@ document.getElementById("ordersSection")
 document.getElementById(sectionId)
 .style.display = "block";
 
-}   
+}
+
 </script>
 
 </body>
