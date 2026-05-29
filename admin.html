@@ -415,6 +415,9 @@ document.getElementById("orderList");
 orderList.innerHTML = "";
 
 orders.forEach(order=>{
+    if(!order.items){
+return;
+}
 
 let itemsHTML = "";
 
