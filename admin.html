@@ -419,9 +419,13 @@ function displayOrders(){
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
+let search =
+(document.getElementById("searchOrder")?.value || "")
+.toLowerCase();
+
 let orderList =
 document.getElementById("orderList");
-orderList.innerHTML = `
+
 orderList.innerHTML = `
 <div id="orderStats"
 style="
@@ -430,12 +434,11 @@ gap:10px;
 margin-bottom:15px;">
 </div>
 `;
+
 let totalOrders = orders.length;
 
 let delivered =
-orders.filter(o =>
-o.status === "Delivered"
-).length;
+orders.filter(o => o.status === "Delivered").length;
 
 let pending =
 totalOrders - delivered;
@@ -462,27 +465,29 @@ border-radius:8px;">
 <b>Delivered:</b> ${delivered}
 </div>
 `;
-console.log(orders);
+
 orders.forEach((order,index)=>{
+
 if(
 search &&
 !(order.customer || "")
 .toLowerCase()
-.includes(search.toLowerCase()) &&
+.includes(search) &&
 !(order.phone || "")
 .includes(search)
 ){
 return;
-}    
+}
+
 if(!order.customer){
 return;
 }
+
 let itemsHTML = "";
 
 (order.items || []).forEach(item=>{
 
 itemsHTML += `
-
 <div class="order-item">
 
 <p><b>${item.name}</b></p>
@@ -491,17 +496,18 @@ itemsHTML += `
 
 <p>Qty : ${item.qty || 1}</p>
 
-<p>Size : ${item.size}</p>
+<p>Size : ${item.size || "-"}</p>
 
 </div>
-
 `;
 
 });
 
+orderList.innerHTML += `
 <div class="order-box">
 
 <h3>${order.customer}</h3>
+
 <p>
 Status:
 <span style="
@@ -512,24 +518,27 @@ ${order.status || 'Pending'}
 </p>
 
 <button onclick="toggleStatus(${index})">
-${order.status === 'Delivered' ? 'Mark Pending' : 'Mark Delivered'}
+${order.status === 'Delivered'
+? 'Mark Pending'
+: 'Mark Delivered'}
 </button>
-<p>${order.phone}</p>
 
-<p>${order.address}</p>
+<p>${order.phone || ""}</p>
+
+<p>${order.address || ""}</p>
 
 ${itemsHTML}
+
 ${order.deliveredOn ?
 `<p><b>Delivered On:</b> ${order.deliveredOn}</p>`
 : ""}
-</div>
 
+</div>
 `;
 
 });
 
 }
-
     displayOrders();
 
 document.getElementById("productsSection")
