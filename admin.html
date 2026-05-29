@@ -414,7 +414,7 @@ document.getElementById("orderList");
 
 orderList.innerHTML = "";
 console.log(orders);
-orders.forEach(order=>{
+orders.forEach((order,index)=>{
 
 let itemsHTML = "";
 
@@ -443,13 +443,26 @@ orderList.innerHTML += `
 <div class="order-box">
 
 <h3>${order.customer}</h3>
+<p>
+Status:
+<span style="
+color:${order.status === 'Delivered' ? 'green' : 'orange'};
+font-weight:bold;">
+${order.status || 'Pending'}
+</span>
+</p>
 
+<button onclick="toggleStatus(${index})">
+${order.status === 'Delivered' ? 'Mark Pending' : 'Mark Delivered'}
+</button>
 <p>${order.phone}</p>
 
 <p>${order.address}</p>
 
 ${itemsHTML}
-
+${order.deliveredOn ?
+`<p><b>Delivered On:</b> ${order.deliveredOn}</p>`
+: ""}
 </div>
 
 `;
@@ -478,7 +491,32 @@ document.getElementById(sectionId)
 .style.display = "block";
 
 }
+function toggleStatus(index){
 
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+if(orders[index].status === "Delivered"){
+
+orders[index].status = "Pending";
+
+}else{
+
+orders[index].status = "Delivered";
+
+orders[index].deliveredOn =
+new Date().toLocaleDateString();
+
+}
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+displayOrders();
+
+}
 </script>
 
 </body>
