@@ -251,7 +251,13 @@ style="display:none;">
 <div class="input-box">
 <label>Price</label>
 <input type="number" id="productPrice">
-</div>
+ <div class="input-box">
+<label>Stock</label>
+<input
+type="number"
+id="productStock"
+placeholder="Enter Stock">
+</div>   
 
 <div class="input-box">
 <label>Image URL</label>
@@ -332,7 +338,10 @@ function addProduct(){
 
     let image =
     document.getElementById("productImage").value;
-
+    let stock =
+    parseInt(
+    document.getElementById("productStock").value
+    ) || 0;
     if(name=="" || price=="" || image==""){
 
         alert("Fill all details");
@@ -341,13 +350,14 @@ function addProduct(){
 
     }
 
-    let product = {
+   let product = {
 
-        name:name,
-        price:price,
-        image:image
+name:name,
+price:price,
+image:image,
+stock:stock
 
-    };
+};
 
     products.push(product);
 
@@ -361,7 +371,7 @@ function addProduct(){
     document.getElementById("productName").value="";
     document.getElementById("productPrice").value="";
     document.getElementById("productImage").value="";
-
+    document.getElementById("productStock").value="";
 }
 
 function displayProducts(){
