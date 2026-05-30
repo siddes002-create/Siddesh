@@ -394,7 +394,15 @@ function displayProducts(){
                 <h3>${product.name}</h3>
 
                 <p>₹${product.price}</p>
+        <p>Stock: ${product.stock || 0}</p>
 
+${
+(product.stock || 0) <= 0
+?
+'<span style="color:red;font-weight:bold;">Out Of Stock</span>'
+:
+'<span style="color:green;font-weight:bold;">Available</span>'
+}
             </div>
 
             <button class="delete-btn"
