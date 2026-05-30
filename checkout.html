@@ -103,7 +103,33 @@ address:address,
 items:cart
 
 };
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
 
+cart.forEach(cartItem => {
+
+let product = products.find(
+p => p.name === cartItem.name
+);
+
+if(product){
+
+product.stock =
+(product.stock || 0) -
+(cartItem.qty || 1);
+
+if(product.stock < 0){
+product.stock = 0;
+}
+
+}
+
+});
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
 orders.push(newOrder);
 
 localStorage.setItem(
