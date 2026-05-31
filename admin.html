@@ -436,69 +436,14 @@ function displayOrders(){
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
-let search =
-(document.getElementById("searchOrder")?.value || "")
-.toLowerCase();
-
 let orderList =
 document.getElementById("orderList");
 
-orderList.innerHTML = `
-<div id="orderStats"
-style="
-display:flex;
-gap:10px;
-margin-bottom:15px;">
-</div>
-`;
+if(!orderList) return;
 
-let totalOrders = orders.length;
-
-let delivered =
-orders.filter(o => o.status === "Delivered").length;
-
-let pending =
-totalOrders - delivered;
-
-document.getElementById("orderStats").innerHTML = `
-<div style="
-background:#fff;
-padding:10px 15px;
-border-radius:8px;">
-<b>Total:</b> ${totalOrders}
-</div>
-
-<div style="
-background:#fff3cd;
-padding:10px 15px;
-border-radius:8px;">
-<b>Pending:</b> ${pending}
-</div>
-
-<div style="
-background:#d4edda;
-padding:10px 15px;
-border-radius:8px;">
-<b>Delivered:</b> ${delivered}
-</div>
-`;
+orderList.innerHTML = "";
 
 orders.forEach((order,index)=>{
-
-if(
-search &&
-!(order.customer || "")
-.toLowerCase()
-.includes(search) &&
-!(order.phone || "")
-.includes(search)
-){
-return;
-}
-
-if(order.customer){
-return;
-}
 
 let itemsHTML = "";
 
@@ -506,15 +451,10 @@ let itemsHTML = "";
 
 itemsHTML += `
 <div class="order-item">
-
 <p><b>${item.name}</b></p>
-
 <p>₹${item.price}</p>
-
-<p>Qty : ${item.qty || 1}</p>
-
-<p>Size : ${item.size || "-"}</p>
-
+<p>Qty: ${item.qty || 1}</p>
+<p>Size: ${item.size || "-"}</p>
 </div>
 `;
 
@@ -525,30 +465,13 @@ orderList.innerHTML += `
 
 <h3>${order.customer}</h3>
 
-<p>
-Status:
-<span style="
-color:${order.status === 'Delivered' ? 'green' : 'orange'};
-font-weight:bold;">
-${order.status || 'Pending'}
-</span>
-</p>
+<p><b>Phone:</b> ${order.phone || ""}</p>
 
-<button onclick="toggleStatus(${index})">
-${order.status === 'Delivered'
-? 'Mark Pending'
-: 'Mark Delivered'}
-</button>
+<p><b>Address:</b> ${order.address || ""}</p>
 
-<p>${order.phone || ""}</p>
-
-<p>${order.address || ""}</p>
+<p><b>Status:</b> ${order.status || "Pending"}</p>
 
 ${itemsHTML}
-
-${order.deliveredOn ?
-`<p><b>Delivered On:</b> ${order.deliveredOn}</p>`
-: ""}
 
 </div>
 `;
@@ -556,8 +479,6 @@ ${order.deliveredOn ?
 });
 
 }
-    displayOrders();
-
 document.getElementById("productsSection")
 .style.display = "block";
 
