@@ -270,6 +270,7 @@ Add Product
 </button>
 
 
+    
 <div class="product-list">
 
 <div id="productList"></div>
@@ -366,11 +367,7 @@ stock:stock
     );
 
     displayProducts();
-    displayOrders();
-    document.getElementById("productName").value="";
-    document.getElementById("productPrice").value="";
-    document.getElementById("productImage").value="";
-    document.getElementById("productStock").value="";
+   
 }
 
 function displayProducts(){
@@ -484,7 +481,11 @@ document.getElementById("productsSection")
 
 document.getElementById("ordersSection")
 .style.display = "none";
-
+ displayOrders();
+    document.getElementById("productName").value="";
+    document.getElementById("productPrice").value="";
+    document.getElementById("productImage").value="";
+    document.getElementById("productStock").value="";
 function showSection(sectionId){
 
 document.getElementById("productsSection")
