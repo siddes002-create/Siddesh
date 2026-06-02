@@ -308,13 +308,29 @@ Add Product
 </div>
 
 <script>
+    window.onload = function(){
+
+if(localStorage.getItem("adminLoggedIn") === "true"){
+
+document.getElementById("loginPage").style.display = "none";
+document.getElementById("adminPanel").style.display = "block";
+document.getElementById("sidebar").style.display = "flex";
+
+showSection(
+localStorage.getItem("currentSection") || "productsSection"
+);
+
+}
+
+};
 function checkLogin(){
 
 const password =
 document.getElementById("adminPassword").value;
 
 if(password == "1234"){
-
+localStorage.setItem("adminLoggedIn", "true");
+    
 document.getElementById("loginPage")
 .style.display = "none";
 
@@ -489,7 +505,7 @@ ${itemsHTML}
 }
 
 function showSection(sectionId){
-
+localStorage.setItem("currentSection", sectionId);
 document.getElementById("productsSection")
 .style.display = "none";
 
