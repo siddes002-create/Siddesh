@@ -225,7 +225,8 @@ placeholder="Enter Password">
 
 <button onclick="checkLogin()">
 Login
-</button>
+</butto
+    n>
 
 </div>
 <header>
@@ -282,7 +283,36 @@ Add Product
 <div id="ordersSection" style="display:none;">
 
     <h1 style="margin-top:40px;">Customer Orders</h1>
+<div id="dashboardStats" style="
+display:flex;
+gap:15px;
+margin-bottom:20px;
+flex-wrap:wrap;
+">
 
+<div style="
+background:#fff;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+min-width:150px;
+">
+<b>Total Orders</b>
+<p id="totalOrders">0</p>
+</div>
+
+<div style="
+background:#fff;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+min-width:150px;
+">
+<b>Pending Orders</b>
+<p id="pendingOrders">0</p>
+</div>
+
+</div>
     <input
         type="text"
         id="searchOrder"
@@ -455,7 +485,13 @@ function displayOrders(){
 
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
+document.getElementById("totalOrders").innerText =
+orders.length;
 
+document.getElementById("pendingOrders").innerText =
+orders.filter(
+o => o.status !== "Delivered"
+).length;
 let orderList =
 document.getElementById("orderList");
 
