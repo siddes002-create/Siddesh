@@ -275,31 +275,33 @@ Add Product
 
 <div id="productList"></div>
 </div>
-<div id="ordersSection"
-style="display:none;">
-</div>    
-<h1 style="margin-top:40px;">
-Customer Orders
-</h1>
-<input
-type="text"
-id="searchOrder"
-placeholder="Search Name or Phone"
-onkeyup="displayOrders()"
-style="
-width:100%;
-padding:10px;
-margin:15px 0;
-border:1px solid #ddd;
-border-radius:8px;">
-<div id="orderList"
-style="
-display:block;
-width:100%;
-min-height:300px;">
-</div>
+<div id="ordersSection" style="display:none;">
+
+    <h1 style="margin-top:40px;">Customer Orders</h1>
+
+    <input
+        type="text"
+        id="searchOrder"
+        placeholder="Search Name or Phone"
+        onkeyup="displayOrders()"
+        style="
+            width:100%;
+            padding:10px;
+            margin:15px 0;
+            border:1px solid #ddd;
+            border-radius:8px;
+        ">
+
+    <div id="orderList"
+         style="
+            display:block;
+            width:100%;
+            min-height:300px;
+         ">
+    </div>
 
 </div>
+
 <script>
 function checkLogin(){
 
@@ -507,8 +509,7 @@ function toggleStatus(index){
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 let search =
-(document.getElementById("searchOrder")?.value || "")
-.toLowerCase();
+(document.getElementById("searchOrder")?.value || "").toLowerCase();
 if(orders[index].status === "Delivered"){
 
 orders[index].status = "Pending";
