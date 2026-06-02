@@ -301,6 +301,9 @@ min-width:150px;
 <p id="totalOrders">0</p>
 </div>
 
+<b>Pending Orders</b>
+<p id="pendingOrders">0</p>
+</div>
 <div style="
 background:#fff;
 padding:15px;
@@ -308,10 +311,9 @@ border-radius:10px;
 border:1px solid #ddd;
 min-width:150px;
 ">
-<b>Pending Orders</b>
-<p id="pendingOrders">0</p>
+<b>Total Revenue</b>
+<p id="totalRevenue">₹0</p>
 </div>
-
 </div>
     <input
         type="text"
@@ -485,6 +487,7 @@ function displayOrders(){
 
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
+    
 document.getElementById("totalOrders").innerText =
 orders.length;
 
@@ -586,6 +589,16 @@ function toggleStatus(index){
 
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
+let totalRevenue = 0;
+
+orders.forEach(order => {
+   (order.items || []).forEach(item => {
+      totalRevenue += Number(item.price || 0);
+   });
+});
+
+document.getElementById("totalRevenue").innerText =
+"₹" + totalRevenue;    
 let search =
 (document.getElementById("searchOrder")?.value || "").toLowerCase();
 if(orders[index].status === "Delivered"){
