@@ -100,8 +100,8 @@ let newOrder = {
 customer:name,
 phone:phone,
 address:address,
-items:cart
-
+items:cart,
+orderDate: new Date().toLocaleString()
 };
 let products =
 JSON.parse(localStorage.getItem("products")) || [];
