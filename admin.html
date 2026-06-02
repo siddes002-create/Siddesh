@@ -211,6 +211,10 @@ Products
 Customer Orders
 </button>
 
+<button onclick="logoutAdmin()" class="menu-btn">
+    Logout
+</button>
+    
 </div>
 
 <div class="main-content">
@@ -372,7 +376,16 @@ localStorage.getItem("currentSection") || "productsSection"
 
 }
 
-};
+function logoutAdmin(){
+
+    localStorage.removeItem("adminLoggedIn");
+
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("sidebar").style.display = "none";
+    document.getElementById("loginPage").style.display = "flex";
+
+    document.getElementById("adminPassword").value = "";
+}
 function checkLogin(){
 
 const password =
