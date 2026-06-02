@@ -517,6 +517,16 @@ document.getElementById("deliveredOrders").innerText =
 orders.filter(
 o => o.status === "Delivered"
 ).length;    
+let totalRevenue = 0;
+
+orders.forEach(order => {
+    (order.items || []).forEach(item => {
+        totalRevenue += Number(item.price || 0);
+    });
+});
+
+document.getElementById("totalRevenue").innerText =
+"₹" + totalRevenue;    
 let orderList =
 document.getElementById("orderList");
 
