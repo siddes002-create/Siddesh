@@ -475,6 +475,10 @@ orderList.innerHTML += `
 
 <p><b>Status:</b> ${order.status || "Pending"}</p>
 
+<button onclick="toggleStatus(${index})">
+${order.status === "Delivered" ? "Mark Pending" : "Mark Delivered"}
+</button>
+
 ${itemsHTML}
 
 </div>
