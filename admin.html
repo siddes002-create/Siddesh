@@ -312,6 +312,16 @@ width:180px;
 <b>Pending Orders</b>
 <p id="pendingOrders">0</p>
 </div>
+    <div style="
+background:#fff;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+width:180px;
+">
+<b>Delivered Orders</b>
+<p id="deliveredOrders">0</p>
+</div>
 <div style="
 background:#fff;
 padding:15px;
@@ -503,6 +513,10 @@ document.getElementById("pendingOrders").innerText =
 orders.filter(
 o => o.status !== "Delivered"
 ).length;
+document.getElementById("deliveredOrders").innerText =
+orders.filter(
+o => o.status === "Delivered"
+).length;    
 let orderList =
 document.getElementById("orderList");
 
