@@ -489,7 +489,13 @@ function displayProducts(){
 
                 <p>₹${product.price}</p>
         <p>Stock: ${product.stock || 0}</p>
-
+${
+(product.stock || 0) <= 5
+?
+'<p style="color:red;font-weight:bold;">⚠️ Low Stock</p>'
+:
+''
+}
 ${
 (product.stock || 0) <= 0
 ?
