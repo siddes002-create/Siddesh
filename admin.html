@@ -336,6 +336,18 @@ width:180px;
 <b>Total Revenue</b>
 <p id="totalRevenue">₹0</p>
 </div>
+    
+<div style="
+background:#fff;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+width:180px;
+">
+<b>Total Customers</b>
+<p id="customerCount">0</p>
+</div>
+    
 </div>
     <input
         type="text"
@@ -539,7 +551,15 @@ orders.forEach(order => {
 });
 
 document.getElementById("totalRevenue").innerText =
-"₹" + totalRevenue;    
+"₹" + totalRevenue; 
+ let customers = new Set();
+
+orders.forEach(order=>{
+customers.add(order.phone);
+});
+
+document.getElementById("customerCount").innerText =
+customers.size;   
 let orderList =
 document.getElementById("orderList");
 
