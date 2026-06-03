@@ -246,6 +246,27 @@ Retail Nanban Admin
 id="adminPanel"
 style="display:none;">
 <div id="productsSection">
+
+<button
+id="showAddProductBtn"
+onclick="toggleAddProductForm()"
+style="
+width:100%;
+padding:15px;
+background:#ff4f6d;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+font-weight:bold;
+margin-bottom:20px;
+cursor:pointer;
+">
++ Add Product
+</button>
+
+<div id="addProductForm" style="display:none;">
+
 <h1>Add Product</h1>
 
 <div class="input-box">
@@ -277,7 +298,7 @@ onclick="addProduct()">
 Add Product
 </button>
 
-
+</div>
     
 <div class="product-list">
 
@@ -465,9 +486,24 @@ stock:stock
     );
 
     displayProducts();
-   
+   document.getElementById("addProductForm").style.display = "none";
+}
+function toggleAddProductForm(){
+
+let form =
+document.getElementById("addProductForm");
+
+if(form.style.display === "none"){
+
+form.style.display = "block";
+
+}else{
+
+form.style.display = "none";
+
 }
 
+}
 function displayProducts(){
 
     let productList =
