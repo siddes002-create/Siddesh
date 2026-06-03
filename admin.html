@@ -498,7 +498,19 @@ ${
 '<span style="color:green;font-weight:bold;">Available</span>'
 }
             </div>
-
+           <button
+style="
+background:orange;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin-right:5px;
+"
+onclick="editProduct(${index})">
+Edit
+</button>
             <button class="delete-btn"
             onclick="deleteProduct(${index})">
             Delete
@@ -524,8 +536,40 @@ function deleteProduct(index){
     displayProducts();
 
 }
+function editProduct(index){
+
+let newName = prompt(
+"Enter Product Name",
+products[index].name
+);
+
+let newPrice = prompt(
+"Enter Product Price",
+products[index].price
+);
+
+let newStock = prompt(
+"Enter Product Stock",
+products[index].stock
+);
+
+if(newName && newPrice){
+
+products[index].name = newName;
+products[index].price = newPrice;
+products[index].stock = newStock;
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
 
 displayProducts();
+
+}
+
+}
+    
 function displayOrders(){
 
 let orders =
