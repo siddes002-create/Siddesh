@@ -604,7 +604,19 @@ ${order.status || "Pending"}
 <button onclick="toggleStatus(${index})">
 ${order.status === "Delivered" ? "Mark Pending" : "Mark Delivered"}
 </button>
-
+<button
+style="
+background:red;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:5px;
+margin-left:5px;
+cursor:pointer;
+"
+onclick="deleteOrder(${index})">
+Delete Order
+</button>
 ${itemsHTML}
 
 </div>
@@ -663,10 +675,26 @@ localStorage.setItem(
 "orders",
 JSON.stringify(orders)
 );
+function deleteOrder(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+if(confirm("Delete this order?")){
+
+orders.splice(index,1);
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
 
 displayOrders();
 
 }
+
+
+
 </script>
 
 </body>
