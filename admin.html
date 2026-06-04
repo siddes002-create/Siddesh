@@ -188,7 +188,30 @@ flex:1;
         margin-left:0;
     }
 }
+.product-table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
 
+.product-table th,
+.product-table td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:left;
+}
+
+.product-table th{
+background:#f5f5f5;
+font-weight:bold;
+}
+
+.product-table img{
+width:50px;
+height:50px;
+object-fit:cover;
+border-radius:6px;
+}
 </style>
 
 </head>
@@ -524,7 +547,26 @@ function displayProducts(){
     let productList =
     document.getElementById("productList");
 
-    productList.innerHTML = "";
+    productList.innerHTML = `
+<table class="product-table">
+<thead>
+<tr>
+<th>Image</th>
+<th>Product</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="productTableBody">
+</tbody>
+</table>
+`;
+
+let tableBody =
+document.getElementById("productTableBody");
+    
     let search =
 (document.getElementById("searchProduct")?.value || "")
 .toLowerCase();
@@ -535,55 +577,55 @@ product.name.toLowerCase().includes(search)
 )
 .forEach((product,index)=>{
 
-        productList.innerHTML += `
+       tableBody.innerHTML += `
+<tr>
 
-        <div class="product-item">
+<td>
+<img src="${product.image}">
+</td>
 
-            <img src="${product.image}">
+<td>${product.name}</td>
 
-            <div class="product-details">
+<td>₹${product.price}</td>
 
-                <h3>${product.name}</h3>
+<td>${product.stock || 0}</td>
 
-                <p>₹${product.price}</p>
-        <p>Stock: ${product.stock || 0}</p>
-${
-(product.stock || 0) <= 5
-?
-'<p style="color:red;font-weight:bold;">⚠️ Low Stock</p>'
-:
-''
-}
+<td>
 ${
 (product.stock || 0) <= 0
 ?
-'<span style="color:red;font-weight:bold;">Out Of Stock</span>'
+'<span style="color:red;">Out Of Stock</span>'
 :
-'<span style="color:green;font-weight:bold;">Available</span>'
+'<span style="color:green;">Available</span>'
 }
-            </div>
-           <button
+</td>
+
+<td>
+
+<button
 style="
 background:orange;
 color:white;
 border:none;
-padding:10px 15px;
-border-radius:6px;
+padding:8px 12px;
+border-radius:5px;
 cursor:pointer;
 margin-right:5px;
 "
 onclick="editProduct(${index})">
 Edit
 </button>
-            <button class="delete-btn"
-            onclick="deleteProduct(${index})">
-            Delete
-            </button>
 
-        </div>
+<button
+class="delete-btn"
+onclick="deleteProduct(${index})">
+Delete
+</button>
 
-        `;
+</td>
 
+</tr>
+`;
     });
 
 }
