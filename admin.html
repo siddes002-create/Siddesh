@@ -304,6 +304,18 @@ Add Product
 <h2 style="margin-top:30px;margin-bottom:15px;">
 Products List
 </h2>
+ <input
+type="text"
+id="searchProduct"
+placeholder="🔍 Search Product"
+onkeyup="displayProducts()"
+style="
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:8px;
+">   
 <div id="productList"></div>
 </div>  
  </div>     
@@ -513,8 +525,15 @@ function displayProducts(){
     document.getElementById("productList");
 
     productList.innerHTML = "";
+    let search =
+(document.getElementById("searchProduct")?.value || "")
+.toLowerCase();
 
-    products.forEach((product,index)=>{
+   products
+.filter(product =>
+product.name.toLowerCase().includes(search)
+)
+.forEach((product,index)=>{
 
         productList.innerHTML += `
 
