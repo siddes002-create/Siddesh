@@ -581,7 +581,10 @@ product.name.toLowerCase().includes(search)
 <tr>
 
 <td>
-<img src="${product.image}">
+<img
+src="${product.image}"
+style="cursor:pointer;"
+onclick="viewProduct(${index})">
 </td>
 
 <td>${product.name}</td>
@@ -629,7 +632,19 @@ Delete
     });
 
 }
+function viewProduct(index){
 
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(products[index])
+);
+
+window.location.href = "product-details.html";
+
+}
 function deleteProduct(index){
 
 if(confirm("Delete this product?")){
