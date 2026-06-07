@@ -107,7 +107,7 @@ let products =
 JSON.parse(localStorage.getItem("products")) || [];
 
 cart.forEach(cartItem => {
-
+console.log(cartItem);
 let product = products.find(
 p => p.name === cartItem.name
 );
@@ -117,8 +117,11 @@ if(product){
 let qty = cartItem.qty || 1;
 let size = cartItem.size;
 
-if(product.sizes && product.sizes[size] != null){
-
+if(
+size &&
+product.sizes &&
+product.sizes[size] !== undefined
+){
 product.sizes[size] =
 Math.max(0, product.sizes[size] - qty);
 
