@@ -203,19 +203,46 @@ document.getElementById("productStatus").innerHTML =
 function editProduct(){
 
 let newName =
-prompt("Product Name",product.name);
+prompt("Product Name", product.name);
 
 let newPrice =
-prompt("Price",product.price);
+prompt("Price", product.price);
 
-let newStock =
-prompt("Stock",product.stock);
+let s =
+parseInt(prompt("S Stock",
+product.sizes?.S || 0)) || 0;
+
+let m =
+parseInt(prompt("M Stock",
+product.sizes?.M || 0)) || 0;
+
+let l =
+parseInt(prompt("L Stock",
+product.sizes?.L || 0)) || 0;
+
+let xl =
+parseInt(prompt("XL Stock",
+product.sizes?.XL || 0)) || 0;
+
+let xxl =
+parseInt(prompt("XXL Stock",
+product.sizes?.XXL || 0)) || 0;
 
 if(newName && newPrice){
 
 products[index].name = newName;
 products[index].price = newPrice;
-products[index].stock = newStock;
+
+products[index].sizes = {
+S:s,
+M:m,
+L:l,
+XL:xl,
+XXL:xxl
+};
+
+products[index].stock =
+s + m + l + xl + xxl;
 
 localStorage.setItem(
 "products",
