@@ -587,7 +587,18 @@ style="cursor:pointer;"
 onclick="viewProduct(${index})">
 </td>
 
-<td>${product.name}</td>
+<td>
+<a
+href="#"
+onclick="viewProduct(${index})"
+style="
+text-decoration:none;
+color:black;
+font-weight:bold;
+">
+${product.name}
+</a>
+</td>
 
 <td>₹${product.price}</td>
 
@@ -634,15 +645,8 @@ Delete
 }
 function viewProduct(index){
 
-let products =
-JSON.parse(localStorage.getItem("products")) || [];
-
-localStorage.setItem(
-"selectedProduct",
-JSON.stringify(products[index])
-);
-
-window.location.href = "product.html";
+window.location.href =
+`product-details.html?id=${index}`;
 
 }
 function deleteProduct(index){
