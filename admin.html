@@ -833,7 +833,32 @@ ${order.status || "Pending"}
 </span>
 
 </p>
+<p>
+<b>Payment:</b>
 
+<span style="
+padding:5px 10px;
+border-radius:5px;
+font-weight:bold;
+background:
+${order.payment === "Paid"
+? "#d4edda"
+: "#f8d7da"};
+
+color:
+${order.payment === "Paid"
+? "#155724"
+: "#721c24"};
+">
+${order.payment || "Pending"}
+</span>
+</p>
+
+<button onclick="togglePayment(${index})">
+${order.payment === "Paid"
+? "Mark Pending"
+: "Mark Paid"}
+</button>
 <button onclick="toggleStatus(${index})">
 ${order.status === "Delivered" ? "Mark Pending" : "Mark Delivered"}
 </button>
@@ -912,6 +937,29 @@ JSON.stringify(orders)
 displayOrders();
 
 }
+function togglePayment(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+if(orders[index].payment === "Paid"){
+
+orders[index].payment = "Pending";
+
+}else{
+
+orders[index].payment = "Paid";
+
+}
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+displayOrders();
+
+}    
 function deleteOrder(index){
 
 let orders =
