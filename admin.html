@@ -212,6 +212,21 @@ height:50px;
 object-fit:cover;
 border-radius:6px;
 }
+.order-actions{
+display:flex;
+gap:8px;
+margin-top:10px;
+flex-wrap:wrap;
+}
+
+.order-btn{
+border:none;
+padding:8px 12px;
+border-radius:6px;
+cursor:pointer;
+font-size:12px;
+font-weight:bold;
+}    
 </style>
 
 </head>
@@ -854,27 +869,35 @@ ${order.payment || "Pending"}
 </span>
 </p>
 
-<button onclick="togglePayment(${index})">
+<div class="order-actions">
+
+<button
+class="order-btn"
+style="background:#28a745;color:white;"
+onclick="togglePayment(${index})">
 ${order.payment === "Paid"
 ? "Mark Pending"
 : "Mark Paid"}
 </button>
-<button onclick="toggleStatus(${index})">
-${order.status === "Delivered" ? "Mark Pending" : "Mark Delivered"}
-</button>
+
 <button
-style="
-background:red;
-color:white;
-border:none;
-padding:6px 12px;
-border-radius:5px;
-margin-left:5px;
-cursor:pointer;
-"
+class="order-btn"
+style="background:#007bff;color:white;"
+onclick="toggleStatus(${index})">
+${order.status === "Delivered"
+? "Mark Pending"
+: "Mark Delivered"}
+</button>
+
+<button
+class="order-btn"
+style="background:red;color:white;"
 onclick="deleteOrder(${index})">
 Delete Order
 </button>
+
+</div>
+
 ${itemsHTML}
 
 </div>
