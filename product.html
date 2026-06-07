@@ -108,6 +108,12 @@ background:blue;
 color:white;
 border-color:blue;
 }
+.disabled-size{
+background:#ddd;
+color:#888;
+cursor:not-allowed;
+pointer-events:none;
+}  
 </style>
 
 </head>
@@ -182,7 +188,22 @@ product.name;
 
 document.getElementById("productPrice").innerText =
 "₹" + product.price;
+const buttons =
+document.querySelectorAll(".size-btn");
 
+buttons.forEach(btn => {
+
+let size = btn.innerText;
+
+if(
+product.sizes &&
+(product.sizes[size] || 0) <= 0
+){
+btn.classList.add("disabled-size");
+btn.innerText = size + " (Out)";
+}
+
+});
 }
 
 function selectSize(button){
