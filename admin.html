@@ -513,7 +513,7 @@ name:name,
 price:price,
 image:image,
 stock:stock,
-sku:"SKU" + Date.now()
+sku:String(products.length + 1).padStart(5,'0')
 
 };
 
