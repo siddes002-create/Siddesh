@@ -310,7 +310,30 @@ type="number"
 id="productStock"
 placeholder="Enter Stock">
 </div>   
+<div class="input-box">
+<label>S Size Stock</label>
+<input type="number" id="stockS" value="0">
+</div>
 
+<div class="input-box">
+<label>M Size Stock</label>
+<input type="number" id="stockM" value="0">
+</div>
+
+<div class="input-box">
+<label>L Size Stock</label>
+<input type="number" id="stockL" value="0">
+</div>
+
+<div class="input-box">
+<label>XL Size Stock</label>
+<input type="number" id="stockXL" value="0">
+</div>
+
+<div class="input-box">
+<label>XXL Size Stock</label>
+<input type="number" id="stockXXL" value="0">
+</div>
 <div class="input-box">
 <label>Image URL</label>
 <input type="text" id="productImage">
@@ -499,6 +522,11 @@ function addProduct(){
     parseInt(
     document.getElementById("productStock").value
     ) || 0;
+    let stockS = parseInt(document.getElementById("stockS").value) || 0;
+let stockM = parseInt(document.getElementById("stockM").value) || 0;
+let stockL = parseInt(document.getElementById("stockL").value) || 0;
+let stockXL = parseInt(document.getElementById("stockXL").value) || 0;
+let stockXXL = parseInt(document.getElementById("stockXXL").value) || 0;
     if(name=="" || price=="" || image==""){
 
         alert("Fill all details");
@@ -507,12 +535,23 @@ function addProduct(){
 
     }
 
-  let product = {
+ let product = {
 
 name:name,
 price:price,
 image:image,
-stock:stock,
+
+stock:
+stockS + stockM + stockL + stockXL + stockXXL,
+
+sizes:{
+S:stockS,
+M:stockM,
+L:stockL,
+XL:stockXL,
+XXL:stockXXL
+},
+
 sku:String(products.length + 1).padStart(5,'0')
 
 };
