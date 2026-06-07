@@ -114,9 +114,29 @@ p => p.name === cartItem.name
 
 if(product){
 
+let qty = cartItem.qty || 1;
+let size = cartItem.size;
+
+if(product.sizes && product.sizes[size] != null){
+
+product.sizes[size] =
+Math.max(0, product.sizes[size] - qty);
+
 product.stock =
-(product.stock || 0) -
-(cartItem.qty || 1);
+(product.sizes.S || 0) +
+(product.sizes.M || 0) +
+(product.sizes.L || 0) +
+(product.sizes.XL || 0) +
+(product.sizes.XXL || 0);
+
+}else{
+
+product.stock =
+Math.max(0, (product.stock || 0) - qty);
+
+}
+
+}
 
 if(product.stock < 0){
 product.stock = 0;
