@@ -136,10 +136,62 @@ onclick="history.back()">
 
 <button
 class="edit-btn"
-onclick="editProduct()">
+onclick="toggleEditForm()">
 Edit Product
 </button>
 
+<div id="editForm"
+style="display:none;margin-top:20px;">
+
+<div class="info-box">
+<b>Name</b>
+<input type="text" id="editName"
+style="width:100%;padding:10px;">
+</div>
+
+<div class="info-box">
+<b>Price</b>
+<input type="number" id="editPrice"
+style="width:100%;padding:10px;">
+</div>
+
+<div class="info-box">
+<b>S Stock</b>
+<input type="number" id="editS"
+style="width:100%;padding:10px;">
+</div>
+
+<div class="info-box">
+<b>M Stock</b>
+<input type="number" id="editM"
+style="width:100%;padding:10px;">
+</div>
+
+<div class="info-box">
+<b>L Stock</b>
+<input type="number" id="editL"
+style="width:100%;padding:10px;">
+</div>
+
+<div class="info-box">
+<b>XL Stock</b>
+<input type="number" id="editXL"
+style="width:100%;padding:10px;">
+</div>
+
+<div class="info-box">
+<b>XXL Stock</b>
+<input type="number" id="editXXL"
+style="width:100%;padding:10px;">
+</div>
+
+<button
+class="edit-btn"
+onclick="saveProduct()">
+Save Changes
+</button>
+
+</div>
 </div>
 
 </div>
@@ -200,38 +252,61 @@ document.getElementById("productStatus").innerHTML =
 
 }
 
-function editProduct(){
+function toggleEditForm(){
 
-let newName =
-prompt("Product Name", product.name);
+let form =
+document.getElementById("editForm");
 
-let newPrice =
-prompt("Price", product.price);
+form.style.display =
+form.style.display === "none"
+? "block"
+: "none";
+
+document.getElementById("editName").value =
+product.name;
+
+document.getElementById("editPrice").value =
+product.price;
+
+document.getElementById("editS").value =
+product.sizes?.S || 0;
+
+document.getElementById("editM").value =
+product.sizes?.M || 0;
+
+document.getElementById("editL").value =
+product.sizes?.L || 0;
+
+document.getElementById("editXL").value =
+product.sizes?.XL || 0;
+
+document.getElementById("editXXL").value =
+product.sizes?.XXL || 0;
+
+}
+
+function saveProduct(){
 
 let s =
-parseInt(prompt("S Stock",
-product.sizes?.S || 0)) || 0;
+parseInt(document.getElementById("editS").value) || 0;
 
 let m =
-parseInt(prompt("M Stock",
-product.sizes?.M || 0)) || 0;
+parseInt(document.getElementById("editM").value) || 0;
 
 let l =
-parseInt(prompt("L Stock",
-product.sizes?.L || 0)) || 0;
+parseInt(document.getElementById("editL").value) || 0;
 
 let xl =
-parseInt(prompt("XL Stock",
-product.sizes?.XL || 0)) || 0;
+parseInt(document.getElementById("editXL").value) || 0;
 
 let xxl =
-parseInt(prompt("XXL Stock",
-product.sizes?.XXL || 0)) || 0;
+parseInt(document.getElementById("editXXL").value) || 0;
 
-if(newName && newPrice){
+products[index].name =
+document.getElementById("editName").value;
 
-products[index].name = newName;
-products[index].price = newPrice;
+products[index].price =
+document.getElementById("editPrice").value;
 
 products[index].sizes = {
 S:s,
@@ -248,6 +323,8 @@ localStorage.setItem(
 "products",
 JSON.stringify(products)
 );
+
+alert("Product Updated");
 
 location.reload();
 
