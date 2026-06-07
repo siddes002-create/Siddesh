@@ -925,7 +925,8 @@ if(confirm("Delete this order?")){
 let order = orders[index];
 
 order.items.forEach(item => {
-
+console.log("ORDER ITEM", item);
+console.log("PRODUCTS", products);
 let product = products.find(
 p => p.name === item.name
 );
