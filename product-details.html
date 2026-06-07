@@ -119,7 +119,16 @@ onclick="history.back()">
 <b>Stock:</b>
 <p id="productStock"></p>
 </div>
+<div class="info-box">
+<b>Size Wise Stock:</b>
 
+<p>S : <span id="sizeS">0</span></p>
+<p>M : <span id="sizeM">0</span></p>
+<p>L : <span id="sizeL">0</span></p>
+<p>XL : <span id="sizeXL">0</span></p>
+<p>XXL : <span id="sizeXXL">0</span></p>
+
+</div>
 <div class="info-box">
 <b>Status:</b>
 <p id="productStatus"></p>
@@ -163,6 +172,24 @@ document.getElementById("productPrice").innerText =
 
 document.getElementById("productStock").innerText =
 product.stock || 0;
+if(product.sizes){
+
+document.getElementById("sizeS").innerText =
+product.sizes.S || 0;
+
+document.getElementById("sizeM").innerText =
+product.sizes.M || 0;
+
+document.getElementById("sizeL").innerText =
+product.sizes.L || 0;
+
+document.getElementById("sizeXL").innerText =
+product.sizes.XL || 0;
+
+document.getElementById("sizeXXL").innerText =
+product.sizes.XXL || 0;
+
+}  
 
 document.getElementById("productStatus").innerHTML =
 (product.stock > 0)
