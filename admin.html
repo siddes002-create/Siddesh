@@ -917,7 +917,53 @@ function deleteOrder(index){
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
 if(confirm("Delete this order?")){
+
+let order = orders[index];
+
+order.items.forEach(item => {
+
+let product = products.find(
+p => p.name === item.name
+);
+
+if(product){
+
+let qty = item.qty || 1;
+let size = item.size;
+
+if(
+size &&
+product.sizes &&
+product.sizes[size] !== undefined
+){
+
+product.sizes[size] += qty;
+
+product.stock =
+(product.sizes.S || 0) +
+(product.sizes.M || 0) +
+(product.sizes.L || 0) +
+(product.sizes.XL || 0) +
+(product.sizes.XXL || 0);
+
+}else{
+
+product.stock += qty;
+
+}
+
+}
+
+});
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
 
 orders.splice(index,1);
 
