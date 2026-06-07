@@ -106,7 +106,10 @@ onclick="history.back()">
 <b>Name:</b>
 <p id="productName"></p>
 </div>
-
+<div class="info-box">
+<b>SKU:</b>
+<p id="productSku"></p>
+</div>
 <div class="info-box">
 <b>Price:</b>
 <p id="productPrice"></p>
@@ -153,7 +156,8 @@ product.image;
 
 document.getElementById("productName").innerText =
 product.name;
-
+document.getElementById("productSku").innerText =
+product.sku || "-";
 document.getElementById("productPrice").innerText =
 "₹" + product.price;
 
