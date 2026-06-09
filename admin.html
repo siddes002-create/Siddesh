@@ -1197,13 +1197,19 @@ text-align:center;
 <body>
 
 <h1>Retail Nanban</h1>
+<p>
+Salem, Tamil Nadu<br>
+Phone: +91 9025360877<br>
+Email: retailnanban@gmail.com
+</p>
+<hr>
 
-<h3>Invoice</h3>
+<h3>Invoice #RN-${String(index+1).padStart(4,'0')}</h3>
 
 <p><b>Customer:</b> ${order.customer}</p>
 <p><b>Phone:</b> ${order.phone}</p>
 <p><b>Address:</b> ${order.address}</p>
-<p><b>Date:</b> ${order.orderDate || "-"}</p>
+<p><b>Date:</b> ${order.orderDate || new Date().toLocaleDateString()}</p>
 
 <table>
 <tr>
@@ -1214,7 +1220,18 @@ text-align:center;
 </tr>
 
 ${items}
-
+<tr>
+<td colspan="3"><b>Grand Total</b></td>
+<td>
+<b>₹${
+(order.items || []).reduce(
+(sum,item)=>
+sum + ((item.price || 0) * (item.qty || 1)),
+0
+)
+}</b>
+</td>
+</tr>
 </table>
 
 <br>
