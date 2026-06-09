@@ -968,7 +968,23 @@ document.getElementById("orderList");
 if(!orderList) return;
 
 orderList.innerHTML = "";
-
+orderList.innerHTML = `
+<table class="product-table">
+<thead>
+<tr>
+<th>Date</th>
+<th>Order No</th>
+<th>Customer</th>
+<th>Phone</th>
+<th>Status</th>
+<th>Payment</th>
+<th>Total</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="ordersTableBody"></tbody>
+</table>
+`;
 let search =
 (document.getElementById("searchOrder")?.value || "")
 .toLowerCase();
@@ -1026,106 +1042,32 @@ Qty: ${item.qty || 1}
 
 });
 
-orderList.innerHTML += `
-<div class="order-card">
+document.getElementById("ordersTableBody").innerHTML += `
+<tr>
+<td>${order.orderDate || "-"}</td>
 
-<div class="order-header">
-
-<div>
-<h3>${order.customer}</h3>
-<p>${order.phone || ""}</p>
-</div>
-
-<div>
-<span class="badge ${
-order.status === "Delivered"
-? "delivered"
-: "pending"
-}">
-${order.status || "Pending"}
-</span>
-
-<span class="badge ${
-order.payment === "Paid"
-? "paid"
-: "unpaid"
-}">
-${order.payment || "Pending"}
-</span>
-</div>
-
-</div>
-
-<div class="order-body">
-
-<div class="info-box">
-<b>Order</b><br>
+<td>
 RN-${String(index+1).padStart(4,'0')}
-</div>
+</td>
 
-<div class="info-box">
-<b>Items</b><br>
-${(order.items || []).length}
-</div>
+<td>${order.customer || ""}</td>
 
-<div class="info-box">
-<b>Date</b><br>
-${order.orderDate || "-"}
-</div>
-<div class="info-box">
-<b>Total</b><br>
-₹${orderTotal}
-</div>
-</div>
+<td>${order.phone || ""}</td>
 
-<p><b>Address:</b> ${order.address || ""}</p>
+<td>${order.status || "Pending"}</td>
 
-${itemsHTML}
+<td>${order.payment || "Pending"}</td>
 
-<div class="order-actions">
+<td>₹${orderTotal}</td>
 
-<button
-class="order-btn"
-style="background:#28a745;color:white;"
-onclick="togglePayment(${index})">
-${order.payment === "Paid"
-? "Mark Pending"
-: "Mark Paid"}
-</button>
+<td>
+<button onclick="togglePayment(${index})">💰</button>
+<button onclick="toggleStatus(${index})">🚚</button>
+<button onclick="printInvoice(${index})">🧾</button>
+<button onclick="deleteOrder(${index})">🗑️</button>
+</td>
 
-<button
-class="order-btn"
-style="background:#007bff;color:white;"
-onclick="toggleStatus(${index})">
-${order.status === "Delivered"
-? "Mark Pending"
-: "Mark Delivered"}
-</button>
-
-<button
-class="order-btn"
-style="background:#25D366;color:white;"
-onclick="openWhatsApp('${order.phone}')">
-WhatsApp
-</button>
-
-<button
-class="order-btn"
-style="background:#6f42c1;color:white;"
-onclick="printInvoice(${index})">
-Invoice
-</button>
-
-<button
-class="order-btn"
-style="background:red;color:white;"
-onclick="deleteOrder(${index})">
-Delete
-</button>
-
-</div>
-
-</div>
+</tr>
 `;
 
 });
