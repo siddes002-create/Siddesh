@@ -83,6 +83,8 @@ let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
 let order = orders[index];
+ document.getElementById("orderNo").innerText =
+"Order No : RN-" + String(Number(index)+1).padStart(4,"0"); 
 
 document.getElementById("statusSelect").value =
 order.status || "Confirmed";
@@ -95,6 +97,8 @@ document.getElementById("orderInfo").innerHTML = `
 <p><b>Phone:</b> ${order.phone}</p>
 <p><b>Address:</b> ${order.address}</p>
 <p><b>Status:</b> ${order.status || "Pending"}</p>
+<p><b>Payment:</b> ${order.payment || "Pending"}</p>
+<p><b>Total:</b> ₹${order.total || 0}</p>
 `;
 
 let productsHtml = "";
