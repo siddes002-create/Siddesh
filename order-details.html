@@ -49,15 +49,23 @@ border:1px solid #ddd;
 <h3>Products</h3>
 <div id="productList"></div>
 
-<h3>Actions</h3>
+<h3>Order Status</h3>
 
-<button class="status-btn" onclick="updateStatus('Confirmed')">Confirm</button>
+<select id="statusSelect"
+onchange="updateStatus(this.value)"
+style="padding:10px;margin-bottom:15px;">
 
-<button class="status-btn" onclick="updateStatus('Packed')">Packed</button>
+<option value="Confirmed">Confirmed</option>
+<option value="Packed">Packed</option>
+<option value="Shipped">Shipped</option>
+<option value="Delivered">Delivered</option>
 
-<button class="status-btn" onclick="updateStatus('Shipped')">Shipped</button>
+</select>
 
-<button class="status-btn" onclick="updateStatus('Delivered')">Delivered</button>
+<p>
+<b>Current Status :</b>
+<span id="currentStatus"></span>
+</p>
 
 <h3>Tracking Updates</h3>
 
@@ -76,9 +84,11 @@ JSON.parse(localStorage.getItem("orders")) || [];
 
 let order = orders[index];
 
-document.getElementById("orderNo").innerHTML =
-"Order No : RN-" +
-String(Number(index)+1).padStart(4,"0");
+document.getElementById("statusSelect").value =
+order.status || "Confirmed";
+
+document.getElementById("currentStatus").innerText =
+order.status || "Pending";
 
 document.getElementById("orderInfo").innerHTML = `
 <p><b>Customer:</b> ${order.customer}</p>
