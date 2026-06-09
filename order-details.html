@@ -55,7 +55,18 @@ cursor:pointer;
 </button>
 
 <h2 id="orderNo"></h2>
-<h2 id="orderNo"></h2>
+<button onclick="printInvoice()"
+style="
+padding:10px 15px;
+background:#28a745;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-bottom:20px;
+">
+🖨 Print Invoice
+</button>
 
 <div id="orderInfo"></div>
 
@@ -175,6 +186,72 @@ document.getElementById("timeline").innerHTML =
 order.timeline[order.timeline.length - 1] || "";
 
 }
+function printInvoice(){
+
+let invoiceWindow = window.open("", "_blank");
+
+invoiceWindow.document.write(`
+<html>
+<head>
+<title>Invoice</title>
+<style>
+body{
+font-family:Arial;
+padding:20px;
+}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+table,th,td{
+border:1px solid #000;
+}
+th,td{
+padding:8px;
+text-align:left;
+}
+</style>
+</head>
+<body>
+
+<h2>Retail Nanban</h2>
+
+<h3>${order.orderNo || document.getElementById("orderNo").innerText}</h3>
+
+<p><b>Customer:</b> ${order.customer}</p>
+<p><b>Phone:</b> ${order.phone}</p>
+<p><b>Address:</b> ${order.address}</p>
+
+<table>
+<tr>
+<th>Product</th>
+<th>Size</th>
+<th>Qty</th>
+<th>Price</th>
+</tr>
+
+${(order.items || []).map(item => `
+<tr>
+<td>${item.name}</td>
+<td>${item.size}</td>
+<td>${item.qty}</td>
+<td>₹${item.price || 0}</td>
+</tr>
+`).join("")}
+
+</table>
+
+<h3>Total : ₹${orderTotal}</h3>
+
+</body>
+</html>
+`);
+
+invoiceWindow.document.close();
+invoiceWindow.print();
+
+}  
 </script>
 
 </body>
