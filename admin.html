@@ -233,8 +233,12 @@ border-radius:15px;
 padding:20px;
 margin-bottom:20px;
 box-shadow:0 3px 10px rgba(0,0,0,.08);
+transition:.3s;    
 }
-
+.order-card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
 .order-header{
 display:flex;
 justify-content:space-between;
@@ -841,7 +845,9 @@ let totalRevenue = 0;
 
 orders.forEach(order => {
     (order.items || []).forEach(item => {
-        totalRevenue += Number(item.price || 0);
+       totalRevenue +=
+(item.price || 0) *
+(item.qty || 1);
     });
 });
 
@@ -862,8 +868,29 @@ if(!orderList) return;
 
 orderList.innerHTML = "";
 
-orders.forEach((order,index)=>{
+let search =
+(document.getElementById("searchOrder")?.value || "")
+.toLowerCase();
 
+orders
+.filter(order =>
+(order.customer || "")
+.toLowerCase()
+.includes(search)
+
+||
+
+(order.phone || "")
+.includes(search)
+)
+.forEach((order,index)=>{
+let orderTotal = 0;
+
+(order.items || []).forEach(item=>{
+orderTotal +=
+(item.price || 0) *
+(item.qty || 1);
+});
 let itemsHTML = "";
 
 (order.items || []).forEach(item=>{
@@ -918,7 +945,7 @@ ${order.payment || "Pending"}
 
 <div class="info-box">
 <b>Order</b><br>
-#${index+1}
+RN-${String(index+1).padStart(4,'0')}
 </div>
 
 <div class="info-box">
@@ -930,7 +957,10 @@ ${(order.items || []).length}
 <b>Date</b><br>
 ${order.orderDate || "-"}
 </div>
-
+<div class="info-box">
+<b>Total</b><br>
+₹${orderTotal}
+</div>
 </div>
 
 <p><b>Address:</b> ${order.address || ""}</p>
@@ -997,7 +1027,9 @@ let totalRevenue = 0;
 
 orders.forEach(order => {
    (order.items || []).forEach(item => {
-      totalRevenue += Number(item.price || 0);
+    totalRevenue +=
+(item.price || 0) *
+(item.qty || 1);
    });
 });
 
