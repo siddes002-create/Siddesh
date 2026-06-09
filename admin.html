@@ -1279,15 +1279,6 @@ sum + ((item.price || 0) * (item.qty || 1)),
 0
 )
 }</h3>
-
-</body>
-</html>
-`);
-
-invoiceWindow.document.close();
-invoiceWindow.print();
-
-}
 <div id="orderModal" style="
 display:none;
 position:fixed;
@@ -1321,7 +1312,16 @@ top:15px;
 <div id="orderDetails"></div>
 
 </div>
-</div>    
+</div>
+</body>
+</html>
+`);
+
+invoiceWindow.document.close();
+invoiceWindow.print();
+
+}
+    
 function togglePayment(index){
 
 let orders =
