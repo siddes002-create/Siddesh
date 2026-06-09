@@ -96,7 +96,7 @@ document.getElementById("orderInfo").innerHTML = `
 <p><b>Customer:</b> ${order.customer}</p>
 <p><b>Phone:</b> ${order.phone}</p>
 <p><b>Address:</b> ${order.address}</p>
-<p><b>Status:</b> ${order.status || "Pending"}</p>
+<p><b>Status:</b> <span id="statusText">${order.status || "Pending"}</span></p>
 <p><b>Payment:</b> ${order.payment || "Pending"}</p>
 <p><b>Total:</b> ₹${order.total || 0}</p>
 `;
@@ -142,7 +142,7 @@ JSON.stringify(orders)
 );
 
 document.getElementById("currentStatus").innerText = status;
-
+document.getElementById("statusText").innerText = status;
 document.getElementById("statusSelect").value = status;
 
 document.getElementById("timeline").innerHTML =
