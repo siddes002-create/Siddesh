@@ -226,6 +226,73 @@ border-radius:6px;
 cursor:pointer;
 font-size:12px;
 font-weight:bold;
+} 
+.order-card{
+background:#fff;
+border-radius:15px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.order-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.order-body{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin:15px 0;
+}
+
+.info-box{
+background:#f8f9fa;
+padding:12px;
+border-radius:8px;
+}
+
+.badge{
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+}
+
+.delivered{
+background:#d4edda;
+color:#155724;
+}
+
+.pending{
+background:#fff3cd;
+color:#856404;
+}
+
+.paid{
+background:#d4edda;
+color:#155724;
+}
+
+.unpaid{
+background:#f8d7da;
+color:#721c24;
+}
+
+.product-row{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-top:1px solid #eee;
+}
+
+@media(max-width:768px){
+.order-body{
+grid-template-columns:1fr;
+}
 }    
 </style>
 
@@ -802,72 +869,73 @@ let itemsHTML = "";
 (order.items || []).forEach(item=>{
 
 itemsHTML += `
-<div class="order-item">
-<p><b>${item.name}</b></p>
-<p>₹${item.price}</p>
-<p>Qty: ${item.qty || 1}</p>
-<p>Size: ${item.size || "-"}</p>
+<div class="product-row">
+<div>
+<b>${item.name}</b><br>
+Size: ${item.size || "-"} |
+Qty: ${item.qty || 1}
+</div>
+
+<div>
+₹${item.price}
+</div>
 </div>
 `;
 
 });
 
 orderList.innerHTML += `
-<div class="order-box">
-<div style="
-float:right;
-font-size:12px;
-color:gray;
-">
-Order #${index + 1}
-</div>
+<div class="order-card">
+
+<div class="order-header">
+
+<div>
 <h3>${order.customer}</h3>
-<p><b>Ordered:</b> ${order.orderDate || "-"}</p>
-<p><b>Phone:</b> ${order.phone || ""}</p>
+<p>${order.phone || ""}</p>
+</div>
 
-<p><b>Address:</b> ${order.address || ""}</p>
-
-<p>
-<b>Status:</b>
-
-<span style="
-padding:5px 10px;
-border-radius:5px;
-font-weight:bold;
-background:
-${order.status === "Delivered"
-? "#d4edda"
-: "#fff3cd"};
-
-color:
-${order.status === "Delivered"
-? "#155724"
-: "#856404"};
-">
+<div>
+<span class="badge ${
+order.status === "Delivered"
+? "delivered"
+: "pending"
+}">
 ${order.status || "Pending"}
 </span>
 
-</p>
-<p>
-<b>Payment:</b>
-
-<span style="
-padding:5px 10px;
-border-radius:5px;
-font-weight:bold;
-background:
-${order.payment === "Paid"
-? "#d4edda"
-: "#f8d7da"};
-
-color:
-${order.payment === "Paid"
-? "#155724"
-: "#721c24"};
-">
+<span class="badge ${
+order.payment === "Paid"
+? "paid"
+: "unpaid"
+}">
 ${order.payment || "Pending"}
 </span>
-</p>
+</div>
+
+</div>
+
+<div class="order-body">
+
+<div class="info-box">
+<b>Order</b><br>
+#${index+1}
+</div>
+
+<div class="info-box">
+<b>Items</b><br>
+${(order.items || []).length}
+</div>
+
+<div class="info-box">
+<b>Date</b><br>
+${order.orderDate || "-"}
+</div>
+
+</div>
+
+<p><b>Address:</b> ${order.address || ""}</p>
+
+${itemsHTML}
 
 <div class="order-actions">
 
@@ -893,12 +961,10 @@ ${order.status === "Delivered"
 class="order-btn"
 style="background:red;color:white;"
 onclick="deleteOrder(${index})">
-Delete Order
+Delete
 </button>
 
 </div>
-
-${itemsHTML}
 
 </div>
 `;
