@@ -128,11 +128,21 @@ if(!order.timeline){
 order.timeline = [];
 }
 
+let lastUpdate =
+order.timeline &&
+order.timeline.length > 0
+? order.timeline[order.timeline.length - 1]
+: "";
+
+if(!lastUpdate.includes(status)){
+
 order.timeline.push(
 new Date().toLocaleString()
 + " - " +
 status
 );
+
+}
 
 orders[index] = order;
 
@@ -146,7 +156,7 @@ document.getElementById("statusText").innerText = status;
 document.getElementById("statusSelect").value = status;
 
 document.getElementById("timeline").innerHTML =
-order.timeline.join("<br>");
+order.timeline[order.timeline.length - 1] || "";
 
 }
 </script>
