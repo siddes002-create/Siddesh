@@ -532,6 +532,20 @@ width:180px;
 </div>
     
 </div>
+    <button
+onclick="exportOrdersCSV()"
+style="
+background:#198754;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+margin-bottom:15px;
+">
+📥 Export Orders CSV
+</button>
     <div id="orderFilters" style="
 display:flex;
 gap:10px;
@@ -864,7 +878,54 @@ function filterOrders(type){
 currentFilter = type;
 displayOrders();
 }    
-    
+function exportOrdersCSV(){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let csv =
+"Order No,Customer,Phone,Address,Status,Payment,Product,Size,Qty,Price,Date\n";
+
+orders.forEach((order,index)=>{
+
+(order.items || []).forEach(item=>{
+
+csv +=
+`RN-${String(index+1).padStart(4,'0')},` +
+`${order.customer || ""},` +
+`${order.phone || ""},` +
+`${order.address || ""},` +
+`${order.status || ""},` +
+`${order.payment || ""},` +
+`${item.name || ""},` +
+`${item.size || ""},` +
+`${item.qty || 1},` +
+`${item.price || 0},` +
+`${order.orderDate || ""}\n`;
+
+});
+
+});
+
+let blob =
+new Blob([csv], {type:'text/csv'});
+
+let url =
+window.URL.createObjectURL(blob);
+
+let a =
+document.createElement("a");
+
+a.href = url;
+
+a.download =
+"RetailNanbanOrders.csv";
+
+a.click();
+
+window.URL.revokeObjectURL(url);
+
+}    
 function displayOrders(){
 
 let orders =
