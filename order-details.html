@@ -41,7 +41,20 @@ border:1px solid #ddd;
 <body>
 
 <div class="card">
+<button onclick="history.back()"
+style="
+padding:10px 15px;
+margin-bottom:20px;
+background:#333;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+">
+← Back
+</button>
 
+<h2 id="orderNo"></h2>
 <h2 id="orderNo"></h2>
 
 <div id="orderInfo"></div>
@@ -98,9 +111,13 @@ document.getElementById("orderInfo").innerHTML = `
 <p><b>Address:</b> ${order.address}</p>
 <p><b>Status:</b> <span id="statusText">${order.status || "Pending"}</span></p>
 <p><b>Payment:</b> ${order.payment || "Pending"}</p>
-<p><b>Total:</b> ₹${order.total || 0}</p>
+<p><b>Total:</b> ₹${orderTotal}</p>
 `;
+let orderTotal = 0;
 
+(order.items || []).forEach(item=>{
+orderTotal += (item.price || 0) * (item.qty || 1);
+});
 let productsHtml = "";
 
 (order.items || []).forEach(item=>{
