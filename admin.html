@@ -1050,6 +1050,13 @@ WhatsApp
 
 <button
 class="order-btn"
+style="background:#6f42c1;color:white;"
+onclick="printInvoice(${index})">
+Invoice
+</button>
+
+<button
+class="order-btn"
 style="background:red;color:white;"
 onclick="deleteOrder(${index})">
 Delete
@@ -1133,7 +1140,101 @@ window.open(
 );
 
 }
-    
+function printInvoice(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let order = orders[index];
+
+let items = "";
+
+(order.items || []).forEach(item => {
+
+items += `
+<tr>
+<td>${item.name}</td>
+<td>${item.size || "-"}</td>
+<td>${item.qty || 1}</td>
+<td>₹${item.price}</td>
+</tr>
+`;
+
+});
+
+let invoiceWindow = window.open("", "_blank");
+
+invoiceWindow.document.write(`
+<html>
+<head>
+<title>Invoice</title>
+
+<style>
+body{
+font-family:Arial;
+padding:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+}
+
+h1{
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Retail Nanban</h1>
+
+<h3>Invoice</h3>
+
+<p><b>Customer:</b> ${order.customer}</p>
+<p><b>Phone:</b> ${order.phone}</p>
+<p><b>Address:</b> ${order.address}</p>
+<p><b>Date:</b> ${order.orderDate || "-"}</p>
+
+<table>
+<tr>
+<th>Product</th>
+<th>Size</th>
+<th>Qty</th>
+<th>Price</th>
+</tr>
+
+${items}
+
+</table>
+
+<br>
+
+<h3>Total: ₹${
+(order.items || []).reduce(
+(sum,item)=>
+sum + ((item.price || 0) * (item.qty || 1)),
+0
+)
+}</h3>
+
+</body>
+</html>
+`);
+
+invoiceWindow.document.close();
+invoiceWindow.print();
+
+}    
 function togglePayment(index){
 
 let orders =
