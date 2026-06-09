@@ -141,17 +141,14 @@ localStorage.setItem(
 JSON.stringify(orders)
 );
 
-location.reload();
+document.getElementById("currentStatus").innerText = status;
 
-}
-
-if(order.timeline){
+document.getElementById("statusSelect").value = status;
 
 document.getElementById("timeline").innerHTML =
 order.timeline.join("<br>");
 
 }
-
 </script>
 
 </body>
