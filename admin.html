@@ -227,6 +227,19 @@ cursor:pointer;
 font-size:12px;
 font-weight:bold;
 } 
+.filter-btn{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:#f1f1f1;
+cursor:pointer;
+font-weight:bold;
+}
+
+.filter-btn:hover{
+background:#ff4f6d;
+color:white;
+}    
 .order-card{
 background:#fff;
 border-radius:15px;
@@ -518,6 +531,25 @@ width:180px;
 <p id="customerCount">0</p>
 </div>
     
+</div>
+    <div id="orderFilters" style="
+display:flex;
+gap:10px;
+margin-bottom:15px;
+">
+
+<button onclick="filterOrders('all')" class="filter-btn">
+All
+</button>
+
+<button onclick="filterOrders('pending')" class="filter-btn">
+Pending
+</button>
+
+<button onclick="filterOrders('delivered')" class="filter-btn">
+Delivered
+</button>
+
 </div>
     <input
         type="text"
@@ -826,6 +858,12 @@ displayProducts();
 }
 
 }
+let currentFilter = "all";
+
+function filterOrders(type){
+currentFilter = type;
+displayOrders();
+}    
     
 function displayOrders(){
 
@@ -875,19 +913,30 @@ let search =
 .toLowerCase();
 
 orders
-orders
 .slice()
 .reverse()
-.filter(order =>
+.filter(order => {
+
+let matchesSearch =
 (order.customer || "")
 .toLowerCase()
 .includes(search)
-
 ||
-
 (order.phone || "")
-.includes(search)
-)
+.includes(search);
+
+let matchesFilter =
+currentFilter === "all"
+||
+(currentFilter === "pending" &&
+order.status !== "Delivered")
+||
+(currentFilter === "delivered" &&
+order.status === "Delivered");
+
+return matchesSearch && matchesFilter;
+
+})
 .forEach((order,index)=>{
 let orderTotal = 0;
 
