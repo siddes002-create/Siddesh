@@ -1015,6 +1015,10 @@ return matchesSearch && matchesFilter;
 
 })
 .forEach((order,index)=>{
+
+let realIndex = orders.findIndex(o =>
+JSON.stringify(o) === JSON.stringify(order)
+);
 let orderTotal = 0;
 
 (order.items || []).forEach(item=>{
@@ -1061,10 +1065,10 @@ RN-${String(index+1).padStart(4,'0')}
 <td>₹${orderTotal}</td>
 
 <td>
-<button onclick="togglePayment(${index})">💰</button>
-<button onclick="toggleStatus(${index})">🚚</button>
-<button onclick="printInvoice(${index})">🧾</button>
-<button onclick="deleteOrder(${index})">🗑️</button>
+<button onclick="togglePayment(${realIndex})">💰</button>
+<button onclick="toggleStatus(${realIndex})">🚚</button>
+<button onclick="printInvoice(${realIndex})">🧾</button>
+<button onclick="deleteOrder(${realIndex})">🗑️</button>
 </td>
 
 </tr>
