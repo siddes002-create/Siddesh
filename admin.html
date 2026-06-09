@@ -1043,6 +1043,13 @@ ${order.status === "Delivered"
 
 <button
 class="order-btn"
+style="background:#25D366;color:white;"
+onclick="openWhatsApp('${order.phone}')">
+WhatsApp
+</button>
+
+<button
+class="order-btn"
 style="background:red;color:white;"
 onclick="deleteOrder(${index})">
 Delete
@@ -1112,6 +1119,21 @@ JSON.stringify(orders)
 displayOrders();
 
 }
+function openWhatsApp(phone){
+
+let cleanPhone = String(phone).replace(/\D/g,'');
+
+if(cleanPhone.length === 10){
+cleanPhone = "91" + cleanPhone;
+}
+
+window.open(
+`https://wa.me/${cleanPhone}`,
+"_blank"
+);
+
+}
+    
 function togglePayment(index){
 
 let orders =
