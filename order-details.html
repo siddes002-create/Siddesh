@@ -96,9 +96,9 @@ let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
 let order = orders[index];
- document.getElementById("orderNo").innerText =
-"Order No : RN-" + String(Number(index)+1).padStart(4,"0"); 
-
+document.getElementById("orderNo").innerText =
+"Order No : " +
+(order.orderNo || ("RN-" + String(Number(index)+1).padStart(4,"0")));
 document.getElementById("statusSelect").value =
 order.status || "Confirmed";
 
