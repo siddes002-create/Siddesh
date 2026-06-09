@@ -1090,7 +1090,6 @@ JSON.parse(localStorage.getItem("orders")) || [];
 let order = orders[index];
 
 alert(
-"Order : RN-" + String(index+1).padStart(4,'0') +
 "\nCustomer : " + order.customer +
 "\nPhone : " + order.phone +
 "\nStatus : " + (order.status || "Pending")
