@@ -228,8 +228,9 @@ text-align:left;
 
 <hr>
 
-<p><b>Invoice No:</b> INV-${order.orderNo}</p>
-<p><b>Order No:</b> ${order.orderNo}</p>
+<p><b>Invoice No:</b> INV-${order.orderNo || ("RN-" + String(Number(index)+1).padStart(4,"0"))}</p>
+
+<p><b>Order No:</b> ${order.orderNo || ("RN-" + String(Number(index)+1).padStart(4,"0"))}</p>
 <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
 
 <p><b>Customer:</b> ${order.customer}</p>
