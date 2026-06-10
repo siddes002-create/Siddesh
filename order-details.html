@@ -183,7 +183,7 @@ document.getElementById("statusText").innerText = status;
 document.getElementById("statusSelect").value = status;
 
 document.getElementById("timeline").innerHTML =
-order.timeline[order.timeline.length - 1] || "";
+(order.timeline || []).join("<br>");
 
 }
 function printInvoice(){
@@ -222,9 +222,9 @@ text-align:left;
 
 <hr>
 
-<p><b>Invoice No:</b> INV-${order.orderNo || ("RN-"+index)}</p>
+<p><b>Invoice No:</b> INV-${order.orderNo}</p>
 
-<p><b>Order No:</b> ${order.orderNo || <p><b>Order No:</b> ${order.orderNo}</p>
+<p><b>Order No:</b> ${order.orderNo}</p>
 
 <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
 
