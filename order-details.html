@@ -263,6 +263,7 @@ ${order.status || "Confirmed"}
 <table>
 
 <tr>
+<th>Photo</th>
 <th>Product</th>
 <th>Size</th>
 <th>Qty</th>
@@ -271,6 +272,9 @@ ${order.status || "Confirmed"}
 
 ${(order.items || []).map(item => `
 <tr>
+<td>
+<img src="${item.image}" width="50">
+</td>
 <td>${item.name}</td>
 <td>${item.size}</td>
 <td>${item.qty}</td>
