@@ -224,7 +224,7 @@ text-align:left;
 
 <p><b>Invoice No:</b> INV-${order.orderNo || ("RN-"+index)}</p>
 
-<p><b>Order No:</b> ${order.orderNo || document.getElementById("orderNo").innerText}</p>
+<p><b>Order No:</b> ${order.orderNo || <p><b>Order No:</b> ${order.orderNo}</p>
 
 <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
 
@@ -251,7 +251,36 @@ ${(order.items || []).map(item => `
 
 </table>
 
-<h3>Total : ₹${orderTotal}</h3>
+<div style="
+width:250px;
+margin-left:auto;
+margin-top:20px;
+">
+
+<p>
+<span>Subtotal</span>
+<span style="float:right">
+₹${orderTotal}
+</span>
+</p>
+
+<p>
+<span>Shipping</span>
+<span style="float:right">
+₹0
+</span>
+</p>
+
+<hr>
+
+<h3>
+Grand Total
+<span style="float:right">
+₹${orderTotal}
+</span>
+</h3>
+
+</div>
 
 <hr>
 
