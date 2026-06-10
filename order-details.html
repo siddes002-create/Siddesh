@@ -142,7 +142,28 @@ background:${
 ${order.status || "Pending"}
 </span>
 </p>
-<p><b>Payment:</b> ${order.payment || "Pending"}</p>
+<p>
+<b>Payment:</b>
+
+<select onchange="updatePayment(this.value)">
+<option value="Pending"
+${order.payment==="Pending"?"selected":""}>
+Pending
+</option>
+
+<option value="Paid"
+${order.payment==="Paid"?"selected":""}>
+Paid
+</option>
+
+<option value="COD"
+${order.payment==="COD"?"selected":""}>
+COD
+</option>
+
+</select>
+
+</p>
 <p><b>Total:</b> ₹${orderTotal}</p>
 `;
 let productsHtml = `
@@ -235,6 +256,18 @@ document.getElementById("timeline").innerHTML =
 : "No Updates";
 
 }
+function updatePayment(payment){
+
+order.payment = payment;
+
+orders[index] = order;
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+}    
 function printInvoice(){
 
 let invoiceWindow = window.open("", "_blank");
