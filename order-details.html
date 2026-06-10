@@ -171,6 +171,9 @@ id="trackingNo"
 placeholder="Enter Tracking Number"
 style="padding:5px;margin-left:10px;"
 onchange="updateTracking(this.value)">
+<button onclick="copyTracking()">
+📋 Copy
+</button>
 </p>
 <select onchange="updatePayment(this.value)">
 <option value="Pending"
@@ -248,6 +251,15 @@ JSON.stringify(orders)
 );
 
 }
+function copyTracking(){
+
+navigator.clipboard.writeText(
+document.getElementById("trackingNo").value
+);
+
+alert("Tracking copied");
+
+}  
 function updateStatus(status){
 
 order.status = status;
