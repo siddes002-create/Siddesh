@@ -194,38 +194,42 @@ invoiceWindow.document.write(`
 <html>
 <head>
 <title>Invoice</title>
+
 <style>
 body{
 font-family:Arial;
 padding:20px;
 }
+
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
 }
+
 table,th,td{
 border:1px solid #000;
 }
+
 th,td{
 padding:8px;
 text-align:left;
 }
 </style>
+
 </head>
+
 <body>
 
 <div style="text-align:center;margin-bottom:20px;">
-    <h1 style="margin:0;">Retail Nanban</h1>
-    <p style="margin:5px 0;">Online Fashion Store</p>
+<h1 style="margin:0;">Retail Nanban</h1>
+<p style="margin:5px 0;">Online Fashion Store</p>
 </div>
 
 <hr>
 
 <p><b>Invoice No:</b> INV-${order.orderNo}</p>
-
 <p><b>Order No:</b> ${order.orderNo}</p>
-
 <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
 
 <p><b>Customer:</b> ${order.customer}</p>
@@ -233,6 +237,7 @@ text-align:left;
 <p><b>Address:</b> ${order.address}</p>
 
 <table>
+
 <tr>
 <th>Product</th>
 <th>Size</th>
@@ -295,8 +300,7 @@ Thank you for shopping with Retail Nanban ❤️
 invoiceWindow.document.close();
 invoiceWindow.print();
 
-}  
-</script>
+}</script>
 
 </body>
 </html>
