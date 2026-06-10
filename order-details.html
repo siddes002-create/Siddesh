@@ -225,7 +225,9 @@ badge.style.color = "white";
 document.getElementById("statusSelect").value = status;
 
 document.getElementById("timeline").innerHTML =
-(order.timeline || []).join("<br>");
+(order.timeline && order.timeline.length > 0)
+? order.timeline[order.timeline.length - 1]
+: "No Updates";
 
 }
 function printInvoice(){
