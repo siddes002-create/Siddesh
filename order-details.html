@@ -115,6 +115,10 @@ order.status || "Confirmed";
 
 document.getElementById("currentStatus").innerText =
 order.status || "Pending";
+if(order.trackingNo){
+document.getElementById("trackingNo").value =
+order.trackingNo;
+}  
 let orderTotal = 0;
 
 (order.items || []).forEach(item=>{
@@ -159,7 +163,15 @@ ${order.status || "Pending"}
 </p>
 <p>
 <b>Payment:</b>
-
+<p>
+<b>Tracking No:</b>
+<input
+type="text"
+id="trackingNo"
+placeholder="Enter Tracking Number"
+style="padding:5px;margin-left:10px;"
+onchange="updateTracking(this.value)">
+</p>
 <select onchange="updatePayment(this.value)">
 <option value="Pending"
 ${order.payment==="Pending"?"selected":""}>
@@ -224,7 +236,18 @@ productsHtml += `</table>`;
 
 document.getElementById("productList").innerHTML =
 productsHtml;
+function updateTracking(value){
 
+order.trackingNo = value;
+
+orders[index] = order;
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+}
 function updateStatus(status){
 
 order.status = status;
