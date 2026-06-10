@@ -124,7 +124,23 @@ document.getElementById("orderInfo").innerHTML = `
 <p><b>Customer:</b> ${order.customer}</p>
 <p><b>Phone:</b> ${order.phone}</p>
 <p><b>Address:</b> ${order.address}</p>
-<p><b>Status:</b> <span id="statusText">${order.status || "Pending"}</span></p>
+<p>
+<b>Status:</b>
+<span id="statusText"
+style="
+padding:5px 12px;
+border-radius:20px;
+color:white;
+background:${
+(order.status==="Delivered") ? "#28a745" :
+(order.status==="Shipped") ? "#fd7e14" :
+(order.status==="Packed") ? "#0d6efd" :
+"#ffc107"
+};
+">
+${order.status || "Pending"}
+</span>
+</p>
 <p><b>Payment:</b> ${order.payment || "Pending"}</p>
 <p><b>Total:</b> ₹${orderTotal}</p>
 `;
@@ -197,6 +213,15 @@ JSON.stringify(orders)
 
 document.getElementById("currentStatus").innerText = status;
 document.getElementById("statusText").innerText = status;
+let badge = document.getElementById("statusText");
+
+badge.style.background =
+status==="Delivered" ? "#28a745" :
+status==="Shipped" ? "#fd7e14" :
+status==="Packed" ? "#0d6efd" :
+"#ffc107";
+
+badge.style.color = "white";    
 document.getElementById("statusSelect").value = status;
 
 document.getElementById("timeline").innerHTML =
