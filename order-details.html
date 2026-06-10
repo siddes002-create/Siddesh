@@ -219,6 +219,8 @@ text-align:left;
 
 <h3>${order.orderNo || document.getElementById("orderNo").innerText}</h3>
 
+<p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
+
 <p><b>Customer:</b> ${order.customer}</p>
 <p><b>Phone:</b> ${order.phone}</p>
 <p><b>Address:</b> ${order.address}</p>
