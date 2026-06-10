@@ -232,6 +232,18 @@ text-align:left;
 
 <p><b>Order No:</b> ${order.orderNo || ("RN-" + String(Number(index)+1).padStart(4,"0"))}</p>
 <p><b>Date:</b> ${new Date().toLocaleDateString()}</p>
+<p>
+<b>Status:</b>
+<span style="
+background:#28a745;
+color:white;
+padding:4px 10px;
+border-radius:20px;
+font-size:12px;
+">
+${order.status || "Confirmed"}
+</span>
+</p>
 
 <p><b>Customer:</b> ${order.customer}</p>
 <p><b>Phone:</b> ${order.phone}</p>
@@ -291,7 +303,13 @@ Grand Total
 <hr>
 
 <p style="text-align:center;">
+<p style="text-align:center;">
 Thank you for shopping with Retail Nanban ❤️
+</p>
+
+<p style="text-align:center;color:gray;font-size:12px;">
+This is a computer generated invoice. No signature required.
+</p>
 </p>
 
 </body>
@@ -299,7 +317,13 @@ Thank you for shopping with Retail Nanban ❤️
 `);
 
 invoiceWindow.document.close();
-invoiceWindow.print();
+invoiceWindow.onload = function(){
+    invoiceWindow.print();
+
+    invoiceWindow.onafterprint = function(){
+        invoiceWindow.close();
+    };
+};
 
 }</script>
 
