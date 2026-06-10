@@ -1048,7 +1048,7 @@ Qty: ${item.qty || 1}
 
 document.getElementById("ordersTableBody").innerHTML += `
 <tr>
-<td>${order.orderDate || "-"}</td>
+<td>${order.orderDate ? new Date(order.orderDate).toLocaleDateString() : "-"}</td>
 
 <td>
 <a href="order-details.html?id=${realIndex}"
