@@ -124,6 +124,21 @@ document.getElementById("orderInfo").innerHTML = `
 <p><b>Order Date:</b> ${order.orderDate || "N/A"}</p>
 <p><b>Customer:</b> ${order.customer}</p>
 <p><b>Phone:</b> ${order.phone}</p>
+<p>
+<a href="https://wa.me/91${order.phone}"
+target="_blank"
+style="
+background:#25D366;
+color:white;
+padding:8px 12px;
+border-radius:5px;
+text-decoration:none;
+display:inline-block;
+margin:5px 0;
+">
+📱 WhatsApp Customer
+</a>
+</p>
 <p><b>Address:</b> ${order.address}</p>
 <p>
 <b>Status:</b>
@@ -192,8 +207,10 @@ style="object-fit:cover;border-radius:6px;">
 <td style="border:1px solid #ddd;padding:8px;">${item.name}</td>
 <td style="border:1px solid #ddd;padding:8px;">${item.size}</td>
 <td style="border:1px solid #ddd;padding:8px;">
+<div style="display:flex;align-items:center;gap:10px;">
 ${item.qty}
-<input type="checkbox"
+<input type="checkbox">
+</div>
 style="margin-left:10px;">
 </td>
 </tr>
