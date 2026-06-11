@@ -271,15 +271,21 @@ JSON.stringify(orders)
 
 }
 function copyTracking(){
+  const tracking =
+  document.getElementById("trackingNo").value;
 
-navigator.clipboard.writeText(
-document.getElementById("trackingNo").value
-);
+  if(!tracking){
+    alert("Enter tracking number");
+    return;
+  }
 
-alert("Tracking copied");
-
-}  
+  navigator.clipboard.writeText(tracking);
+  alert("Tracking copied");
+}
 function updateStatus(status){
+if(!confirm("Update order status?")){
+return;
+}    
 
 order.status = status;
 
