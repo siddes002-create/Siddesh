@@ -210,7 +210,7 @@ margin-top:10px;
 </tr>
 `;
 
-(order.items || []).forEach(item=>{
+(order.items || []).forEach((item,itemIndex)=>{
 
 productsHtml += `
 <tr>
@@ -225,10 +225,9 @@ style="object-fit:cover;border-radius:6px;">
 <div style="display:flex;align-items:center;gap:10px;">
 <div style="display:flex;align-items:center;gap:8px;">
   <span>${item.qty || 1}</span>
-<input
-type="checkbox"
-${item.packed ? "checked" : ""}
-onchange="togglePacked(${itemIndex})">
+<td style="border:1px solid #ddd;padding:8px;">
+${item.qty || 1}
+</td>
 </div>
 </div>
 
