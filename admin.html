@@ -435,6 +435,23 @@ placeholder="Enter Stock">
 <label>XXL Size Stock</label>
 <input type="number" id="stockXXL" value="0">
 </div>
+ <div class="input-box">
+<label>Category</label>
+
+<select id="productCategory"
+style="
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+">
+<option value="mens">Mens</option>
+<option value="women">Women</option>
+<option value="kids">Kids</option>
+</select>
+
+</div>   
 <div class="input-box">
 <label>Image URL</label>
 <input type="text" id="productImage">
@@ -653,6 +670,8 @@ function addProduct(){
 
     let image =
     document.getElementById("productImage").value;
+    let category =
+document.getElementById("productCategory").value;
     let stock =
     parseInt(
     document.getElementById("productStock").value
@@ -675,7 +694,7 @@ let stockXXL = parseInt(document.getElementById("stockXXL").value) || 0;
 name:name,
 price:price,
 image:image,
-
+category:category,
 stock:
 stockS + stockM + stockL + stockXL + stockXXL,
 
