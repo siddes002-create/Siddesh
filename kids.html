@@ -150,95 +150,51 @@ body{
 
 <!-- Products -->
 
-<div class="products">
-
-
-    <!-- Product 1 -->
-
-    <div class="product-card"
-    onclick="openProduct(
-    'Kids Frock',
-    799,
-    'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea',
-    'Beautiful kids frock collection',
-    'kids'
-    )">
-
-        <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea">
-
-        <h3>Kids Frock</h3>
-
-        <p>₹799</p>
-
-        <button>Buy Now</button>
-
-    </div>
-
-
-
-    <!-- Product 2 -->
-
-    <div class="product-card"
-    onclick="openProduct(
-    'Kids T-Shirt',
-    599,
-    'https://images.unsplash.com/photo-1503919545889-aef636e10ad4',
-    'Comfortable kids t-shirt'
-    )">
-
-        <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4">
-
-        <h3>Kids T-Shirt</h3>
-
-        <p>₹599</p>
-
-        <button>Buy Now</button>
-
-    </div>
-
-
-
-    <!-- Product 3 -->
-
-    <div class="product-card"
-    onclick="openProduct(
-    'Kids Fashion Wear',
-    999,
-    'https://images.unsplash.com/photo-1519345182560-3f2917c472ef',
-    'Premium fashion wear for kids'
-    )">
-
-        <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef">
-
-        <h3>Kids Fashion Wear</h3>
-
-        <p>₹999</p>
-
-        <button>Buy Now</button>
-
-    </div>
-
-</div>
-
+<div class="products" id="products"></div>
 
 
 <script>
 
-function openProduct(name, price, image, desc){
+const allProducts =
+JSON.parse(localStorage.getItem("products")) || [];
 
-    let product = {
-        name:name,
-        price:price,
-        image:image,
-        desc:desc
-    };
+const kidsProducts =
+allProducts.filter(product =>
+product.category === "kids"
+);
 
-    localStorage.setItem(
-        "selectedProduct",
-        JSON.stringify(product)
-    );
+let output = "";
 
-    window.location.href = "product.html";
+kidsProducts.forEach(product=>{
+
+output += `
+<div class="product-card"
+onclick='openProduct(${JSON.stringify(product)})'>
+
+<img src="${product.image}">
+
+<h3>${product.name}</h3>
+
+<p>₹${product.price}</p>
+
+<button>Buy Now</button>
+
+</div>
+`;
+
+});
+
+document.getElementById("products").innerHTML =
+output;
+
+function openProduct(product){
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(product)
+);
+
+window.location.href = "product.html";
 
 }
 
