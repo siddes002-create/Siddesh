@@ -250,8 +250,13 @@ onkeyup="searchProducts()"
 <div class="products" id="products"></div>
 <script>
 
-const productsData =
+const allProducts =
 JSON.parse(localStorage.getItem("products")) || [];
+
+const productsData =
+allProducts.filter(product =>
+product.category === "mens"
+);
 let output = "";
 
 productsData.forEach(product=>{
