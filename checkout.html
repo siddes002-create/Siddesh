@@ -53,7 +53,15 @@ text-align:center;
 </head>
 
 <body>
+<script>
+let user = localStorage.getItem("loggedInUser");
 
+if(!user){
+    alert("Please Login First");
+
+    window.location.href = "login.html";
+}
+</script>
 <div class="checkout-box">
 
 <h1>Checkout</h1>
