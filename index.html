@@ -226,7 +226,7 @@ footer{
     <a href="mens.html">Mens</a>
     <a href="women.html">Women</a>
     <a href="kids.html">Kids</a>
-    <a href="login.html">👤 Login</a>
+  <a href="login.html" id="loginLink">👤 Login</a>
     <a href="cart.html">🛒 Cart</a>
 </nav>
 
@@ -318,6 +318,13 @@ footer{
     © 2026 Retail Nanban | All Rights Reserved
 
 </footer>
+<script>
+let loggedUser = localStorage.getItem("loggedInUser");
 
+if(loggedUser){
+    document.getElementById("loginLink").innerHTML =
+    "👤 " + loggedUser;
+}
+</script>
 </body>
 </html>
