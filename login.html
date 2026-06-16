@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Login</title>
+</head>
+<body>
+    <h2>Customer Login</h2>
+
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required><br><br>
+
+        <input type="password" id="password" placeholder="Password" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if(email==="customer@gmail.com" && password==="1234"){
+            alert("Login Successful");
+            window.location.href="index.html";
+        } else {
+            alert("Invalid Login");
+        }
+    });
+    </script>
+</body>
+</html>
