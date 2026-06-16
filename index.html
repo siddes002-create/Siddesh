@@ -229,7 +229,9 @@ footer{
 <a href="register.html">Register</a>
 <a href="login.html" id="loginLink">👤 Login</a>
 <a href="#" id="logoutLink" style="display:none;">Logout</a>
-<a href="cart.html">🛒 Cart</a>
+<a href="cart.html">
+🛒 Cart (<span id="cartCount">0</span>)
+</a>
 </nav>
 
 </header>
@@ -335,6 +337,8 @@ document.getElementById("logoutLink").addEventListener("click", function(e){
 
     location.reload();
 });
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+document.getElementById("cartCount").innerText = cart.length;
 </script>
 </body>
 </html>
