@@ -221,13 +221,15 @@ footer{
         Retail Nanban
     </div>
 
-   <nav>
-    <a href="index.html">Home</a>
-    <a href="mens.html">Mens</a>
-    <a href="women.html">Women</a>
-    <a href="kids.html">Kids</a>
-  <a href="login.html" id="loginLink">👤 Login</a>
-    <a href="cart.html">🛒 Cart</a>
+  <nav>
+<a href="index.html">Home</a>
+<a href="mens.html">Mens</a>
+<a href="women.html">Women</a>
+<a href="kids.html">Kids</a>
+<a href="register.html">Register</a>
+<a href="login.html" id="loginLink">👤 Login</a>
+<a href="#" id="logoutLink" style="display:none;">Logout</a>
+<a href="cart.html">🛒 Cart</a>
 </nav>
 
 </header>
@@ -319,12 +321,32 @@ footer{
 
 </footer>
 <script>
-let loggedUser = localStorage.getItem("loggedInUser");
 
-if(loggedUser){
-    document.getElementById("loginLink").innerHTML =
-    "👤 " + loggedUser;
+let user =
+localStorage.getItem("loggedInUser");
+
+if(user){
+
+document.getElementById("loginLink")
+.innerHTML="👤 "+user;
+
+document.getElementById("logoutLink")
+.style.display="inline";
+
 }
+
+document.getElementById("logoutLink")
+.addEventListener("click",function(){
+
+localStorage.removeItem(
+"loggedInUser"
+);
+
+location.reload();
+
+});
+
+</script>
 </script>
 </body>
 </html>
