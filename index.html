@@ -207,7 +207,72 @@ footer{
     }
 
 }
+.left-header{
+display:flex;
+align-items:center;
+gap:15px;
+}
 
+.menu-btn{
+font-size:30px;
+border:none;
+background:none;
+cursor:pointer;
+}
+
+.side-menu{
+
+height:100%;
+width:0;
+
+position:fixed;
+
+top:0;
+left:0;
+
+background:#222;
+
+overflow-x:hidden;
+
+transition:.4s;
+
+padding-top:60px;
+
+z-index:9999;
+
+}
+
+.side-menu a{
+
+display:block;
+
+padding:18px;
+
+color:white;
+
+text-decoration:none;
+
+font-size:20px;
+
+}
+
+.side-menu a:hover{
+
+background:#ff4f6d;
+
+}
+
+.closebtn{
+
+position:absolute;
+
+top:10px;
+
+right:20px;
+
+font-size:35px;
+
+}
 </style>
 
 </head>
@@ -217,9 +282,17 @@ footer{
 
 <header>
 
-    <div class="logo">
-        Retail Nanban
-    </div>
+<div class="left-header">
+
+<button class="menu-btn" onclick="openMenu()">
+☰
+</button>
+
+<div class="logo">
+Retail Nanban
+</div>
+
+</div>
 
   <nav>
 <a href="index.html">Home</a>
@@ -235,7 +308,19 @@ footer{
 </nav>
 
 </header>
+<div id="sideMenu" class="side-menu">
 
+    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="mens.html">👔 Mens</a>
+    <a href="women.html">👗 Women</a>
+    <a href="kids.html">🧒 Kids</a>
+    <a href="register.html">📝 Register</a>
+    <a href="login.html">👤 Login</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
 <!-- HERO -->
 
 <section class="hero">
@@ -339,6 +424,17 @@ document.getElementById("logoutLink").addEventListener("click", function(e){
 });
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 document.getElementById("cartCount").innerText = cart.length;
+    function openMenu(){
+
+document.getElementById("sideMenu").style.width="260px";
+
+}
+
+function closeMenu(){
+
+document.getElementById("sideMenu").style.width="0";
+
+}
 </script>
 </body>
 </html>
