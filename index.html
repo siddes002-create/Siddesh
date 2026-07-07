@@ -273,6 +273,40 @@ right:20px;
 font-size:35px;
 
 }
+.search-box{
+display:flex;
+align-items:center;
+margin-left:30px;
+}
+
+.search-box input{
+
+width:250px;
+padding:10px;
+
+border:1px solid #ddd;
+
+border-radius:6px 0 0 6px;
+
+outline:none;
+
+}
+
+.search-box button{
+
+padding:10px 15px;
+
+border:none;
+
+background:#ff4f6d;
+
+color:white;
+
+cursor:pointer;
+
+border-radius:0 6px 6px 0;
+
+}    
 </style>
 
 </head>
@@ -293,7 +327,15 @@ Retail Nanban
 </div>
 
 </div>
+<div class="search-box">
+    <input type="text"
+           id="searchInput"
+           placeholder="Search Products...">
 
+    <button onclick="searchProduct()">
+        🔍
+    </button>
+</div>
   <nav>
 <a href="index.html">Home</a>
 <a href="mens.html">Mens</a>
@@ -433,6 +475,35 @@ document.getElementById("sideMenu").style.width="260px";
 function closeMenu(){
 
 document.getElementById("sideMenu").style.width="0";
+
+}
+    function searchProduct(){
+
+let value=document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+if(value.includes("shirt") || value.includes("men")){
+
+window.location.href="mens.html";
+
+}
+else if(value.includes("women")){
+
+window.location.href="women.html";
+
+}
+else if(value.includes("kids")){
+
+window.location.href="kids.html";
+
+}
+else{
+
+alert("No Product Found");
+
+}
 
 }
 </script>
