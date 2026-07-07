@@ -21,15 +21,15 @@ body{
 /* HEADER */
 
 header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    position:sticky;
-    top:0;
-    z-index:1000;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 30px;
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:999;
 }
 
 .logo{
@@ -39,15 +39,27 @@ header{
 }
 
 nav{
-    display:flex;
-    gap:25px;
+display:flex;
+align-items:center;
+gap:25px;
 }
 
 nav a{
-    text-decoration:none;
-    color:black;
-    font-size:18px;
-    font-weight:bold;
+
+text-decoration:none;
+
+color:#222;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#ff4f6d;
+
 }
 
 nav a:hover{
@@ -276,37 +288,35 @@ font-size:35px;
 .search-box{
 display:flex;
 align-items:center;
-margin-left:30px;
+width:350px;
 }
 
 .search-box input{
 
-width:250px;
-padding:10px;
+width:100%;
+padding:12px;
 
 border:1px solid #ddd;
 
-border-radius:6px 0 0 6px;
-
-outline:none;
+border-radius:25px 0 0 25px;
 
 }
 
 .search-box button{
 
-padding:10px 15px;
-
-border:none;
+padding:12px 18px;
 
 background:#ff4f6d;
 
 color:white;
 
+border:none;
+
+border-radius:0 25px 25px 0;
+
 cursor:pointer;
 
-border-radius:0 6px 6px 0;
-
-}    
+}
 </style>
 
 </head>
