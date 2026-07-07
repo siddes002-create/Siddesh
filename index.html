@@ -551,7 +551,56 @@ color:#aaa;
 
 font-size:14px;
 
-}    
+}
+    .category-strip{
+
+display:flex;
+
+justify-content:center;
+
+gap:40px;
+
+padding:25px;
+
+background:white;
+
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+.cat-item{
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.cat-item img{
+
+width:70px;
+
+height:70px;
+
+object-fit:contain;
+
+}
+
+.cat-item p{
+
+margin-top:10px;
+
+font-weight:bold;
+
+}
+
+.cat-item:hover{
+
+transform:translateY(-5px);
+
+}
 </style>
 
 </head>
@@ -613,6 +662,49 @@ Retail Nanban
 <section class="hero">
 
     <div class="overlay"></div>
+
+</section>
+    <section class="category-strip">
+
+<div class="cat-item" onclick="location.href='mens.html'">
+
+<img src="https://cdn-icons-png.flaticon.com/512/892/892458.png">
+
+<p>Mens</p>
+
+</div>
+
+<div class="cat-item" onclick="location.href='women.html'">
+
+<img src="https://cdn-icons-png.flaticon.com/512/892/892462.png">
+
+<p>Women</p>
+
+</div>
+
+<div class="cat-item" onclick="location.href='kids.html'">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png">
+
+<p>Kids</p>
+
+</div>
+
+<div class="cat-item">
+
+<img src="https://cdn-icons-png.flaticon.com/512/2589/2589903.png">
+
+<p>Footwear</p>
+
+</div>
+
+<div class="cat-item">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3081/3081822.png">
+
+<p>Accessories</p>
+
+</div>
 
 </section>
 <section class="new-arrivals">
