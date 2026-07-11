@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retail Nanban</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
 
 *{
@@ -44,6 +44,25 @@ display:flex;
 align-items:center;
 gap:35px;
 }
+.right-nav{
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+.right-nav a{
+text-decoration:none;
+color:#333;
+font-weight:600;
+transition:.3s;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.right-nav a:hover{
+color:#ff4f6d;
+}    
 
 nav a{
 
@@ -688,16 +707,19 @@ Retail Nanban
         🔍
     </button>
 </div>
- <nav>
+<nav class="right-nav">
 
-<a href="index.html">🏠</a>
+<a href="login.html">
+<i class="fa-regular fa-user"></i> Login
+</a>
 
 <a href="wishlist.html">
-❤️
+<i class="fa-regular fa-heart"></i> Wishlist
 </a>
 
 <a href="cart.html">
-🛒 (<span id="cartCount">0</span>)
+<i class="fa-solid fa-cart-shopping"></i> Cart
+(<span id="cartCount">0</span>)
 </a>
 
 </nav>
