@@ -10,13 +10,28 @@
 
 <form id="registerForm">
 
-<input type="text" id="name" placeholder="Name" required><br><br>
+<input type="text"
+id="name"
+placeholder="Full Name"
+required><br><br>
 
-<input type="email" id="email" placeholder="Email" required><br><br>
+<input
+type="tel"
+id="mobile"
+placeholder="Mobile Number"
+maxlength="10"
+pattern="[0-9]{10}"
+required><br><br>
 
-<input type="password" id="password" placeholder="Password" required><br><br>
+<input
+type="password"
+id="password"
+placeholder="Password"
+required><br><br>
 
-<button type="submit">Register</button>
+<button type="submit">
+Register
+</button>
 
 </form>
 
@@ -29,15 +44,13 @@ e.preventDefault();
 
 let user={
 name:document.getElementById("name").value,
-email:document.getElementById("email").value,
+mobile:document.getElementById("mobile").value,
 password:document.getElementById("password").value
 };
-
 localStorage.setItem(
-user.email,
+user.mobile,
 JSON.stringify(user)
 );
-
 alert("Registration Successful");
 
 window.location.href="login.html";
