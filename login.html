@@ -7,22 +7,42 @@
     <h2>Customer Login</h2>
 
     <form id="loginForm">
-        <input type="email" id="email" placeholder="Email" required><br><br>
 
-        <input type="password" id="password" placeholder="Password" required><br><br>
+<input
+type="tel"
+id="mobile"
+placeholder="Mobile Number"
+maxlength="10"
+pattern="[0-9]{10}"
+required>
 
-        <button type="submit">Login</button>
-    </form>
+<br><br>
+
+<input
+type="password"
+id="password"
+placeholder="Password"
+required>
+
+<br><br>
+
+<button type="submit">
+
+Login
+
+</button>
+
+</form>
 <script>
 document.getElementById("loginForm")
 .addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    let email = document.getElementById("email").value;
+   let mobile = document.getElementById("mobile").value;
     let password = document.getElementById("password").value;
 
-    let user = JSON.parse(localStorage.getItem(email));
+   let user = JSON.parse(localStorage.getItem(mobile));
 
     if(user && user.password === password){
 
