@@ -1,3 +1,388 @@
+
+
+
+
+
+d8f1fca9-a7af-4b48-813e-86bd5ede36ca.png
+c9ad9fb2-a0df-49e6-b3e9-861b9a969d98.png
+machi yanku billing wbe creat panni kudu ethula
+
+Machi, semma idea. 👍 Un admin panel-la Billing/POS page add pannalaam. Zakya maari simple billing screen irukkum.
+
+Sidebar-la new button
+Products
+Customer Orders
+Billing (NEW)
+Customers
+Reports
+Logout
+Billing Page Layout
+---------------------------------------------------------
+                Retail Nanban Billing
+---------------------------------------------------------
+
+Barcode : [_________________]  🔍 Scan
+
+Search Product : [______________]
+
+---------------------------------------------------------
+| Product      | Size | Qty | Rate | Total | Remove |
+---------------------------------------------------------
+| Linen Shirt  |  M   |  1  | 999  | 999   | 🗑 |
+| Jeans        | 32   |  2  |1499  |2998   | 🗑 |
+---------------------------------------------------------
+
+Subtotal : ₹3997
+Discount : [____]
+GST : ₹0
+Grand Total : ₹3997
+
+----------------------------------------
+Customer Name : [____________]
+Phone         : [____________]
+
+Payment :
+(•) Cash
+( ) UPI
+( ) Card
+( ) COD
+
+[ Save Bill ]
+[ Print Bill ]
+[ Generate Invoice ]
+Features
+✅ Barcode Scan
+
+Barcode scan pannuna product auto add aagum.
+
+✅ Search Product
+
+Product name type pannina dropdown varum.
+
+✅ Qty Change
+
+[-] 1 [+]
+✅ Discount
+
+Flat ₹100
+or
+10%
+✅ Payment
+
+Cash
+
+UPI
+
+Card
+
+✅ Print
+
+A4 / Thermal Printer support.
+
+Bill Save
+MongoDB-la save aagum.
+
+Bill No : RNB00001
+
+Customer
+
+Items
+
+Total
+
+Payment
+
+Date
+
+Staff
+Admin Dashboard Update
+Today's Sales
+
+Today's Bills
+
+Cash Collection
+
+UPI Collection
+
+Top Selling Product
+
+Low Stock Alert
+Future Features
+✅ Barcode Scanner Support
+
+✅ Thermal Printer (58mm / 80mm)
+
+✅ Customer Loyalty Points
+
+✅ Return Bill
+
+✅ Exchange Bill
+
+✅ Day Closing Report
+
+✅ GST Invoice
+
+✅ Stock auto reduce after billing
+
+Files create pannalaam
+billing.html
+css/billing.css
+js/billing.js
+Sidebar-la add pannunga:
+
+<button onclick="showPage('billing')">
+    Billing
+</button>
+Ithu unga existing Retail Nanban Admin design-oda same theme-la integrate pannalaam.
+
+Naan complete professional Billing POS page (HTML + CSS + JavaScript) ready panni tharen, barcode scan, print bill, MongoDB integration-ready structure-oda.
+
+
+0ff2248a-bec5-487b-ad37-0b15765e3138.png
+ethuku aproo enna panuurathu
+
+a83f76c3-25bc-487f-88cd-35e7f0cab1d4.png
+
+Semma machi! 🔥 Billing page live aayiduchu. Ippo namma Admin Panel-la Billing button add pannuvom.
+
+Step 2 - admin.html open pannu
+GitHub-la
+
+admin.html → Edit (✏️)
+
+Step 3
+Keyboard-la
+
+Ctrl + F
+Search pannu:
+
+Logout
+illa
+
+Products
+Sidebar code varum.
+
+Adhu ippadi irukkum (similar):
+
+<button>Products</button>
+
+<button>Customer Orders</button>
+
+<button>Logout</button>
+Step 4
+Customer Orders button-ku keezha indha code paste pannu.
+
+<button onclick="window.location.href='billing.html'">
+    Billing
+</button>
+Final:
+
+<button>Products</button>
+
+<button>Customer Orders</button>
+
+<button onclick="window.location.href='billing.html'">
+    Billing
+</button>
+
+<button>Logout</button>
+Step 5
+Commit changes
+
+Message:
+
+Added Billing Button
+❗Oru request machi
+Un admin.html romba customized-a irukku. Exact code paathaa dhaan correct place solla mudiyum.
+
+👉 admin.html-oda Edit page screenshot (left sidebar code visible-a) illaina admin.html code (first 100–150 lines) anuppu.
+
+Appo exact line number, enga paste pannanum, entha code replace pannanum nu naan sollren. Appuram Billing button Admin Panel-la perfect-a work aagum.
+
+
+
+Pasted text(890).txt
+Document
+
+Super machi! 🔥 Naan code paathuten. Billing button already correct place-la add pannita. 
+
+
+<button onclick="showSection('productsSection')">
+Products
+</button>
+
+<button onclick="showSection('ordersSection')">
+Customer Orders
+</button>
+
+<button onclick="window.location.href='billing.html'">
+Billing
+</button>
+
+<button onclick="logoutAdmin()">
+Logout
+</button>
+Ippo next level pannuvom 😎
+Ippo irukkura billing.html oru demo page dhaan. Namma website-ku use aagura actual POS Billing create pannuvom.
+
+Phase 1
+✅ Products localStorage-la irundhu auto load aaganum.
+
+✅ Barcode/SKU enter pannina product auto add aaganum.
+
+✅ Qty + / - buttons.
+
+✅ Total auto calculate.
+
+✅ Customer details save.
+
+✅ Save Bill → orders localStorage-la save.
+
+✅ Stock auto reduce.
+
+✅ Bill print.
+
+Phase 2
+Search product by name.
+
+Size select (S/M/L/XL/XXL).
+
+Discount.
+
+UPI/Cash/Card payment.
+
+Invoice No (RNB000001).
+
+Naan recommend panra next step
+billing.html-a complete rewrite pannuvom. Approx 500–700 lines code varum. Adhu professional POS maari irukkum.
+
+Result:
+
+Barcode scanner support
+
+Product search
+
+Dynamic cart
+
+Auto stock update
+
+Print invoice
+
+Order save
+
+Admin dashboard update
+
+Idha orae thadava complete build pannalaam. Step by step code kudukka maatten; full working version kuduppen. Appuram just copy–paste pannina pothum.
+
+Adhu mudinja un Retail Nanban website-ku offline shop billing software madhiri use panna mudiyum. 💯
+
+
+Mass idea machi! 🔥 Aana unakku copy-paste panna 700+ lines code thevai. ChatGPT oru response-la avlo periya HTML + CSS + JavaScript anuppa mudiyadhu (message size limit irukku). Adhanala code cut aagidum, work pannaadhu.
+
+Namma best plan:
+Naan Professional POS Billing System-a 5 parts-la kudukren.
+
+Part 1
+✅ UI Design
+
+✅ Product Search
+
+✅ Barcode Input
+
+✅ Cart Table
+
+✅ Customer Details
+
+Part 2
+✅ Add Product
+
+✅ Qty + / -
+
+✅ Remove Item
+
+✅ Total Calculation
+
+Part 3
+✅ Save Bill
+
+✅ Stock Auto Reduce
+
+✅ Save to Orders
+
+Part 4
+✅ Print Invoice
+
+✅ Payment Method
+
+✅ Bill Number
+
+✅ Date & Time
+
+Part 5
+✅ Dashboard Integration
+
+✅ Sales Report
+
+✅ Today's Collection
+
+✅ Low Stock Alert
+
+Final Result
+Idhu Zakya maari irukkum:
+
+🛒 Barcode Scan
+
+🔍 Product Search
+
+👕 Size Selection
+
+➕ Qty Increase/Decrease
+
+💰 Auto Total
+
+🧾 Print Bill
+
+📦 Auto Stock Reduce
+
+👤 Customer Save
+
+📊 Admin Dashboard Update
+
+Naan suggest panradhu
+Un project already index.html, admin.html, product-details.html, order-details.html nu perusa irukku. Adhanala GitHub project structure-ku match aagara professional code kudukren.
+
+Naalai illa next message-la illa, ippo dhaan start pannalaam.
+
+➡️ Part 1 (billing.html complete professional UI + dynamic cart) kudukren. Adha paste pannina apram Part 2-ku polaam. Idhu safest way, code cut aagama complete work aagum.
+
+
+ok
+
+Super machi! 🔥 Namma professional POS build pannalaam.
+
+Aana oru mukkiyamaana vishayam. Un project ippo single HTML + localStorage architecture-la irukku. Naan Part 1-aa 600+ lines code anuppinaa message limit nala cut aagum.
+
+Best solution:
+
+Naan unakku oru complete billing.html file (HTML + CSS + JavaScript full) generate panni download panna ready file-aa kudukkaren. Appo:
+
+✅ Copy paste thevai illa.
+
+✅ Code cut aagathu.
+
+✅ One shot-la work aagum.
+
+✅ Un admin.html-oda match aagum.
+
+Adhukku python_user_visible tool use panni file generate pannanum. Nee download panni GitHub-la billing.html replace pannina pothum.
+
+Next message-la naan complete billing.html file ready panni tharuren.
+
+
+ok
+
+
+Analyzed
 from textwrap import dedent
 
 html = dedent("""\
@@ -122,3 +507,313 @@ from pathlib import Path
 out="/mnt/data/billing.html"
 Path(out).write_text(html,encoding="utf-8")
 print(out)
+STDOUT/STDERR
+/mnt/data/billing.html
+Super machi! 🔥
+
+Naan unakku starter Professional Billing POS file ready pannitten.
+
+📥 Download here:
+sandbox:/mnt/data/billing.html
+
+Idha use pannura method
+billing.html download pannu.
+
+GitHub-la irukkura billing.html-oda content-a delete pannu.
+
+Indha file content-a paste pannu (illaina upload/replace pannalaam).
+
+Commit changes.
+
+Website refresh pannu.
+
+Idhula already irukku
+✅ Customer Details
+
+✅ Product Add
+
+✅ Size Selection
+
+✅ Qty
+
+✅ Cart
+
+✅ Auto Total
+
+✅ Save Bill (localStorage)
+
+✅ Print Bill
+
+Next Version (Professional)
+Next version-la namma add pannuvom:
+
+🔍 Product search from products
+
+📷 Barcode/SKU scan
+
+👕 Stock auto reduce
+
+📊 Dashboard auto update
+
+🧾 GST Invoice
+
+💳 Cash / UPI / Card split
+
+📦 Product image in billing
+
+➕ Qty + / - buttons
+
+📱 Mobile POS UI
+
+📈 Today's Sales report
+
+Idhu Retail Nanban-ku full Zakya-style POS system aagum. Namma step by step complete pannalaam. 💪 
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel - Retail Nanban</title>
+
+<style> *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; } body{ background:#f5f5f5; } /* HEADER */ header{ background:white; padding:20px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.1); } .logo{ font-size:40px; font-weight:bold; color:#ff4f6d; } /* ADMIN */ .admin-container{ max-width:1400px; width:95%; margin:20px auto; background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); } .admin-container h1{ text-align:center; margin-bottom:30px; } .input-box{ margin-bottom:20px; } .input-box label{ display:block; margin-bottom:8px; font-weight:bold; } .input-box input{ width:100%; padding:14px; border:1px solid #ddd; border-radius:8px; font-size:16px; } .add-btn{ width:100%; padding:15px; border:none; background:#ff4f6d; color:white; font-size:18px; font-weight:bold; border-radius:8px; cursor:pointer; } /* PRODUCT LIST */ .product-list{ margin-top:40px; } .product-item{ background:#fafafa; border:1px solid #ddd; border-radius:10px; padding:15px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; } .product-item img{ width:70px; height:70px; object-fit:cover; border-radius:8px; } .product-details{ flex:1; margin-left:15px; } .delete-btn{ background:red; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; } .order-box{ background:#fafafa; padding:20px; border-radius:10px; margin-top:20px; border:1px solid #ddd; } .order-box h3{ margin-bottom:10px; } .order-item{ margin-top:10px; padding:10px; background:white; border-radius:8px; } .admin-layout{ display:flex; } .sidebar{ width:250px; background:black; min-height:100vh; padding:20px; display:flex; flex-direction:column; gap:20px; } .sidebar h2{ color:white; text-align:center; } .sidebar button{ padding:15px; border:none; background:#ff4f6d; color:white; border-radius:8px; cursor:pointer; font-size:16px; font-weight:bold; } .main-content{ flex:1; } /* MOBILE */ @media(max-width:768px){ .admin-container{ margin:20px; padding:20px; } .product-item{ flex-direction:column; align-items:flex-start; gap:15px; } .product-details{ margin-left:0; } } .product-table{ width:100%; border-collapse:collapse; margin-top:15px; } .product-table th, .product-table td{ padding:12px; border-bottom:1px solid #ddd; text-align:left; } .product-table th{ background:#f5f5f5; font-weight:bold; } .product-table img{ width:50px; height:50px; object-fit:cover; border-radius:6px; } .order-actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; } .order-btn{ border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:bold; } .filter-btn{ padding:10px 15px; border:none; border-radius:8px; background:#f1f1f1; cursor:pointer; font-weight:bold; } .filter-btn:hover{ background:#ff4f6d; color:white; } .order-card{ background:#fff; border-radius:15px; padding:20px; margin-bottom:20px; box-shadow:0 3px 10px rgba(0,0,0,.08); transition:.3s; } .order-card:hover{ transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.12); } .order-header{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px; } .order-body{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:15px 0; } .info-box{ background:#f8f9fa; padding:12px; border-radius:8px; } .badge{ padding:5px 10px; border-radius:20px; font-size:12px; font-weight:bold; margin-left:5px; } .delivered{ background:#d4edda; color:#155724; } .pending{ background:#fff3cd; color:#856404; } .paid{ background:#d4edda; color:#155724; } .unpaid{ background:#f8d7da; color:#721c24; } .product-row{ display:flex; justify-content:space-between; padding:10px 0; border-top:1px solid #eee; } @media(max-width:768px){ .order-body{ grid-template-columns:1fr; } } </style>
+
+</head>
+
+<body> <div class="admin-layout" id="adminLayout">
+
+<div class="sidebar" style="display:none;" id="sidebar">
+
+<h2>Admin Panel</h2>
+
+<button onclick="showSection('productsSection')"> Products </button>
+
+<button onclick="showSection('ordersSection')"> Customer Orders </button> <button onclick="window.location.href='billing.html'"> Billing </button> <button onclick="logoutAdmin()" class="menu-btn"> Logout </button>
+
+</div>
+
+<div class="main-content"> <div id="loginPage" style="padding:40px;"> <h1>Admin Login</h1>
+
+<input type="password" id="adminPassword" placeholder="Enter Password">
+
+<button onclick="checkLogin()"> Login </button>
+
+</div> <header>
+
+<div class="logo"> Retail Nanban Admin </div>
+
+</header>
+
+<div class="admin-container" id="adminPanel" style="display:none;"> <div id="productsSection">
+
+<button id="showAddProductBtn" onclick="toggleAddProductForm()" style=" width:100%; padding:15px; background:#ff4f6d; color:white; border:none; border-radius:8px; font-size:18px; font-weight:bold; margin-bottom:20px; cursor:pointer; ">
+📦 Add New Product
+</button>
+
+<div id="addProductForm" style="display:none;">
+
+<h1>Add Product</h1>
+
+<div class="input-box"> <label>Product Name</label> <input type="text" id="productName"> </div>
+
+<div class="input-box"> <label>Price</label> <input type="number" id="productPrice"> </div>
+
+<div class="input-box">
+
+<label>Stock</label>
+<input type="number" id="productStock" placeholder="Enter Stock">
+
+</div> <div class="input-box"> <label>S Size Stock</label> <input type="number" id="stockS" value="0"> </div>
+
+<div class="input-box"> <label>M Size Stock</label> <input type="number" id="stockM" value="0"> </div>
+
+<div class="input-box"> <label>L Size Stock</label> <input type="number" id="stockL" value="0"> </div>
+
+<div class="input-box"> <label>XL Size Stock</label> <input type="number" id="stockXL" value="0"> </div>
+
+<div class="input-box"> <label>XXL Size Stock</label> <input type="number" id="stockXXL" value="0"> </div> <div class="input-box"> <label>Category</label>
+
+<select id="productCategory" style=" width:100%; padding:14px; border:1px solid #ddd; border-radius:8px; font-size:16px; ">
+
+<option value="mens">Mens</option> <option value="women">Women</option> <option value="kids">Kids</option> </select>
+
+</div> <div class="input-box"> <label>Image URL</label> <input type="text" id="productImage"> </div>
+
+<button class="add-btn" onclick="addProduct()">
+Add Product
+</button>
+
+</div>
+
+<div class="product-list"> <h2 style="margin-top:30px;margin-bottom:15px;"> Products List </h2> <input type="text" id="searchProduct" placeholder="🔍 Search Product" onkeyup="displayProducts()" style=" width:100%; padding:14px; font-size:15px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; "> <div id="productList"></div> </div> </div>
+
+<div id="ordersSection" style="display:none;">
+
+<h1 style="margin-top:40px;">Customer Orders</h1>
+<div id="dashboardStats" style=" display:flex; gap:15px; margin-bottom:20px; flex-wrap:wrap; align-items:flex-start; ">
+
+<div style=" background:#fff; padding:15px; border-radius:10px; border:1px solid #ddd; width:180px; "> <b>Total Orders</b> <p id="totalOrders">0</p> </div>
+
+<div style=" background:#fff; padding:15px; border-radius:10px; border:1px solid #ddd; width:180px; "> <b>Pending Orders</b> <p id="pendingOrders">0</p> </div> <div style=" background:#fff; padding:15px; border-radius:10px; border:1px solid #ddd; width:180px; "> <b>Delivered Orders</b> <p id="deliveredOrders">0</p> </div> <div style=" background:#fff; padding:15px; border-radius:10px; border:1px solid #ddd; width:180px; "> <b>Total Revenue</b> <p id="totalRevenue">₹0</p> </div>
+
+<div style=" background:#fff; padding:15px; border-radius:10px; border:1px solid #ddd; width:180px; "> <b>Total Customers</b> <p id="customerCount">0</p> </div>
+
+</div> <button onclick="exportOrdersCSV()" style=" background:#198754; color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold; margin-bottom:15px; "> 📥 Export Orders CSV </button> <div id="orderFilters" style=" display:flex; gap:10px; margin-bottom:15px; ">
+
+<button onclick="filterOrders('all')" class="filter-btn"> All </button>
+
+<button onclick="filterOrders('pending')" class="filter-btn"> Pending </button>
+
+<button onclick="filterOrders('delivered')" class="filter-btn"> Delivered </button>
+
+</div> <input type="text" id="searchOrder" placeholder="Search Name or Phone" onkeyup="displayOrders()" style=" width:100%; padding:10px; margin:15px 0; border:1px solid #ddd; border-radius:8px; ">
+
+<div id="orderList"
+     style="
+        display:block;
+        width:100%;
+        min-height:300px;
+     ">
+</div>
+</div> </div>
+
+<script> window.onload = function(){ if(localStorage.getItem("adminLoggedIn") === "true"){ document.getElementById("loginPage").style.display = "none"; document.getElementById("adminPanel").style.display = "block"; document.getElementById("sidebar").style.display = "flex"; showSection( localStorage.getItem("currentSection") || "productsSection" ); } }; function logoutAdmin(){ localStorage.removeItem("adminLoggedIn"); document.getElementById("adminPanel").style.display = "none"; document.getElementById("sidebar").style.display = "none"; document.getElementById("loginPage").style.display = "flex"; document.getElementById("adminPassword").value = ""; } function checkLogin(){ const password = document.getElementById("adminPassword").value; if(password == "1234"){ localStorage.setItem("adminLoggedIn", "true"); document.getElementById("loginPage") .style.display = "none"; document.getElementById("adminPanel") .style.display = "block"; document.getElementById("sidebar") .style.display = "flex"; document.getElementById("productsSection") .style.display = "block"; } else{ alert("Wrong Password"); } } let products = JSON.parse(localStorage.getItem("products")) || []; function addProduct(){ let name = document.getElementById("productName").value; let price = document.getElementById("productPrice").value; let image = document.getElementById("productImage").value; let category = document.getElementById("productCategory").value; let stock = parseInt( document.getElementById("productStock").value ) || 0; let stockS = parseInt(document.getElementById("stockS").value) || 0; let stockM = parseInt(document.getElementById("stockM").value) || 0; let stockL = parseInt(document.getElementById("stockL").value) || 0; let stockXL = parseInt(document.getElementById("stockXL").value) || 0; let stockXXL = parseInt(document.getElementById("stockXXL").value) || 0; if(name=="" || price=="" || image==""){ alert("Fill all details"); return; } let product = { name:name, price:price, image:image, category:category, stock: stockS + stockM + stockL + stockXL + stockXXL, sizes:{ S:stockS, M:stockM, L:stockL, XL:stockXL, XXL:stockXXL }, sku:String(products.length + 1).padStart(5,'0') }; products.push(product); localStorage.setItem( "products", JSON.stringify(products) ); displayProducts(); document.getElementById("addProductForm").style.display = "none"; } function toggleAddProductForm(){ let form = document.getElementById("addProductForm"); if(form.style.display === "none"){ form.style.display = "block"; }else{ form.style.display = "none"; } } function displayProducts(){ let productList = document.getElementById("productList"); productList.innerHTML = ` <table class="product-table"> <thead> <tr> <th>Image</th> <th>Product</th> <th>Price</th> <th>Stock</th> <th>Status</th> <th>Action</th> </tr> </thead> <tbody id="productTableBody"> </tbody> </table> `; let tableBody = document.getElementById("productTableBody"); let search = (document.getElementById("searchProduct")?.value || "") .toLowerCase(); products .filter(product => product.name.toLowerCase().includes(search) ) .forEach((product,index)=>{ tableBody.innerHTML += ` <tr> <td> <img src="${product.image}" style="cursor:pointer;" onclick="viewProduct(${index})"> </td> <td> <a href="#" onclick="viewProduct(${index})" style=" text-decoration:none; color:black; font-weight:bold; "> ${product.name} </a> </td> <td>₹${product.price}</td> <td>${product.stock || 0}</td> <td> ${ (product.stock || 0) <= 0 ? '<span style="color:red;">Out Of Stock</span>' : '<span style="color:green;">Available</span>' } </td> <td> <button style=" background:orange; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-right:5px; " onclick="editProduct(${index})"> Edit </button> <button class="delete-btn" onclick="deleteProduct(${index})"> Delete </button> </td> </tr> `; }); } function viewProduct(index){ window.location.href = `product-details.html?id=${index}`; } function deleteProduct(index){ if(confirm("Delete this product?")){ products.splice(index,1); localStorage.setItem( "products", JSON.stringify(products) ); displayProducts(); } } function editProduct(index){ let newName = prompt( "Enter Product Name", products[index].name ); let newPrice = prompt( "Enter Product Price", products[index].price ); let newStock = prompt( "Enter Product Stock", products[index].stock ); if(newName && newPrice){ products[index].name = newName; products[index].price = newPrice; products[index].stock = newStock; localStorage.setItem( "products", JSON.stringify(products) ); displayProducts(); } } let currentFilter = "all"; function filterOrders(type){ currentFilter = type; displayOrders(); } function exportOrdersCSV(){ let orders = JSON.parse(localStorage.getItem("orders")) || []; let csv = "Order No,Customer,Phone,Address,Status,Payment,Product,Size,Qty,Price,Date\n"; orders.forEach((order,index)=>{ (order.items || []).forEach(item=>{ csv += `RN-${String(index+1).padStart(4,'0')},` + `${order.customer || ""},` + `${order.phone || ""},` + `${order.address || ""},` + `${order.status || ""},` + `${order.payment || ""},` + `${item.name || ""},` + `${item.size || ""},` + `${item.qty || 1},` + `${item.price || 0},` + `${order.orderDate || ""}\n`; }); }); let blob = new Blob([csv], {type:'text/csv'}); let url = window.URL.createObjectURL(blob); let a = document.createElement("a"); a.href = url; a.download = "RetailNanbanOrders.csv"; a.click(); window.URL.revokeObjectURL(url); } function displayOrders(){ let orders = JSON.parse(localStorage.getItem("orders")) || []; document.getElementById("totalOrders").innerText = orders.length; document.getElementById("pendingOrders").innerText = orders.filter( o => o.status !== "Delivered" ).length; document.getElementById("deliveredOrders").innerText = orders.filter( o => o.status === "Delivered" ).length; let totalRevenue = 0; orders.forEach(order => { (order.items || []).forEach(item => { totalRevenue += (item.price || 0) * (item.qty || 1); }); }); document.getElementById("totalRevenue").innerText = "₹" + totalRevenue; let customers = new Set(); orders.forEach(order=>{ customers.add(order.phone); }); document.getElementById("customerCount").innerText = customers.size; let orderList = document.getElementById("orderList"); if(!orderList) return; orderList.innerHTML = ""; orderList.innerHTML = ` <table class="product-table"> <thead> <tr> <th>Date</th> <th>Order No</th> <th>Customer</th> <th>Phone</th> <th>Status</th> <th>Payment</th> <th>Total</th> <th>Actions</th> </tr> </thead> <tbody id="ordersTableBody"></tbody> </table> `; let search = (document.getElementById("searchOrder")?.value || "") .toLowerCase(); orders .slice() .reverse() .filter(order => { let matchesSearch = (order.customer || "") .toLowerCase() .includes(search) || (order.phone || "") .includes(search); let matchesFilter = currentFilter === "all" || (currentFilter === "pending" && order.status !== "Delivered") || (currentFilter === "delivered" && order.status === "Delivered"); return matchesSearch && matchesFilter; }) .forEach((order,index)=>{ let realIndex = orders.findIndex(o => JSON.stringify(o) === JSON.stringify(order) ); let orderTotal = 0; (order.items || []).forEach(item=>{ orderTotal += (item.price || 0) * (item.qty || 1); }); let itemsHTML = ""; (order.items || []).forEach(item=>{ itemsHTML += ` <div class="product-row"> <div> <b>${item.name}</b><br> Size: ${item.size || "-"} | Qty: ${item.qty || 1} </div> <div> ₹${item.price} </div> </div> `; }); document.getElementById("ordersTableBody").innerHTML += ` <tr> <td>${order.orderDate ? new Date(order.orderDate).toLocaleDateString() : "-"}</td> <td> <a href="order-details.html?id=${realIndex}" style="color:#006efd;font-weight:bold;text-decoration:none;"> RN-${String(realIndex+1).padStart(4,'0')} </a> </td> <td>${order.customer || ""}</td> <td>${order.phone || ""}</td> <td>${order.status || "Pending"}</td> <td>${order.payment || "Pending"}</td> <td>₹${orderTotal}</td> <td> <button onclick="togglePayment(${realIndex})">💰</button> <button onclick="toggleStatus(${realIndex})">🚚</button> <button onclick="printInvoice(${realIndex})">🧾</button> <button onclick="deleteOrder(${realIndex})">🗑️</button> </td> </tr> `; }); } function viewOrder(index){ let orders = JSON.parse(localStorage.getItem("orders")) || []; let order = orders[index]; document.getElementById("orderDetails").innerHTML = ` <h2>Order Details</h2> <p><b>Customer:</b> ${order.customer}</p> <p><b>Phone:</b> ${order.phone}</p> <p><b>Address:</b> ${order.address || "-"}</p> <p><b>Status:</b> ${order.status || "Pending"}</p> <p><b>Payment:</b> ${order.payment || "Pending"}</p> <p><b>Total:</b> ₹${order.total || 0}</p> `; document.getElementById("orderModal").style.display = "block"; } function closeOrderModal(){ document.getElementById("orderModal").style.display = "none"; } function showSection(sectionId){ localStorage.setItem("currentSection", sectionId); document.getElementById("productsSection") .style.display = "none"; document.getElementById("ordersSection") .style.display = "none"; document.getElementById(sectionId) .style.display = "block"; if(sectionId === "ordersSection"){ displayOrders(); } } function toggleStatus(index){ let orders = JSON.parse(localStorage.getItem("orders")) || []; let totalRevenue = 0; orders.forEach(order => { (order.items || []).forEach(item => { totalRevenue += (item.price || 0) * (item.qty || 1); }); }); document.getElementById("totalRevenue").innerText = "₹" + totalRevenue; let search = (document.getElementById("searchOrder")?.value || "").toLowerCase(); if(orders[index].status === "Delivered"){ orders[index].status = "Pending"; }else{ orders[index].status = "Delivered"; orders[index].deliveredOn = new Date().toLocaleDateString(); } localStorage.setItem( "orders", JSON.stringify(orders) ); displayOrders(); } function openWhatsApp(phone){ let cleanPhone = String(phone).replace(/\D/g,''); if(cleanPhone.length === 10){ cleanPhone = "91" + cleanPhone; } window.open( `https://wa.me/${cleanPhone}`, "_blank" ); } function printInvoice(index){ let orders = JSON.parse(localStorage.getItem("orders")) || []; let order = orders[index]; let items = ""; (order.items || []).forEach(item => { items += ` <tr> <td>${item.name}</td> <td>${item.size || "-"}</td> <td>${item.qty || 1}</td> <td>₹${item.price}</td> </tr> `; }); let invoiceWindow = window.open("", "_blank"); invoiceWindow.document.write(` <html> <head> <title>Invoice</title> <style> body{ font-family:Arial; padding:20px; } table{ width:100%; border-collapse:collapse; margin-top:20px; } th,td{ border:1px solid #ddd; padding:10px; text-align:left; } h1{ text-align:center; } </style>
+
+</head>
+
+<body>
+
+<h1>Retail Nanban</h1> <p> Salem, Tamil Nadu<br> Phone: +91 9025360877<br> Email: retailnanban@gmail.com </p> <hr>
+
+<h3>Invoice #RN-${String(index+1).padStart(4,'0')}</h3>
+
+<p><b>Customer:</b> ${order.customer}</p> <p><b>Phone:</b> ${order.phone}</p> <p><b>Address:</b> ${order.address}</p> <p><b>Date:</b> ${order.orderDate || new Date().toLocaleDateString()}</p>
+
+<table> <tr> <th>Product</th> <th>Size</th> <th>Qty</th> <th>Price</th> </tr>
+
+${items}
+
+<tr> <td colspan="3"><b>Grand Total</b></td> <td> <b>₹${ (order.items || []).reduce( (sum,item)=> sum + ((item.price || 0) * (item.qty || 1)), 0 ) }</b> </td> </tr> </table>
+
+<br>
+
+<h3>Total: ₹${ (order.items || []).reduce( (sum,item)=> sum + ((item.price || 0) * (item.qty || 1)), 0 ) }</h3>
+
+</body> </html> `);
+
+invoiceWindow.document.close();
+invoiceWindow.print();
+
+}
+
+function togglePayment(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+if(orders[index].payment === "Paid"){
+
+orders[index].payment = "Pending";
+
+}else{
+
+orders[index].payment = "Paid";
+
+}
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+displayOrders();
+
+}
+function deleteOrder(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+if(confirm("Delete this order?")){
+
+let order = orders[index];
+
+order.items.forEach(item => {
+console.log("ORDER ITEM", item);
+console.log("PRODUCTS", products);
+let product = products.find(
+p => p.name === item.name
+);
+
+if(product){
+
+let qty = item.qty || 1;
+let size = item.size;
+
+if(
+size &&
+product.sizes &&
+product.sizes[size] !== undefined
+){
+
+product.sizes[size] += qty;
+
+product.stock =
+(product.sizes.S || 0) +
+(product.sizes.M || 0) +
+(product.sizes.L || 0) +
+(product.sizes.XL || 0) +
+(product.sizes.XXL || 0);
+
+}else{
+
+product.stock += qty;
+
+}
+
+}
+
+});
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+orders.splice(index,1);
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+displayOrders();
+
+}
+
+}
+displayProducts();
+displayOrders();
+
+</script> <div id="orderModal" style=" display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; ">
+
+<div style=" background:white; width:90%; max-width:700px; margin:40px auto; padding:20px; border-radius:10px; position:relative; ">
+
+<button onclick="closeOrderModal()" style=" position:absolute; right:15px; top:15px; ">
+✖
+</button>
+
+<div id="orderDetails"></div>
+
+</div> </div> 
+</body>
+</html>
+
+
+Close
