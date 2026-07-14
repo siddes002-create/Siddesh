@@ -1,6 +1,3 @@
-from textwrap import dedent
-
-html = dedent("""\
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,9 +113,3 @@ function saveBill(){
 </script>
 </body>
 </html>
-""")
-
-from pathlib import Path
-out="/mnt/data/billing.html"
-Path(out).write_text(html,encoding="utf-8")
-print(out)
