@@ -1,171 +1,124 @@
+from textwrap import dedent
+
+html = dedent("""\
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retail Nanban Billing</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Retail Nanban Billing POS</title>
 <style>
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f4f4;
-}
-
-.header{
-    background:#ff4d73;
-    color:white;
-    text-align:center;
-    padding:15px;
-    font-size:30px;
-    font-weight:bold;
-}
-
-.container{
-    width:95%;
-    margin:20px auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-}
-
-input,select{
-    padding:10px;
-    width:100%;
-    margin:5px 0 15px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-table th{
-    background:#ff4d73;
-    color:white;
-    padding:10px;
-}
-
-table td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-}
-
-button{
-    background:#ff4d73;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    cursor:pointer;
-    border-radius:5px;
-}
-
-.summary{
-    width:300px;
-    margin-left:auto;
-    margin-top:20px;
-}
-
-.summary p{
-    display:flex;
-    justify-content:space-between;
-}
-
+body{font-family:Arial,sans-serif;margin:0;background:#f4f4f4}
+header{background:#ff4f6d;color:#fff;padding:18px;text-align:center;font-size:30px;font-weight:bold}
+.wrap{display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:20px}
+.card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+input,select,button{padding:10px;border:1px solid #ccc;border-radius:6px}
+input,select{width:100%;margin:8px 0}
+button{background:#ff4f6d;color:#fff;border:none;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+th{background:#ff4f6d;color:#fff}
+.total p{display:flex;justify-content:space-between}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
 </style>
-
 </head>
-
 <body>
+<header>Retail Nanban Billing POS</header>
 
-<div class="header">
-Retail Nanban Billing
+<div class="wrap">
+<div class="card">
+<h2>Customer</h2>
+<input id="custName" placeholder="Customer Name">
+<input id="custPhone" placeholder="Phone Number">
+
+<h2>Add Product</h2>
+<input id="sku" placeholder="Barcode / SKU">
+<input id="pname" placeholder="Product Name">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">
+<input id="qty" type="number" value="1" min="1">
+<input id="price" type="number" placeholder="Price">
+<select id="size">
+<option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+</select>
+<button onclick="addItem()">Add</button>
 </div>
-
-<div class="container">
-
-<h3>Customer Details</h3>
-
-<input type="text" placeholder="Customer Name">
-
-<input type="text" placeholder="Phone Number">
-
-<h3>Add Product</h3>
-
-<input type="text" placeholder="Scan Barcode">
-
-<input type="text" placeholder="Search Product">
 
 <table>
-
-<thead>
-
-<tr>
-
-<th>Product</th>
-
-<th>Size</th>
-
-<th>Qty</th>
-
-<th>Rate</th>
-
-<th>Total</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td>Linen Shirt</td>
-
-<td>M</td>
-
-<td>1</td>
-
-<td>999</td>
-
-<td>999</td>
-
-<td>🗑</td>
-
-</tr>
-
-</tbody>
-
+<thead><tr><th>Product</th><th>Size</th><th>Qty</th><th>Rate</th><th>Total</th><th></th></tr></thead>
+<tbody id="cart"></tbody>
 </table>
+</div>
 
-<div class="summary">
-
-<p><span>Subtotal</span><span>₹999</span></p>
-
+<div class="card">
+<h2>Bill Summary</h2>
+<div class="total">
+<p><span>Subtotal</span><span id="sub">₹0</span></p>
 <p><span>Discount</span><span>₹0</span></p>
-
-<p><span><b>Grand Total</b></span><span><b>₹999</b></span></p>
-
+<h3 style="display:flex;justify-content:space-between"><span>Grand Total</span><span id="grand">₹0</span></h3>
 </div>
-
-<br>
-
-<select>
-
+<select id="payment">
 <option>Cash</option>
-
 <option>UPI</option>
-
 <option>Card</option>
-
 </select>
-
-<button>Save Bill</button>
-
-<button onclick="window.print()">Print Bill</button>
-
+<br><br>
+<button onclick="saveBill()">Save Bill</button>
+<button onclick="window.print()">Print</button>
+</div>
 </div>
 
+<script>
+let cart=[];
+function addItem(){
+ let p=document.getElementById('pname').value;
+ let q=parseInt(document.getElementById('qty').value)||1;
+ let r=parseFloat(document.getElementById('price').value)||0;
+ let s=document.getElementById('size').value;
+ if(!p||r<=0){alert("Enter product and price");return;}
+ cart.push({name:p,size:s,qty:q,price:r});
+ document.getElementById('pname').value="";
+ document.getElementById('price').value="";
+ render();
+}
+function render(){
+ let tb=document.getElementById('cart');
+ tb.innerHTML="";
+ let total=0;
+ cart.forEach((i,n)=>{
+   total+=i.qty*i.price;
+   tb.innerHTML+=`<tr>
+   <td>${i.name}</td>
+   <td>${i.size}</td>
+   <td>${i.qty}</td>
+   <td>₹${i.price}</td>
+   <td>₹${i.qty*i.price}</td>
+   <td><button onclick="del(${n})">X</button></td>
+   </tr>`;
+ });
+ document.getElementById("sub").innerText="₹"+total;
+ document.getElementById("grand").innerText="₹"+total;
+}
+function del(i){cart.splice(i,1);render();}
+function saveBill(){
+ let orders=JSON.parse(localStorage.getItem("orders"))||[];
+ orders.push({
+   customer:document.getElementById("custName").value,
+   phone:document.getElementById("custPhone").value,
+   payment:document.getElementById("payment").value,
+   status:"Pending",
+   orderDate:new Date().toISOString(),
+   items:cart
+ });
+ localStorage.setItem("orders",JSON.stringify(orders));
+ alert("Bill Saved Successfully");
+ cart=[];render();
+}
+</script>
 </body>
 </html>
+""")
+
+from pathlib import Path
+out="/mnt/data/billing.html"
+Path(out).write_text(html,encoding="utf-8")
+print(out)
