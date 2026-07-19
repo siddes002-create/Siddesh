@@ -29,7 +29,11 @@ th{background:#ff4f6d;color:#fff}
 <input id="custPhone" placeholder="Phone Number">
 
 <h2>Add Product</h2>
-<input id="sku" placeholder="Barcode / SKU">
+<input
+id="sku"
+placeholder="Scan / Enter Barcode"
+onkeydown="searchSKU(event)"
+autofocus>
 <input id="pname" placeholder="Product Name">
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">
 <input id="qty" type="number" value="1" min="1">
@@ -65,7 +69,17 @@ th{background:#ff4f6d;color:#fff}
 </div>
 
 <script>
-let cart=[];
+ let products = JSON.parse(localStorage.getItem("products")) || [];
+let cart = [];
+ function searchSKU(event){
+
+    if(event.key !== "Enter") return;
+
+    let code = document.getElementById("sku").value.trim();
+
+    alert(code);
+
+}
 function addItem(){
  let p=document.getElementById('pname').value;
  let q=parseInt(document.getElementById('qty').value)||1;
