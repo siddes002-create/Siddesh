@@ -399,6 +399,13 @@ cursor:pointer;
 <label>Product Name</label>
 <input type="text" id="productName">
 </div>
+ <div class="input-box">
+<label>Style No</label>
+<input
+type="text"
+id="styleNo"
+placeholder="Example : SS001">
+</div>   
 
 <div class="input-box">
 <label>Price</label>
@@ -667,6 +674,9 @@ function addProduct(){
     let name =
     document.getElementById("productName").value;
 
+    let styleNo =
+    document.getElementById("styleNo").value.trim();
+
     let price =
     document.getElementById("productPrice").value;
 
@@ -697,7 +707,8 @@ name:name,
 price:price,
 image:image,
 category:category,
-
+styleNo: styleNo,
+    
 stock:
 stockS + stockM + stockL + stockXL + stockXXL,
 
