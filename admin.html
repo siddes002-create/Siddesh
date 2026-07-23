@@ -691,12 +691,13 @@ let stockXXL = parseInt(document.getElementById("stockXXL").value) || 0;
 
     }
 
- let product = {
+let product = {
 
 name:name,
 price:price,
 image:image,
 category:category,
+
 stock:
 stockS + stockM + stockL + stockXL + stockXXL,
 
@@ -708,10 +709,9 @@ XL:stockXL,
 XXL:stockXXL
 },
 
-sku:String(products.length + 1).padStart(5,'0')
+sku: "RN" + Date.now()
 
 };
-
     products.push(product);
 
     localStorage.setItem(
