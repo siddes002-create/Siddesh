@@ -1,16 +1,46 @@
- let products = JSON.parse(localStorage.getItem("products")) || [];
+// =========================
+// Retail Nanban Billing POS
+// billing.js - PART 1
+// =========================
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = [];
- function searchSKU(event){
+
+// ---------------------
+// Live Clock
+// ---------------------
+function updateClock() {
+    const clock = document.getElementById("clock");
+    if (!clock) return;
+
+    const now = new Date();
+
+    clock.innerHTML = now.toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+
+// ---------------------
+// Barcode Scan
+// ---------------------
+function searchSKU(event){
 
     if(event.key !== "Enter") return;
 
     let code = document.getElementById("sku").value.trim();
 
+    if(code.length < 6){
+        alert("Invalid Barcode");
+        return;
+    }
+
     let styleNo = code.slice(0,5);
-
-    console.log("Products :", products);
-    console.log("Style No :", styleNo);
-
     let sizeCode = code.slice(5);
 
     let sizeMap = {
@@ -21,6 +51,8 @@ let cart = [];
         "5":"XXL"
     };
 
+    let selectedSize = sizeMap[sizeCode];
+
     let product = products.find(p => p.styleNo === styleNo);
 
     if(!product){
@@ -28,198 +60,522 @@ let cart = [];
         return;
     }
 
+    if(product.sizes[selectedSize] <= 0){
+
+        alert(selectedSize + " Size Out Of Stock");
+
+        document.getElementById("sku").value="";
+        document.getElementById("sku").focus();
+
+        return;
+    }
+
+    // Fill Product Details
     document.getElementById("pname").value = product.name;
     document.getElementById("price").value = product.price;
-   document.getElementById("productImage").src =
-product.image || "https://via.placeholder.com/140x180?text=No+Image";
+    document.getElementById("size").value = selectedSize;
 
-document.getElementById("previewName").innerText =
-product.name;
+    showProductPreview(product);
 
-document.getElementById("previewStyle").innerText =
-product.styleNo;
+    addItem();
 
-document.getElementById("previewStock").innerText =
-product.stock;
-
-if(product.stock > 0){
-
-document.getElementById("stockStatus").innerText =
-"Available";
-
-document.getElementById("stockStatus").style.background =
-"green";
-
-}else{
-
-document.getElementById("stockStatus").innerText =
-"Out Of Stock";
-
-document.getElementById("stockStatus").style.background =
-"red";
-
-}
- let selectedSize = sizeMap[sizeCode];
-
-if(product.sizes[selectedSize] <= 0){
-
-    alert(selectedSize + " Size Out Of Stock");
-
-    document.getElementById("sku").value = "";
+    document.getElementById("sku").value="";
     document.getElementById("sku").focus();
-
-    return;
-
-} 
-  addItem();
-
-document.getElementById("sku").value = "";
-
-document.getElementById("sku").focus();
 }
+
+
+// ---------------------
+// Product Preview Card
+// ---------------------
+function showProductPreview(product){
+
+    const box = document.getElementById("productPreview");
+
+    if(!box) return;
+
+    box.innerHTML = `
+        <div class="preview-card">
+
+            <img src="${product.image}" class="preview-img">
+
+            <div class="preview-info">
+
+                <h3>${product.name}</h3>
+
+                <p>Style : ${product.styleNo}</p>
+
+                <p>Price : ₹${product.price}</p>
+
+                <p>Stock : ${product.stock}</p>
+
+            </div>
+
+        </div>
+    `;
+}// ---------------------
+// Add Item
+// ---------------------
 function addItem(){
 
-let p=document.getElementById('pname').value;
+    let p = document.getElementById("pname").value;
+    let q = parseInt(document.getElementById("qty").value) || 1;
+    let r = parseFloat(document.getElementById("price").value) || 0;
+    let s = document.getElementById("size").value;
 
-let q=parseInt(document.getElementById('qty').value)||1;
+    if(!p || r <= 0){
+        alert("Enter Product");
+        return;
+    }
 
-let r=parseFloat(document.getElementById('price').value)||0;
+    let item = cart.find(x => x.name === p && x.size === s);
 
-let s=document.getElementById('size').value;
+    if(item){
 
-if(!p||r<=0){
+        item.qty += q;
 
-alert("Enter product and price");
+    }else{
 
-return;
+        cart.push({
+            name: p,
+            size: s,
+            qty: q,
+            price: r
+        });
+
+    }
+
+    renderCart();
+
+    document.getElementById("pname").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("qty").value = 1;
+}
+
+
+// ---------------------
+// Increase Qty
+// ---------------------
+function increase(index){
+
+    cart[index].qty++;
+
+    renderCart();
 
 }
 
-let existingItem = cart.find(item =>
-    item.name === p &&
-    item.size === s
-);
 
-if(existingItem){
+// ---------------------
+// Decrease Qty
+// ---------------------
+function decrease(index){
 
-    existingItem.qty += q;
+    if(cart[index].qty > 1){
 
-}else{
+        cart[index].qty--;
 
-    cart.push({
-        name:p,
-        size:s,
-        qty:q,
-        price:r
+    }
+
+    renderCart();
+
+}
+
+
+// ---------------------
+// Delete Item
+// ---------------------
+function del(index){
+
+    cart.splice(index,1);
+
+    renderCart();
+
+}
+
+
+// ---------------------
+// Render Cart
+// ---------------------
+function renderCart(){
+
+    let tbody = document.getElementById("cart");
+
+    tbody.innerHTML = "";
+
+    let subtotal = 0;
+
+    cart.forEach((item,index)=>{
+
+        let total = item.qty * item.price;
+
+        subtotal += total;
+
+        tbody.innerHTML += `
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>${item.size}</td>
+
+            <td>
+
+                <button onclick="decrease(${index})">-</button>
+
+                <span style="padding:0 10px;font-weight:bold">
+                    ${item.qty}
+                </span>
+
+                <button onclick="increase(${index})">+</button>
+
+            </td>
+
+            <td>₹${item.price}</td>
+
+            <td>₹${total}</td>
+
+            <td>
+
+                <button
+                onclick="del(${index})"
+                style="background:red">
+
+                🗑
+
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
     });
 
-}
+    document.getElementById("sub").innerText = "₹" + subtotal;
+    document.getElementById("grand").innerText = "₹" + subtotal;
 
-document.getElementById('pname').value="";
-document.getElementById('price').value="";
-document.getElementById('qty').value = 1;
-document.getElementById('size').selectedIndex = 0; 
-
-render();
-
-}
-function render(){
- let tb=document.getElementById('cart');
- tb.innerHTML="";
- let total=0;
- cart.forEach((i,n)=>{
-   total+=i.qty*i.price;
-   tb.innerHTML+=`<tr>
-   <td>${i.name}</td>
-   <td>${i.size}</td>
-   <td>${i.qty}</td>
-   <td>₹${i.price}</td>
-   <td>₹${i.qty*i.price}</td>
-   <td>
-<button
-onclick="del(${n})"
-style="
-background:red;
-padding:8px 12px;
-border-radius:6px;
-">
-🗑
-</button>
-</td>
-   </tr>`;
- });
- document.getElementById("sub").innerText="₹"+total;
- document.getElementById("grand").innerText="₹"+total;
-}
-function del(i){cart.splice(i,1);render();}
+}// ---------------------
+// Save Bill
+// ---------------------
 function saveBill(){
- let orders=JSON.parse(localStorage.getItem("orders"))||[];
-let billNo = "RN" + String(orders.length + 1).padStart(6,"0");
- orders.push({
-  billNo: billNo,
-   customer:document.getElementById("custName").value,
-   phone:document.getElementById("custPhone").value,
-   payment:document.getElementById("payment").value,
-   status:"Pending",
-   orderDate:new Date().toISOString(),
-   items:cart
- });
- let products =
-JSON.parse(localStorage.getItem("products")) || [];
 
-cart.forEach(item => {
+    if(cart.length === 0){
 
-    let product = products.find(
-        p => p.name === item.name
+        alert("Cart is Empty");
+
+        return;
+
+    }
+
+    let orders =
+    JSON.parse(localStorage.getItem("orders")) || [];
+
+    let billNo =
+    "RN" + String(orders.length + 1).padStart(6,"0");
+
+    let order = {
+
+        billNo: billNo,
+
+        customer:
+        document.getElementById("custName").value,
+
+        phone:
+        document.getElementById("custPhone").value,
+
+        payment:
+        document.getElementById("payment").value,
+
+        status:"Pending",
+
+        orderDate:
+        new Date().toISOString(),
+
+        items:[...cart]
+
+    };
+
+    orders.push(order);
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
     );
 
-    if(product){
+    updateStock();
 
-        if(product.sizes && product.sizes[item.size] != null){
+    alert("✅ Bill Saved Successfully\n\nBill No : " + billNo);
 
-            product.sizes[item.size] -= item.qty;
+    clearBilling();
 
-            if(product.sizes[item.size] < 0){
-                product.sizes[item.size] = 0;
-            }
+}
 
-            product.stock =
-                (product.sizes.S || 0) +
-                (product.sizes.M || 0) +
-                (product.sizes.L || 0) +
-                (product.sizes.XL || 0) +
-                (product.sizes.XXL || 0);
 
-        }else{
+// ---------------------
+// Update Stock
+// ---------------------
+function updateStock(){
 
-            product.stock -= item.qty;
+    let products =
+    JSON.parse(localStorage.getItem("products")) || [];
 
-            if(product.stock < 0){
-                product.stock = 0;
+    cart.forEach(item=>{
+
+        let product =
+        products.find(p=>p.name===item.name);
+
+        if(product){
+
+            if(product.sizes &&
+               product.sizes[item.size] != null){
+
+                product.sizes[item.size] -= item.qty;
+
+                if(product.sizes[item.size] < 0){
+
+                    product.sizes[item.size] = 0;
+
+                }
+
+                product.stock =
+
+                    (product.sizes.S || 0)+
+                    (product.sizes.M || 0)+
+                    (product.sizes.L || 0)+
+                    (product.sizes.XL || 0)+
+                    (product.sizes.XXL || 0);
+
             }
 
         }
+
+    });
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+}
+
+
+// ---------------------
+// Clear Billing
+// ---------------------
+function clearBilling(){
+
+    cart = [];
+
+    renderCart();
+
+    document.getElementById("custName").value="";
+
+    document.getElementById("custPhone").value="";
+
+    document.getElementById("sku").value="";
+
+    document.getElementById("pname").value="";
+
+    document.getElementById("price").value="";
+
+    document.getElementById("qty").value=1;
+
+    document.getElementById("size").selectedIndex=0;
+
+    document.getElementById("previewName").innerText =
+    "No Product";
+
+    document.getElementById("previewStyle").innerText="-";
+
+    document.getElementById("previewStock").innerText="0";
+
+    document.getElementById("productImage").src =
+    "https://via.placeholder.com/140x180?text=No+Image";
+
+    document.getElementById("stockStatus").innerText =
+    "No Stock";
+
+    document.getElementById("stockStatus").style.background =
+    "red";
+
+    document.getElementById("sku").focus();
+
+}// ---------------------
+// Live Date & Time
+// ---------------------
+function updateDateTime() {
+    const el = document.getElementById("liveTime");
+    if (!el) return;
+
+    const now = new Date();
+
+    el.innerHTML = now.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+
+// ---------------------
+// Print Bill
+// ---------------------
+function printBill() {
+
+    if (cart.length === 0) {
+        alert("Cart is Empty");
+        return;
+    }
+
+    let html = `
+    <html>
+    <head>
+        <title>Retail Nanban Bill</title>
+
+        <style>
+        body{
+            font-family:Arial;
+            padding:20px;
+        }
+
+        h2{
+            text-align:center;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th,td{
+            border:1px solid #000;
+            padding:8px;
+            text-align:center;
+        }
+
+        </style>
+    </head>
+
+    <body>
+
+    <h2>Retail Nanban</h2>
+
+    <p><b>Date :</b> ${new Date().toLocaleString()}</p>
+
+    <table>
+
+    <tr>
+
+    <th>Product</th>
+
+    <th>Size</th>
+
+    <th>Qty</th>
+
+    <th>Price</th>
+
+    <th>Total</th>
+
+    </tr>
+    `;
+
+    let grand = 0;
+
+    cart.forEach(item => {
+
+        let total = item.qty * item.price;
+
+        grand += total;
+
+        html += `
+        <tr>
+
+        <td>${item.name}</td>
+
+        <td>${item.size}</td>
+
+        <td>${item.qty}</td>
+
+        <td>${item.price}</td>
+
+        <td>${total}</td>
+
+        </tr>
+        `;
+    });
+
+    html += `
+    </table>
+
+    <h2>Total : ₹${grand}</h2>
+
+    </body>
+
+    </html>
+    `;
+
+    let win = window.open("", "_blank");
+
+    win.document.write(html);
+
+    win.document.close();
+
+    win.print();
+
+}
+
+
+// ---------------------
+// Keyboard Shortcuts
+// ---------------------
+document.addEventListener("keydown", function(e){
+
+    if(e.key==="F2"){
+
+        e.preventDefault();
+
+        saveBill();
+
+    }
+
+    if(e.key==="F4"){
+
+        e.preventDefault();
+
+        printBill();
+
+    }
+
+    if(e.key==="Escape"){
+
+        clearBilling();
 
     }
 
 });
 
-localStorage.setItem(
-    "products",
-    JSON.stringify(products)
-);
- localStorage.setItem("orders",JSON.stringify(orders));
-alert("Bill Saved Successfully");
 
-cart = [];
-render();
+// ---------------------
+// Auto Focus
+// ---------------------
+window.onload = function(){
 
-document.getElementById("custName").value = "";
-document.getElementById("custPhone").value = "";
-document.getElementById("sku").value = "";
-document.getElementById("pname").value = "";
-document.getElementById("price").value = "";
-document.getElementById("qty").value = 1;
-document.getElementById("size").selectedIndex = 0;
+    updateClock();
 
-document.getElementById("sku").focus();}
+    updateDateTime();
+
+    document.getElementById("sku").focus();
+
+};
+
+
+// ---------------------
+// Barcode Enter Event
+// ---------------------
+document.getElementById("sku")
+.addEventListener("keydown", searchSKU);
