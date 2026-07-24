@@ -104,15 +104,48 @@ let cart = [];
     document.getElementById("size").value = sizeMap[sizeCode];
 }
 function addItem(){
- let p=document.getElementById('pname').value;
- let q=parseInt(document.getElementById('qty').value)||1;
- let r=parseFloat(document.getElementById('price').value)||0;
- let s=document.getElementById('size').value;
- if(!p||r<=0){alert("Enter product and price");return;}
- cart.push({name:p,size:s,qty:q,price:r});
- document.getElementById('pname').value="";
- document.getElementById('price').value="";
- render();
+
+let p=document.getElementById('pname').value;
+
+let q=parseInt(document.getElementById('qty').value)||1;
+
+let r=parseFloat(document.getElementById('price').value)||0;
+
+let s=document.getElementById('size').value;
+
+if(!p||r<=0){
+
+alert("Enter product and price");
+
+return;
+
+}
+
+let existingItem = cart.find(item =>
+    item.name === p &&
+    item.size === s
+);
+
+if(existingItem){
+
+    existingItem.qty += q;
+
+}else{
+
+    cart.push({
+        name:p,
+        size:s,
+        qty:q,
+        price:r
+    });
+
+}
+
+document.getElementById('pname').value="";
+document.getElementById('price').value="";
+
+render();
+
 }
 function render(){
  let tb=document.getElementById('cart');
