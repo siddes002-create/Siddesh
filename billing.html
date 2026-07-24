@@ -187,7 +187,9 @@ function render(){
 function del(i){cart.splice(i,1);render();}
 function saveBill(){
  let orders=JSON.parse(localStorage.getItem("orders"))||[];
+let billNo = "RN" + String(orders.length + 1).padStart(6,"0");
  orders.push({
+  billNo: billNo,
    customer:document.getElementById("custName").value,
    phone:document.getElementById("custPhone").value,
    payment:document.getElementById("payment").value,
