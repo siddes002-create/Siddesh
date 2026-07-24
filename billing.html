@@ -102,6 +102,11 @@ let cart = [];
     document.getElementById("pname").value = product.name;
     document.getElementById("price").value = product.price;
     document.getElementById("size").value = sizeMap[sizeCode];
+  addItem();
+
+document.getElementById("sku").value = "";
+
+document.getElementById("sku").focus();
 }
 function addItem(){
 
@@ -143,6 +148,8 @@ if(existingItem){
 
 document.getElementById('pname').value="";
 document.getElementById('price').value="";
+document.getElementById('qty').value = 1;
+document.getElementById('size').selectedIndex = 0; 
 
 render();
 
