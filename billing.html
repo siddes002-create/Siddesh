@@ -71,13 +71,17 @@ autofocus>
 <script>
  let products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = [];
-function searchSKU(event){
+ function searchSKU(event){
 
     if(event.key !== "Enter") return;
 
     let code = document.getElementById("sku").value.trim();
 
     let styleNo = code.slice(0,5);
+
+    console.log("Products :", products);
+    console.log("Style No :", styleNo);
+
     let sizeCode = code.slice(5);
 
     let sizeMap = {
@@ -88,7 +92,7 @@ function searchSKU(event){
         "5":"XXL"
     };
 
-    let product = products.find(p => p.sku === styleNo);
+    let product = products.find(p => p.styleNo === styleNo);
 
     if(!product){
         alert("Product Not Found");
