@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Retail Nanban Billing POS</title>
 
 <link rel="stylesheet" href="css/billing.css">
@@ -12,173 +16,248 @@
 <body>
 
 <header>
-    Retail Nanban Billing POS
+
+<div class="logo">
+🛒 Retail Nanban POS
+</div>
+
+<div id="liveTime"></div>
+
 </header>
 
-<div class="wrap">
 
-    <!-- Left Side -->
-    <div class="card">
+<div class="container">
 
-        <h2>Customer</h2>
+<div class="left">
 
-        <input
-            id="custName"
-            placeholder="Customer Name">
+<!-- Customer -->
 
-        <input
-            id="custPhone"
-            placeholder="Phone Number">
+<div class="card">
 
+<h2>Customer</h2>
 
-        <h2>Add Product</h2>
+<input
+id="custName"
+placeholder="Customer Name">
+
+<input
+id="custPhone"
+placeholder="Phone Number">
+
+</div>
+
+<!-- Product -->
+
+<div class="card">
+
+<h2>Scan Product</h2>
+
 <div class="product-preview">
 
 <img
 id="productImage"
-src="https://via.placeholder.com/220x280?text=No+Image"
-alt="Product Image">
+src="https://via.placeholder.com/140x180?text=No+Image">
 
-<div class="product-info">
+<div>
 
-<h3 id="previewName">No Product</h3>
+<h3 id="previewName">
+
+No Product
+
+</h3>
 
 <p>
+
 Style :
 <span id="previewStyle">-</span>
+
 </p>
 
 <p>
+
 Stock :
 <span id="previewStock">0</span>
+
 </p>
 
+<span
+id="stockStatus"
+class="stock">
+No Stock
+</span>
+
+</div>
+
+</div>
+
+<input
+
+id="sku"
+
+placeholder="🔍 Scan Barcode"
+
+onkeydown="searchSKU(event)"
+
+autofocus>
+
+<div class="row">
+
+<input
+id="qty"
+type="number"
+value="1">
+
+<select id="size">
+
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+<option>XXL</option>
+
+</select>
+
+<button onclick="addItem()">
+
+➕ Add
+
+</button>
+
 </div>
 
 </div>
-        <input
-            id="sku"
-            placeholder="🔍 Scan Barcode..."
-            onkeydown="searchSKU(event)"
-            autofocus>
 
-        <input
-            id="pname"
-            placeholder="Product Name"
-            readonly>
 
-        <div class="product-row">
+<!-- Cart -->
 
-            <input
-                id="qty"
-                type="number"
-                value="1"
-                min="1">
+<div class="card">
 
-            <input
-                id="price"
-                type="number"
-                placeholder="Price"
-                readonly>
+<h2>
 
-            <select id="size">
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-                <option>XXL</option>
-            </select>
+🛒 Shopping Cart
 
-            <button onclick="addItem()">
-                ➕ ADD
-            </button>
+</h2>
 
-        </div>
+<table>
 
-        <table>
+<thead>
 
-            <thead>
+<tr>
 
-                <tr>
+<th>Product</th>
 
-                    <th>Product</th>
-                    <th>Size</th>
-                    <th>Qty</th>
-                    <th>Rate</th>
-                    <th>Total</th>
-                    <th>Action</th>
+<th>Size</th>
 
-                </tr>
+<th>Qty</th>
 
-            </thead>
+<th>Rate</th>
 
-            <tbody id="cart">
+<th>Total</th>
 
-            </tbody>
+<th></th>
 
-        </table>
+</tr>
 
-    </div>
+</thead>
 
-    <!-- Right Side -->
+<tbody id="cart">
 
-    <div class="card">
+</tbody>
 
-        <h2>Bill Summary</h2>
+</table>
 
-        <div class="total">
+</div>
 
-            <p>
+</div>
 
-                <span>Subtotal</span>
 
-                <span id="sub">₹0</span>
 
-            </p>
+<div class="right">
 
-            <p>
+<div class="card">
 
-                <span>Discount</span>
+<h2>
 
-                <span>₹0</span>
+💰 Bill Summary
 
-            </p>
+</h2>
 
-            <h3>
+<div class="summary">
 
-                <span>Grand Total</span>
+<p>
 
-                <span id="grand">₹0</span>
+<span>Items</span>
 
-            </h3>
+<span id="items">
 
-        </div>
+0
 
-        <select id="payment">
+</span>
 
-            <option>Cash</option>
-            <option>UPI</option>
-            <option>Card</option>
+</p>
 
-        </select>
+<p>
 
-        <button onclick="saveBill()">
+<span>Subtotal</span>
 
-            💾 SAVE BILL
+<span id="sub">
 
-        </button>
+₹0
 
-        <button onclick="window.print()">
+</span>
 
-            🖨 PRINT BILL
+</p>
 
-        </button>
+<p>
 
-    </div>
+<span>Discount</span>
+
+<span>
+
+₹0
+
+</span>
+
+</p>
+
+<h1 id="grand">
+
+₹0
+
+</h1>
+
+</div>
+
+<select id="payment">
+
+<option>Cash</option>
+
+<option>UPI</option>
+
+<option>Card</option>
+
+</select>
+
+<button onclick="saveBill()">
+
+💾 Save Bill
+
+</button>
+
+<button onclick="window.print()">
+
+🖨 Print Bill
+
+</button>
+
+</div>
+
+</div>
 
 </div>
 
 <script src="js/billing.js"></script>
 
 </body>
+
 </html>
