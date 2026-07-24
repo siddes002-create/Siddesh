@@ -1,4 +1,3 @@
-<script>
  let products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = [];
  function searchSKU(event){
@@ -185,4 +184,3 @@ localStorage.setItem(
  alert("Bill Saved Successfully");
  cart=[];render();
 }
-</script>
