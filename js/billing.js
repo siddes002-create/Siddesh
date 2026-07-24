@@ -31,6 +31,17 @@ let cart = [];
     document.getElementById("pname").value = product.name;
     document.getElementById("price").value = product.price;
     document.getElementById("size").value = sizeMap[sizeCode];
+  document.getElementById("productImage").src =
+product.image || "https://via.placeholder.com/220x280?text=No+Image";
+
+document.getElementById("previewName").innerText =
+product.name;
+
+document.getElementById("previewStyle").innerText =
+product.styleNo;
+
+document.getElementById("previewStock").innerText =
+product.stock;
  let selectedSize = sizeMap[sizeCode];
 
 if(product.sizes[selectedSize] <= 0){
