@@ -102,6 +102,18 @@ let cart = [];
     document.getElementById("pname").value = product.name;
     document.getElementById("price").value = product.price;
     document.getElementById("size").value = sizeMap[sizeCode];
+ let selectedSize = sizeMap[sizeCode];
+
+if(product.sizes[selectedSize] <= 0){
+
+    alert(selectedSize + " Size Out Of Stock");
+
+    document.getElementById("sku").value = "";
+    document.getElementById("sku").focus();
+
+    return;
+
+} 
   addItem();
 
 document.getElementById("sku").value = "";
