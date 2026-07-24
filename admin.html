@@ -1085,7 +1085,7 @@ document.getElementById("ordersTableBody").innerHTML += `
 <td>
 <a href="order-details.html?id=${realIndex}"
 style="color:#006efd;font-weight:bold;text-decoration:none;">
-RN-${String(realIndex+1).padStart(4,'0')}
+${order.billNo || ("RN" + String(realIndex+1).padStart(6,"0"))}
 </a>
 </td>
 
