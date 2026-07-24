@@ -181,6 +181,17 @@ localStorage.setItem(
     JSON.stringify(products)
 );
  localStorage.setItem("orders",JSON.stringify(orders));
- alert("Bill Saved Successfully");
- cart=[];render();
-}
+alert("Bill Saved Successfully");
+
+cart = [];
+render();
+
+document.getElementById("custName").value = "";
+document.getElementById("custPhone").value = "";
+document.getElementById("sku").value = "";
+document.getElementById("pname").value = "";
+document.getElementById("price").value = "";
+document.getElementById("qty").value = 1;
+document.getElementById("size").selectedIndex = 0;
+
+document.getElementById("sku").focus();}
