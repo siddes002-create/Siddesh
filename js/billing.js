@@ -30,9 +30,8 @@ let cart = [];
 
     document.getElementById("pname").value = product.name;
     document.getElementById("price").value = product.price;
-    document.getElementById("size").value = sizeMap[sizeCode];
-  document.getElementById("productImage").src =
-product.image || "https://via.placeholder.com/220x280?text=No+Image";
+   document.getElementById("productImage").src =
+product.image || "https://via.placeholder.com/140x180?text=No+Image";
 
 document.getElementById("previewName").innerText =
 product.name;
@@ -42,6 +41,24 @@ product.styleNo;
 
 document.getElementById("previewStock").innerText =
 product.stock;
+
+if(product.stock > 0){
+
+document.getElementById("stockStatus").innerText =
+"Available";
+
+document.getElementById("stockStatus").style.background =
+"green";
+
+}else{
+
+document.getElementById("stockStatus").innerText =
+"Out Of Stock";
+
+document.getElementById("stockStatus").style.background =
+"red";
+
+}
  let selectedSize = sizeMap[sizeCode];
 
 if(product.sizes[selectedSize] <= 0){
