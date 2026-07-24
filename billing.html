@@ -139,6 +139,50 @@ function saveBill(){
    orderDate:new Date().toISOString(),
    items:cart
  });
+ let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+cart.forEach(item => {
+
+    let product = products.find(
+        p => p.name === item.name
+    );
+
+    if(product){
+
+        if(product.sizes && product.sizes[item.size] != null){
+
+            product.sizes[item.size] -= item.qty;
+
+            if(product.sizes[item.size] < 0){
+                product.sizes[item.size] = 0;
+            }
+
+            product.stock =
+                (product.sizes.S || 0) +
+                (product.sizes.M || 0) +
+                (product.sizes.L || 0) +
+                (product.sizes.XL || 0) +
+                (product.sizes.XXL || 0);
+
+        }else{
+
+            product.stock -= item.qty;
+
+            if(product.stock < 0){
+                product.stock = 0;
+            }
+
+        }
+
+    }
+
+});
+
+localStorage.setItem(
+    "products",
+    JSON.stringify(products)
+);
  localStorage.setItem("orders",JSON.stringify(orders));
  alert("Bill Saved Successfully");
  cart=[];render();
