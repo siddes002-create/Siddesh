@@ -148,3 +148,31 @@ font-size:22px;
 }
 
 }
+.product-preview{
+display:flex;
+gap:20px;
+align-items:center;
+background:#fafafa;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+border:1px solid #eee;
+}
+
+.product-preview img{
+width:140px;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.product-info h3{
+margin-bottom:10px;
+font-size:22px;
+}
+
+.product-info p{
+margin:8px 0;
+font-size:18px;
+}
