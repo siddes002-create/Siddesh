@@ -194,14 +194,28 @@ function del(index){
 
 // ---------------------
 // Render Cart
-// ---------------------
-function renderCart(){
+// ---------------------function renderCart(){
 
-    let tbody = document.getElementById("cart");
+    let cartBox = document.getElementById("cart");
 
-    tbody.innerHTML = "";
+    cartBox.innerHTML = "";
 
     let subtotal = 0;
+
+    if(cart.length === 0){
+
+        cartBox.innerHTML = `
+        <div class="empty-cart">
+            Cart is Empty
+        </div>
+        `;
+
+        document.getElementById("items").innerText = 0;
+        document.getElementById("sub").innerText = "₹0";
+        document.getElementById("grand").innerText = "₹0";
+
+        return;
+    }
 
     cart.forEach((item,index)=>{
 
@@ -209,48 +223,61 @@ function renderCart(){
 
         subtotal += total;
 
-        tbody.innerHTML += `
-        <tr>
+        cartBox.innerHTML += `
 
-            <td>${item.name}</td>
+        <div class="cart-item">
 
-            <td>${item.size}</td>
+            <div class="cart-left">
 
-            <td>
+                <h3>${item.name}</h3>
 
-                <button onclick="decrease(${index})">-</button>
+                <p>Size : <b>${item.size}</b></p>
 
-                <span style="padding:0 10px;font-weight:bold">
-                    ${item.qty}
-                </span>
+                <p>Price : ₹${item.price}</p>
 
-                <button onclick="increase(${index})">+</button>
+                <div class="qty-box">
 
-            </td>
+                    <button onclick="decrease(${index})">-</button>
 
-            <td>₹${item.price}</td>
+                    <span>${item.qty}</span>
 
-            <td>₹${total}</td>
+                    <button onclick="increase(${index})">+</button>
 
-            <td>
+                </div>
+
+            </div>
+
+            <div class="cart-right">
+
+                <div class="cart-price">
+
+                    ₹${total}
+
+                </div>
 
                 <button
-                onclick="del(${index})"
-                style="background:red">
+                class="delete-btn"
+                onclick="del(${index})">
 
-                🗑
+                🗑 Delete
 
                 </button>
 
-            </td>
+            </div>
 
-        </tr>
+        </div>
+
         `;
 
     });
 
+    document.getElementById("items").innerText = cart.length;
+
     document.getElementById("sub").innerText = "₹" + subtotal;
+
     document.getElementById("grand").innerText = "₹" + subtotal;
+
+}
 
 }// ---------------------
 // Save Bill
