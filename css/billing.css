@@ -151,7 +151,75 @@ background:#fafafa;
 .summary p{
 display:flex;
 justify-content:space-between;
-margin:12px 0;
+margin:12px 0;/* ===========================
+   Shopping Cart New Design
+=========================== */
+
+.cart-list{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+border:1px solid #eee;
+border-radius:10px;
+background:#fafafa;
+}
+
+.cart-left h3{
+font-size:18px;
+margin-bottom:6px;
+color:#333;
+}
+
+.cart-left p{
+font-size:14px;
+color:#666;
+margin:2px 0;
+}
+
+.qty-box{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:10px;
+}
+
+.qty-box button{
+width:35px;
+height:35px;
+padding:0;
+border-radius:50%;
+}
+
+.cart-right{
+text-align:right;
+}
+
+.cart-price{
+font-size:20px;
+font-weight:bold;
+color:#ff4f6d;
+margin-bottom:10px;
+}
+
+.delete-btn{
+background:red;
+padding:8px 12px;
+border-radius:6px;
+}
+
+.empty-cart{
+text-align:center;
+padding:40px;
+font-size:18px;
+color:#888;
+}
 font-size:18px;
 }
 
