@@ -58,18 +58,22 @@ updateDateTime();
 // --------------------
 
 function searchSKU(event){
+    console.log("searchSKU called");
+
 
     if(event.key!=="Enter") return;
 
     let barcode=document.getElementById("sku").value.trim();
 
-    if(barcode.length<6){
+ if (event.key !== "Enter") return;
 
-        alert("Invalid Barcode");
+let barcode = document.getElementById("sku").value.trim().toUpperCase();
 
-        return;
+console.log("Scanned Barcode:", barcode);
 
-    }
+if (barcode.length !== 6) {
+    return;
+}
 
     let styleNo=barcode.substring(0,5);
 
