@@ -98,21 +98,6 @@ function searchSKU(event){
 
 }
 
-    document.getElementById("size").value=selectedSize;
-
-    document.getElementById("qty").value=1;
-
-   // Auto Add To Cart
-addItem();
-
-// Ready for Next Scan
-document.getElementById("sku").value="";
-document.getElementById("qty").value=1;
-document.getElementById("sku").focus();
-
-}
-
-
 // --------------------
 // Barcode Event
 // --------------------
