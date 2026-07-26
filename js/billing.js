@@ -590,9 +590,9 @@ let html5QrCode;
 
 function startCameraScanner(){
 
-    document.getElementById("reader").style.display = "block";
+    document.getElementById("scannerModal").style.display = "flex";
 
-    html5QrCode = new Html5Qrcode("reader");
+html5QrCode = new Html5Qrcode("reader");
 
     html5QrCode.start(
         { facingMode: "environment" },
@@ -611,11 +611,7 @@ function startCameraScanner(){
             // Add product
             searchSKU({});
 
-            // Resume scanning after 1 second
-            setTimeout(() => {
-                html5QrCode.resume();
-            }, 1000);
-
+         closeScanner();  
         },
         function(errorMessage){
             // Ignore scan errors while searching
@@ -629,3 +625,14 @@ function startCameraScanner(){
 
 
 
+function closeScanner(){
+
+    if(html5QrCode){
+
+        html5QrCode.stop().catch(()=>{});
+
+    }
+
+    document.getElementById("scannerModal").style.display="none";
+
+}
