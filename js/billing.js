@@ -1,188 +1,205 @@
-// =========================
-// Retail Nanban Billing POS
-// billing.js - PART 1
-// =========================
+// =======================================
+// Retail Nanban POS
+// billing.js - Part 1
+// =======================================
+
+// --------------------
+// Global Variables
+// --------------------
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = [];
 
-// ---------------------
+
+// --------------------
 // Live Clock
-// ---------------------
-function updateClock() {
-    const clock = document.getElementById("clock");
-    if (!clock) return;
+// --------------------
 
-    const now = new Date();
+function updateClock(){
 
-    clock.innerHTML = now.toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    });
+    const clock=document.getElementById("clock");
+
+    if(!clock) return;
+
+    clock.innerText=new Date().toLocaleTimeString("en-IN");
 }
 
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 updateClock();
 
 
-// ---------------------
-// Barcode Scan
-// ---------------------
+// --------------------
+// Live Date Time
+// --------------------
+
+function updateDateTime(){
+
+    const live=document.getElementById("liveTime");
+
+    if(!live) return;
+
+    live.innerText=new Date().toLocaleString("en-IN",{
+        day:"2-digit",
+        month:"short",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+    });
+
+}
+
+setInterval(updateDateTime,1000);
+updateDateTime();
+
+
+// --------------------
+// Barcode Search
+// --------------------
+
 function searchSKU(event){
 
-    if(event.key !== "Enter") return;
+    if(event.key!=="Enter") return;
 
-    let code = document.getElementById("sku").value.trim();
+    let barcode=document.getElementById("sku").value.trim();
 
-    if(code.length < 6){
+    if(barcode.length<6){
+
         alert("Invalid Barcode");
+
         return;
+
     }
 
-    let styleNo = code.slice(0,5);
-    let sizeCode = code.slice(5);
+    let styleNo=barcode.substring(0,5);
 
-    let sizeMap = {
+    let sizeCode=barcode.substring(5);
+
+    const sizeMap={
+
         "1":"S",
         "2":"M",
         "3":"L",
         "4":"XL",
         "5":"XXL"
+
     };
 
-    let selectedSize = sizeMap[sizeCode];
+    let selectedSize=sizeMap[sizeCode];
 
-    let product = products.find(p => p.styleNo === styleNo);
+    let product=products.find(p=>p.styleNo===styleNo);
 
     if(!product){
+
         alert("Product Not Found");
-        return;
-    }
-
-    if(product.sizes[selectedSize] <= 0){
-
-        alert(selectedSize + " Size Out Of Stock");
 
         document.getElementById("sku").value="";
-        document.getElementById("sku").focus();
 
         return;
+
     }
 
-    // Fill Product Details
-   document.getElementById("previewName").innerText = product.name;
+    if(product.sizes[selectedSize]<=0){
 
-document.getElementById("previewStyle").innerText = product.styleNo;
+        alert(selectedSize+" Size Out Of Stock");
 
-document.getElementById("previewStock").innerText = product.stock;
+        document.getElementById("sku").value="";
 
-document.getElementById("productImage").src =
-product.image || "https://via.placeholder.com/140x180?text=No+Image";
-    document.getElementById("size").value = selectedSize;
+        return;
+
+    }
+
+    // Product Preview
+
+    document.getElementById("previewName").innerText=product.name;
+
+    document.getElementById("previewStyle").innerText=product.styleNo;
+
+    document.getElementById("previewPrice").innerText="₹"+product.price;
+
+    document.getElementById("previewStock").innerText=product.stock;
+
+    document.getElementById("stockStatus").innerText="In Stock";
+
+    document.getElementById("stockStatus").style.background="#16a34a";
+
+    document.getElementById("productImage").src=
+    product.image || "https://via.placeholder.com/150x180?text=No+Image";
+
+    document.getElementById("size").value=selectedSize;
+
+    document.getElementById("qty").value=1;
+
     document.getElementById("sku").value="";
+
     document.getElementById("sku").focus();
+
 }
 
 
-// ---------------------
-// Product Preview Card
-// ---------------------
-function showProductPreview(product){
+// --------------------
+// Barcode Event
+// --------------------
 
-    const box = document.getElementById("productPreview");
+document
+.getElementById("sku")
+.addEventListener("keydown",searchSKU);
 
-    if(!box) return;
+// =======================================
+// Add Item to Cart
+// =======================================
 
-    box.innerHTML = `
-        <div class="preview-card">
-
-            <img src="${product.image}" class="preview-img">
-
-            <div class="preview-info">
-
-                <h3>${product.name}</h3>
-
-                <p>Style : ${product.styleNo}</p>
-
-                <p>Price : ₹${product.price}</p>
-
-                <p>Stock : ${product.stock}</p>
-
-            </div>
-
-        </div>
-    `;
-}// ---------------------
-// Add Item
-// ---------------------
 function addItem(){
 
-    let p = document.getElementById("previewName").innerText;
+    const name = document.getElementById("previewName").innerText;
 
-    let style = document.getElementById("previewStyle").innerText;
-
-    let stock = parseInt(document.getElementById("previewStock").innerText) || 0;
-
-    let q = parseInt(document.getElementById("qty").value) || 1;
-
-    let s = document.getElementById("size").value;
-
-    if(p === "No Product"){
-
-        alert("Please Scan Product");
-
+    if(name === "No Product"){
+        alert("Please scan a product first.");
         return;
-
     }
 
-    let product = products.find(x => x.styleNo === style);
+    const style = document.getElementById("previewStyle").innerText;
+    const size = document.getElementById("size").value;
+    const qty = parseInt(document.getElementById("qty").value) || 1;
+
+    const product = products.find(p => p.styleNo === style);
 
     if(!product){
-
-        alert("Product Not Found");
-
+        alert("Product not found.");
         return;
-
     }
 
-    let r = product.price;
+    const existing = cart.find(item =>
+        item.styleNo === style && item.size === size
+    );
 
-    let item = cart.find(x => x.name === p && x.size === s);
+    if(existing){
 
-    if(item){
-
-        item.qty += q;
+        existing.qty += qty;
 
     }else{
 
         cart.push({
-
-            name:p,
-
-            size:s,
-
-            qty:q,
-
-            price:r
-
+            styleNo: product.styleNo,
+            name: product.name,
+            size: size,
+            qty: qty,
+            price: product.price
         });
 
     }
 
     renderCart();
 
-    document.getElementById("qty").value = 1;
-
-    document.getElementById("sku").value = "";
-
     document.getElementById("sku").focus();
 
 }
 
-// ---------------------
-// Increase Qty
-// ---------------------
+
+// =======================================
+// Increase Quantity
+// =======================================
+
 function increase(index){
 
     cart[index].qty++;
@@ -192,9 +209,10 @@ function increase(index){
 }
 
 
-// ---------------------
-// Decrease Qty
-// ---------------------
+// =======================================
+// Decrease Quantity
+// =======================================
+
 function decrease(index){
 
     if(cart[index].qty > 1){
@@ -208,38 +226,44 @@ function decrease(index){
 }
 
 
-// ---------------------
+// =======================================
 // Delete Item
-// ---------------------
+// =======================================
+
 function del(index){
 
-    cart.splice(index,1);
+    if(confirm("Remove this item?")){
 
-    renderCart();
+        cart.splice(index,1);
+
+        renderCart();
+
+    }
 
 }
 
-
-// ---------------------
+// =======================================
 // Render Cart
-// ---------------------
+// =======================================
+
 function renderCart(){
 
-    let cartBox = document.getElementById("cart");
+    const cartBox = document.getElementById("cart");
 
     cartBox.innerHTML = "";
 
     let subtotal = 0;
+    let totalQty = 0;
 
     if(cart.length === 0){
 
         cartBox.innerHTML = `
-        <div class="empty-cart">
-            Cart is Empty
-        </div>
+            <div class="empty-cart">
+                🛒 Cart is Empty
+            </div>
         `;
 
-        document.getElementById("items").innerText = 0;
+        document.getElementById("items").innerText = "0";
         document.getElementById("sub").innerText = "₹0";
         document.getElementById("grand").innerText = "₹0";
 
@@ -248,9 +272,10 @@ function renderCart(){
 
     cart.forEach((item,index)=>{
 
-        let total = item.qty * item.price;
+        const total = item.qty * item.price;
 
         subtotal += total;
+        totalQty += item.qty;
 
         cartBox.innerHTML += `
 
@@ -260,13 +285,15 @@ function renderCart(){
 
                 <h3>${item.name}</h3>
 
+                <p>Style : ${item.styleNo}</p>
+
                 <p>Size : <b>${item.size}</b></p>
 
                 <p>Price : ₹${item.price}</p>
 
                 <div class="qty-box">
 
-                    <button onclick="decrease(${index})">-</button>
+                    <button onclick="decrease(${index})">−</button>
 
                     <span>${item.qty}</span>
 
@@ -285,10 +312,10 @@ function renderCart(){
                 </div>
 
                 <button
-                class="delete-btn"
-                onclick="del(${index})">
+                    class="delete-btn"
+                    onclick="del(${index})">
 
-                🗑 Delete
+                    🗑 Delete
 
                 </button>
 
@@ -300,7 +327,7 @@ function renderCart(){
 
     });
 
-    document.getElementById("items").innerText = cart.length;
+    document.getElementById("items").innerText = totalQty;
 
     document.getElementById("sub").innerText = "₹" + subtotal;
 
@@ -308,12 +335,13 @@ function renderCart(){
 
 }
 
-// ---------------------
+// =======================================
 // Save Bill
-// ---------------------
+// =======================================
+
 function saveBill(){
 
-    if(cart.length === 0){
+    if(cart.length===0){
 
         alert("Cart is Empty");
 
@@ -321,104 +349,89 @@ function saveBill(){
 
     }
 
-    let orders =
-    JSON.parse(localStorage.getItem("orders")) || [];
+    const orders=JSON.parse(localStorage.getItem("orders")) || [];
 
-    let billNo =
-    "RN" + String(orders.length + 1).padStart(6,"0");
+    const billNo="RN"+String(orders.length+1).padStart(6,"0");
 
-    let order = {
+    const order={
 
-        billNo: billNo,
+        billNo:billNo,
 
-        customer:
-        document.getElementById("custName").value,
+        customer:document.getElementById("custName").value.trim(),
 
-        phone:
-        document.getElementById("custPhone").value,
+        phone:document.getElementById("custPhone").value.trim(),
 
-        payment:
-        document.getElementById("payment").value,
+        payment:document.getElementById("payment").value,
 
-        status:"Pending",
+        date:new Date().toLocaleString("en-IN"),
 
-        orderDate:
-        new Date().toISOString(),
+        items:[...cart],
 
-        items:[...cart]
+        grandTotal:cart.reduce((sum,item)=>sum+(item.qty*item.price),0)
 
     };
 
     orders.push(order);
 
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
+    localStorage.setItem("orders",JSON.stringify(orders));
 
     updateStock();
 
-    alert("✅ Bill Saved Successfully\n\nBill No : " + billNo);
+    alert("✅ Bill Saved\n\nBill No : "+billNo);
 
     clearBilling();
 
 }
 
 
-// ---------------------
-// Update Stock
-// ---------------------
+// =======================================
+// Update Product Stock
+// =======================================
+
 function updateStock(){
 
-    let products =
-    JSON.parse(localStorage.getItem("products")) || [];
+    let productList=JSON.parse(localStorage.getItem("products")) || [];
 
     cart.forEach(item=>{
 
-        let product =
-        products.find(p=>p.name===item.name);
+        let product=productList.find(p=>p.styleNo===item.styleNo);
 
-        if(product){
+        if(product && product.sizes){
 
-            if(product.sizes &&
-               product.sizes[item.size] != null){
+            product.sizes[item.size]-=item.qty;
 
-                product.sizes[item.size] -= item.qty;
+            if(product.sizes[item.size]<0){
 
-                if(product.sizes[item.size] < 0){
-
-                    product.sizes[item.size] = 0;
-
-                }
-
-                product.stock =
-
-                    (product.sizes.S || 0)+
-                    (product.sizes.M || 0)+
-                    (product.sizes.L || 0)+
-                    (product.sizes.XL || 0)+
-                    (product.sizes.XXL || 0);
+                product.sizes[item.size]=0;
 
             }
+
+            product.stock=
+
+                (product.sizes.S||0)+
+                (product.sizes.M||0)+
+                (product.sizes.L||0)+
+                (product.sizes.XL||0)+
+                (product.sizes.XXL||0);
 
         }
 
     });
 
-    localStorage.setItem(
-        "products",
-        JSON.stringify(products)
-    );
+    localStorage.setItem("products",JSON.stringify(productList));
+
+    products=productList;
 
 }
 
 
-// ---------------------
-// Clear Billing
-// ---------------------
+// =======================================
+// Clear Billing Screen
+// =======================================
+
 function clearBilling(){
 
-    cart = [];
+    cart=[];
 
     renderCart();
 
@@ -432,160 +445,171 @@ function clearBilling(){
 
     document.getElementById("size").selectedIndex=0;
 
-    document.getElementById("previewName").innerText =
-    "No Product";
+    document.getElementById("previewName").innerText="No Product";
 
     document.getElementById("previewStyle").innerText="-";
 
+    document.getElementById("previewPrice").innerText="₹0";
+
     document.getElementById("previewStock").innerText="0";
 
-    document.getElementById("productImage").src =
-    "https://via.placeholder.com/140x180?text=No+Image";
+    document.getElementById("productImage").src="https://via.placeholder.com/150x180?text=No+Image";
 
-    document.getElementById("stockStatus").innerText =
-    "No Stock";
+    document.getElementById("stockStatus").innerText="No Stock";
 
-    document.getElementById("stockStatus").style.background =
-    "red";
+    document.getElementById("stockStatus").style.background="#dc2626";
 
     document.getElementById("sku").focus();
 
-}// ---------------------
-// Live Date & Time
-// ---------------------
-function updateDateTime() {
-    const el = document.getElementById("liveTime");
-    if (!el) return;
-
-    const now = new Date();
-
-    el.innerHTML = now.toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    });
 }
 
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-
-// ---------------------
+// =======================================
 // Print Bill
-// ---------------------
-function printBill() {
+// =======================================
 
-    if (cart.length === 0) {
+function printBill(){
+
+    if(cart.length===0){
+
         alert("Cart is Empty");
+
         return;
+
     }
 
-    let html = `
+    let grandTotal=0;
+
+    let rows="";
+
+    cart.forEach(item=>{
+
+        const total=item.qty*item.price;
+
+        grandTotal+=total;
+
+        rows+=`
+        <tr>
+            <td>${item.name}</td>
+            <td>${item.size}</td>
+            <td>${item.qty}</td>
+            <td>₹${item.price}</td>
+            <td>₹${total}</td>
+        </tr>
+        `;
+
+    });
+
+    const customer=document.getElementById("custName").value || "Walk-in Customer";
+    const phone=document.getElementById("custPhone").value || "-";
+
+    const html=`
+
     <html>
+
     <head>
-        <title>Retail Nanban Bill</title>
 
-        <style>
-        body{
-            font-family:Arial;
-            padding:20px;
-        }
+    <title>Retail Nanban Invoice</title>
 
-        h2{
-            text-align:center;
-        }
+    <style>
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            margin-top:20px;
-        }
+    body{
+        font-family:Arial,sans-serif;
+        padding:20px;
+    }
 
-        th,td{
-            border:1px solid #000;
-            padding:8px;
-            text-align:center;
-        }
+    h2,h3{
+        text-align:center;
+        margin:5px;
+    }
 
-        </style>
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:20px;
+    }
+
+    th,td{
+        border:1px solid #000;
+        padding:8px;
+        text-align:center;
+    }
+
+    .total{
+        text-align:right;
+        font-size:22px;
+        font-weight:bold;
+        margin-top:20px;
+    }
+
+    </style>
+
     </head>
 
     <body>
 
     <h2>Retail Nanban</h2>
 
-    <p><b>Date :</b> ${new Date().toLocaleString()}</p>
+    <h3>Sales Invoice</h3>
+
+    <p><b>Date :</b> ${new Date().toLocaleString("en-IN")}</p>
+
+    <p><b>Customer :</b> ${customer}</p>
+
+    <p><b>Phone :</b> ${phone}</p>
 
     <table>
 
     <tr>
 
-    <th>Product</th>
-
-    <th>Size</th>
-
-    <th>Qty</th>
-
-    <th>Price</th>
-
-    <th>Total</th>
+        <th>Product</th>
+        <th>Size</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Total</th>
 
     </tr>
-    `;
 
-    let grand = 0;
+    ${rows}
 
-    cart.forEach(item => {
-
-        let total = item.qty * item.price;
-
-        grand += total;
-
-        html += `
-        <tr>
-
-        <td>${item.name}</td>
-
-        <td>${item.size}</td>
-
-        <td>${item.qty}</td>
-
-        <td>${item.price}</td>
-
-        <td>${total}</td>
-
-        </tr>
-        `;
-    });
-
-    html += `
     </table>
 
-    <h2>Total : ₹${grand}</h2>
+    <div class="total">
+
+    Grand Total : ₹${grandTotal}
+
+    </div>
+
+    <br>
+
+    <center>
+
+    Thank You ❤️ Visit Again
+
+    </center>
 
     </body>
 
     </html>
     `;
 
-    let win = window.open("", "_blank");
+    const win=window.open("","","width=800,height=700");
 
     win.document.write(html);
 
     win.document.close();
+
+    win.focus();
 
     win.print();
 
 }
 
 
-// ---------------------
+// =======================================
 // Keyboard Shortcuts
-// ---------------------
-document.addEventListener("keydown", function(e){
+// =======================================
+
+document.addEventListener("keydown",function(e){
 
     if(e.key==="F2"){
 
@@ -605,6 +629,8 @@ document.addEventListener("keydown", function(e){
 
     if(e.key==="Escape"){
 
+        e.preventDefault();
+
         clearBilling();
 
     }
@@ -612,22 +638,20 @@ document.addEventListener("keydown", function(e){
 });
 
 
-// ---------------------
-// Auto Focus
-// ---------------------
-window.onload = function(){
+// =======================================
+// Initial Load
+// =======================================
+
+window.onload=function(){
 
     updateClock();
 
     updateDateTime();
+
+    renderCart();
 
     document.getElementById("sku").focus();
 
 };
 
 
-// ---------------------
-// Barcode Enter Event
-// ---------------------
-document.getElementById("sku")
-.addEventListener("keydown", searchSKU);
