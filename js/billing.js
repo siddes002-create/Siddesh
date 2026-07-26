@@ -80,11 +80,6 @@ document.getElementById("previewStock").innerText = product.stock;
 document.getElementById("productImage").src =
 product.image || "https://via.placeholder.com/140x180?text=No+Image";
     document.getElementById("size").value = selectedSize;
-
-    showProductPreview(product);
-
-    addItem();
-
     document.getElementById("sku").value="";
     document.getElementById("sku").focus();
 }
@@ -123,15 +118,35 @@ function showProductPreview(product){
 // ---------------------
 function addItem(){
 
-    let p = document.getElementById("pname").value;
+    let p = document.getElementById("previewName").innerText;
+
+    let style = document.getElementById("previewStyle").innerText;
+
+    let stock = parseInt(document.getElementById("previewStock").innerText) || 0;
+
     let q = parseInt(document.getElementById("qty").value) || 1;
-    let r = parseFloat(document.getElementById("price").value) || 0;
+
     let s = document.getElementById("size").value;
 
-    if(!p || r <= 0){
-        alert("Enter Product");
+    if(p === "No Product"){
+
+        alert("Please Scan Product");
+
         return;
+
     }
+
+    let product = products.find(x => x.styleNo === style);
+
+    if(!product){
+
+        alert("Product Not Found");
+
+        return;
+
+    }
+
+    let r = product.price;
 
     let item = cart.find(x => x.name === p && x.size === s);
 
@@ -142,21 +157,28 @@ function addItem(){
     }else{
 
         cart.push({
-            name: p,
-            size: s,
-            qty: q,
-            price: r
+
+            name:p,
+
+            size:s,
+
+            qty:q,
+
+            price:r
+
         });
 
     }
 
     renderCart();
 
-    document.getElementById("pname").value = "";
-    document.getElementById("price").value = "";
     document.getElementById("qty").value = 1;
-}
 
+    document.getElementById("sku").value = "";
+
+    document.getElementById("sku").focus();
+
+}
 
 // ---------------------
 // Increase Qty
