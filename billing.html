@@ -164,11 +164,20 @@
     <div class="payment-box">
 
         <div class="payment-header">
-            <h2>💰 Payment</h2>
-            <button onclick="closePayment()">✕</button>
-        </div>
+    <h2>💰 Select Payment</h2>
 
-        <h1 id="paymentTotal">₹0</h1>
+    <button class="close-payment" onclick="closePayment()">
+        ✕
+    </button>
+</div>
+
+       <div class="payment-total">
+
+    <span>Total Amount</span>
+
+    <h1 id="paymentTotal">₹0</h1>
+
+</div>
 
         <button class="pay-btn cash" onclick="payNow('Cash')">
             💵 Cash
