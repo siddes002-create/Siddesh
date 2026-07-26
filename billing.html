@@ -158,6 +158,41 @@
     <div id="reader"></div>
 
 </div>  
+    <!-- Payment Modal -->
+<div id="paymentModal" class="payment-modal">
+
+    <div class="payment-box">
+
+        <div class="payment-header">
+            <h2>💳 Payment</h2>
+            <button onclick="closePayment()">✕</button>
+        </div>
+
+        <h1 id="paymentTotal">₹0</h1>
+
+        <button class="pay-btn cash" onclick="payNow('Cash')">
+            💵 Cash
+        </button>
+
+        <button class="pay-btn card" onclick="payNow('Card')">
+            💳 Card
+        </button>
+
+        <button class="pay-btn upi" onclick="payNow('UPI')">
+            📱 UPI
+        </button>
+
+        <button class="pay-btn wallet" onclick="payNow('Wallet')">
+            👛 Wallet
+        </button>
+
+        <button class="pay-btn split" onclick="payNow('Split')">
+            🔀 Split Payment
+        </button>
+
+    </div>
+
+</div>
 <script src="https://unpkg.com/html5-qrcode"></script>    
 <script src="js/billing.js"></script>
 
