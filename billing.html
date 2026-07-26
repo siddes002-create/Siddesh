@@ -55,17 +55,20 @@
 
 <div class="card">
 
-    <h2>🔍 Scan Product</h2>
+  <h2>🔍 Scan Product</h2>
 
-    <input
-        id="sku"
-        type="text"
-        placeholder="Scan Barcode"
-        autofocus>
+<input
+    id="sku"
+    type="text"
+    placeholder="Scan Barcode"
+    autocomplete="off"
+    autofocus>
 
+<button id="cameraBtn" onclick="startCameraScanner()">
+    📷 Scan with Camera
+</button>
 
-</div>
-
+<div id="reader"></div>
 
 <!-- Shopping Cart -->
 
@@ -142,6 +145,7 @@
 </div>
 
 </div>
+<script src="https://unpkg.com/html5-qrcode"></script>    
 <script src="js/billing.js"></script>
 
 </body>
