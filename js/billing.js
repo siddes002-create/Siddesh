@@ -581,7 +581,36 @@ window.onload=function(){
     document.getElementById("sku").focus();
 
 };
+// ==============================
+// Payment Popup
+// ==============================
 
+function openPayment(){
+
+    document.getElementById("paymentModal").style.display = "flex";
+
+    document.getElementById("paymentTotal").innerText =
+        "₹" + grandTotal.toFixed(2);
+
+}
+
+function closePayment(){
+
+    document.getElementById("paymentModal").style.display = "none";
+
+}
+
+function payNow(type){
+
+    alert(type + " Payment Successful");
+
+    closePayment();
+
+    printBill();
+
+    clearBilling();
+
+}
 // ======================================
 // Camera Barcode Scanner
 // ======================================
