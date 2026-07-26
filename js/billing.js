@@ -130,9 +130,13 @@ function searchSKU(event){
 
     document.getElementById("qty").value=1;
 
-    document.getElementById("sku").value="";
+   // Auto Add To Cart
+addItem();
 
-    document.getElementById("sku").focus();
+// Ready for Next Scan
+document.getElementById("sku").value="";
+document.getElementById("qty").value=1;
+document.getElementById("sku").focus();
 
 }
 
@@ -169,29 +173,32 @@ function addItem(){
         return;
     }
 
-    const existing = cart.find(item =>
-        item.styleNo === style && item.size === size
-    );
+ const existing = cart.find(item =>
+    item.styleNo === style &&
+    item.size === size
+);
 
-    if(existing){
+if(existing){
 
-        existing.qty += qty;
+    existing.qty++;
 
-    }else{
+}else{
 
-        cart.push({
-            styleNo: product.styleNo,
-            name: product.name,
-            size: size,
-            qty: qty,
-            price: product.price
-        });
+    cart.push({
+        styleNo: product.styleNo,
+        name: product.name,
+        size: size,
+        qty: 1,
+        price: Number(product.price)
+    });
 
-    }
+}
 
-    renderCart();
+   renderCart();
 
-    document.getElementById("sku").focus();
+// Ready for Next Product
+document.getElementById("qty").value = 1;
+document.getElementById("sku").focus();
 
 }
 
