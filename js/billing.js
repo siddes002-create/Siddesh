@@ -214,14 +214,16 @@ function renderCart(){
         document.getElementById("sub").innerText = "₹0";
         document.getElementById("grand").innerText = "₹0";
 
+        grandTotal = 0;
+
         return;
     }
 
     cart.forEach((item,index)=>{
 
-        const total = item.qty * item.price;
+        const itemTotal = item.qty * item.price;
 
-        subtotal += total;
+        subtotal += itemTotal;
         totalQty += item.qty;
 
         cartBox.innerHTML += `
@@ -254,7 +256,7 @@ function renderCart(){
 
                 <div class="cart-price">
 
-                    ₹${total}
+                    ₹${itemTotal}
 
                 </div>
 
@@ -274,14 +276,17 @@ function renderCart(){
 
     });
 
+    let total = subtotal;
+
+    grandTotal = total;
+
     document.getElementById("items").innerText = totalQty;
 
     document.getElementById("sub").innerText = "₹" + subtotal;
 
-    document.getElementById("grand").innerText = "₹" + subtotal;
+    document.getElementById("grand").innerText = "₹" + total;
 
 }
-
 // =======================================
 // Save Bill
 // =======================================
