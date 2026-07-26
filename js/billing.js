@@ -71,8 +71,14 @@ function searchSKU(event){
     }
 
     // Fill Product Details
-    document.getElementById("pname").value = product.name;
-    document.getElementById("price").value = product.price;
+   document.getElementById("previewName").innerText = product.name;
+
+document.getElementById("previewStyle").innerText = product.styleNo;
+
+document.getElementById("previewStock").innerText = product.stock;
+
+document.getElementById("productImage").src =
+product.image || "https://via.placeholder.com/140x180?text=No+Image";
     document.getElementById("size").value = selectedSize;
 
     showProductPreview(product);
