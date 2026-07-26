@@ -59,7 +59,9 @@ updateDateTime();
 
 function searchSKU(event){
 
-    if(event.key !== "Enter") return;
+    if(event.key !== "Enter") return;if(event && event.key && event.key !== "Enter"){
+    return;
+}
 
     const barcode = document.getElementById("sku").value.trim().toUpperCase();
 
@@ -579,5 +581,51 @@ window.onload=function(){
     document.getElementById("sku").focus();
 
 };
+
+// ======================================
+// Camera Barcode Scanner
+// ======================================
+
+let html5QrCode;
+
+function startCameraScanner(){
+
+    document.getElementById("reader").style.display = "block";
+
+    html5QrCode = new Html5Qrcode("reader");
+
+    html5QrCode.start(
+        { facingMode: "environment" },
+        {
+            fps: 10,
+            qrbox: { width: 250, height: 120 }
+        },
+        function(decodedText){
+
+            // Stop duplicate scans for the same item
+            html5QrCode.pause();
+
+            // Put barcode into input
+            document.getElementById("sku").value = decodedText.trim().toUpperCase();
+
+            // Add product
+            searchSKU({});
+
+            // Resume scanning after 1 second
+            setTimeout(() => {
+                html5QrCode.resume();
+            }, 1000);
+
+        },
+        function(errorMessage){
+            // Ignore scan errors while searching
+        }
+    ).catch(err=>{
+        alert("Camera Open Failed");
+        console.error(err);
+    });
+
+}
+
 
 
