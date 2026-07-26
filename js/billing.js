@@ -137,8 +137,6 @@ function addItem(product, size){
     renderCart();
 
     document.getElementById("sku").value = "";
-    document.getElementById("qty").value = 1;
-    document.getElementById("size").value = size;
     document.getElementById("sku").focus();
 
 }
@@ -386,8 +384,6 @@ function clearBilling(){
     document.getElementById("custPhone").value = "";
 
     document.getElementById("sku").value = "";
-    document.getElementById("qty").value = 1;
-    document.getElementById("size").selectedIndex = 0;
 
     document.getElementById("sku").focus();
 
