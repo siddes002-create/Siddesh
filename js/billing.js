@@ -58,77 +58,45 @@ updateDateTime();
 // --------------------
 
 function searchSKU(event){
-    console.log("searchSKU called");
 
+    if(event.key !== "Enter") return;
 
-    if(event.key!=="Enter") return;
+    const barcode = document.getElementById("sku").value.trim().toUpperCase();
 
-    let barcode=document.getElementById("sku").value.trim();
+    if(barcode.length !== 6){
+        return;
+    }
 
- if (event.key !== "Enter") return;
+    const styleNo = barcode.substring(0,5);
+    const sizeCode = barcode.substring(5);
 
-let barcode = document.getElementById("sku").value.trim().toUpperCase();
-
-console.log("Scanned Barcode:", barcode);
-
-if (barcode.length !== 6) {
-    return;
-}
-
-    let styleNo=barcode.substring(0,5);
-
-    let sizeCode=barcode.substring(5);
-
-    const sizeMap={
-
+    const sizeMap = {
         "1":"S",
         "2":"M",
         "3":"L",
         "4":"XL",
         "5":"XXL"
-
     };
 
-    let selectedSize=sizeMap[sizeCode];
+    const selectedSize = sizeMap[sizeCode];
 
-    let product=products.find(p=>p.styleNo===styleNo);
+    const product = products.find(p => p.styleNo === styleNo);
 
     if(!product){
-
         alert("Product Not Found");
-
-        document.getElementById("sku").value="";
-
+        document.getElementById("sku").value = "";
         return;
-
     }
 
-    if(product.sizes[selectedSize]<=0){
-
-        alert(selectedSize+" Size Out Of Stock");
-
-        document.getElementById("sku").value="";
-
+    if(product.sizes[selectedSize] <= 0){
+        alert(selectedSize + " Size Out Of Stock");
+        document.getElementById("sku").value = "";
         return;
-
     }
 
-    // Product Preview
+    addItem(product, selectedSize);
 
-    document.getElementById("previewName").innerText=product.name;
-
-    document.getElementById("previewStyle").innerText=product.styleNo;
-
-    document.getElementById("previewPrice").innerText="₹"+product.price;
-
-    document.getElementById("previewStock").innerText=product.stock;
-
-    document.getElementById("stockStatus").innerText="In Stock";
-
-    document.getElementById("stockStatus").style.background="#16a34a";
-
-    document.getElementById("productImage").src=
-    product.image || "https://via.placeholder.com/150x180?text=No+Image";
+}
 
     document.getElementById("size").value=selectedSize;
 
@@ -154,58 +122,41 @@ document
 .addEventListener("keydown",searchSKU);
 
 // =======================================
-// Add Item to Cart
+// Add Item
 // =======================================
 
-function addItem(){
+function addItem(product, size){
 
-    const name = document.getElementById("previewName").innerText;
+    const existing = cart.find(item =>
+        item.styleNo === product.styleNo &&
+        item.size === size
+    );
 
-    if(name === "No Product"){
-        alert("Please scan a product first.");
-        return;
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+            styleNo: product.styleNo,
+            name: product.name,
+            image: product.image,
+            size: size,
+            qty: 1,
+            price: Number(product.price)
+        });
+
     }
 
-    const style = document.getElementById("previewStyle").innerText;
-    const size = document.getElementById("size").value;
-    const qty = parseInt(document.getElementById("qty").value) || 1;
+    renderCart();
 
-    const product = products.find(p => p.styleNo === style);
-
-    if(!product){
-        alert("Product not found.");
-        return;
-    }
-
- const existing = cart.find(item =>
-    item.styleNo === style &&
-    item.size === size
-);
-
-if(existing){
-
-    existing.qty++;
-
-}else{
-
-    cart.push({
-        styleNo: product.styleNo,
-        name: product.name,
-        size: size,
-        qty: 1,
-        price: Number(product.price)
-    });
+    document.getElementById("sku").value = "";
+    document.getElementById("qty").value = 1;
+    document.getElementById("size").value = size;
+    document.getElementById("sku").focus();
 
 }
-
-   renderCart();
-
-// Ready for Next Product
-document.getElementById("qty").value = 1;
-document.getElementById("sku").focus();
-
-}
-
 
 // =======================================
 // Increase Quantity
@@ -442,33 +393,16 @@ function updateStock(){
 
 function clearBilling(){
 
-    cart=[];
+    cart = [];
 
     renderCart();
 
-    document.getElementById("custName").value="";
+    document.getElementById("custName").value = "";
+    document.getElementById("custPhone").value = "";
 
-    document.getElementById("custPhone").value="";
-
-    document.getElementById("sku").value="";
-
-    document.getElementById("qty").value=1;
-
-    document.getElementById("size").selectedIndex=0;
-
-    document.getElementById("previewName").innerText="No Product";
-
-    document.getElementById("previewStyle").innerText="-";
-
-    document.getElementById("previewPrice").innerText="₹0";
-
-    document.getElementById("previewStock").innerText="0";
-
-    document.getElementById("productImage").src="https://via.placeholder.com/150x180?text=No+Image";
-
-    document.getElementById("stockStatus").innerText="No Stock";
-
-    document.getElementById("stockStatus").style.background="#dc2626";
+    document.getElementById("sku").value = "";
+    document.getElementById("qty").value = 1;
+    document.getElementById("size").selectedIndex = 0;
 
     document.getElementById("sku").focus();
 
