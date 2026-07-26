@@ -607,7 +607,11 @@ function closePayment(){
 
 function payNow(type){
 
-    alert(type + " Payment Successful");
+    alert(
+        "✅ Payment Successful\n\n" +
+        "Mode : " + type +
+        "\nAmount : ₹" + grandTotal
+    );
 
     closePayment();
 
@@ -615,8 +619,7 @@ function payNow(type){
 
     clearBilling();
 
-}
-// ======================================
+}// ======================================
 // Camera Barcode Scanner
 // ======================================
 
