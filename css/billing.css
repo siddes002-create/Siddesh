@@ -368,3 +368,30 @@ text-align:left;
 }
 
 }
+
+#cameraBtn{
+    width:100%;
+    margin-top:12px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#ff4d73;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+#cameraBtn:hover{
+    background:#e63c63;
+}
+
+#reader{
+    display:none;
+    width:100%;
+    max-width:380px;
+    margin-top:15px;
+    border-radius:12px;
+    overflow:hidden;
+}
+
