@@ -222,7 +222,8 @@ function del(index){
 
 // ---------------------
 // Render Cart
-// ---------------------function renderCart(){
+// ---------------------
+function renderCart(){
 
     let cartBox = document.getElementById("cart");
 
@@ -307,7 +308,7 @@ function del(index){
 
 }
 
-}// ---------------------
+// ---------------------
 // Save Bill
 // ---------------------
 function saveBill(){
@@ -426,10 +427,6 @@ function clearBilling(){
     document.getElementById("custPhone").value="";
 
     document.getElementById("sku").value="";
-
-    document.getElementById("pname").value="";
-
-    document.getElementById("price").value="";
 
     document.getElementById("qty").value=1;
 
